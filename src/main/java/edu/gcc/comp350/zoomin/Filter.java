@@ -7,6 +7,15 @@ public class Filter {
     private String department;
     private String CourseCode;
 
+    Filter()
+    {
+        timeSlot = "";
+        professor = "";
+        creditHours = 0;
+        department = "";
+        CourseCode = "";
+    }
+
     public Boolean FilterStatus()
     {
         return null;
