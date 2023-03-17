@@ -2,35 +2,41 @@ package edu.gcc.comp350.zoomin;
 import java.util.ArrayList;
 
 public class Search {
-	private ArrayList<Filter> FilterList = new ArrayList<Filter>();
-	private ArrayList<Course> CourseList = new ArrayList<Course>();
+	private Filter filter = new Filter();
+	private ArrayList<Course> SearchResults = new ArrayList<Course>();
 	
 	
 	public ArrayList<Course> search() {
 		return null;
 	}
 	
-	public void addFilters(ArrayList<Filter> newFilters) {
+	public void addFilters(Filter newFilter) {
 		
 	}
 	
-	public void addClass(Course newCourse) {
-		
+	public void addClass(Course newCourse, Schedule sched) {
+		//WE NEED TO MAKE SURE
+		//NO DUPE SCHEDULE NAMES ALLOWED
+		for (int i = 0; i < Driver.schedList.size(); i++){
+			if(sched.getScheduleName().equals(Driver.schedList.get(i).getScheduleName())){
+				sched.addClass(newCourse);
+			}
+		}
 	}
 
-	public ArrayList<Filter> getFilterList() {
-		return FilterList;
+	public Filter getFilter() {
+		return filter;
 	}
 
-	public void setFilterList(ArrayList<Filter> filterList) {
-		FilterList = filterList;
+	public void setFilter(Filter filterer) {
+		filter = filterer;
 	}
 
-	public ArrayList<Course> getCourseList() {
-		return CourseList;
+	public ArrayList<Course> getSearchResults() {
+		return SearchResults;
 	}
 
-	public void setCourseList(ArrayList<Course> courseList) {
-		CourseList = courseList;
+	public void setSearchResults(ArrayList<Course> searchresults) {
+		SearchResults = searchresults;
 	}
 }

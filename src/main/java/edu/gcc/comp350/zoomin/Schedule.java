@@ -35,7 +35,7 @@ public class Schedule {
 
     }
 
-    public void addClass()
+    public void addClass(Course course)
     {
 
     }

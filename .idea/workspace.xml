@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="StubCode pt2">
+    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="gitignore line added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Search.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="NoahBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,13 +51,10 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/BURIOKMG19/OneDrive - Grove City College/Desktop/SoftwareEngineering/ZoominGit"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cacheDemoEx" />
+  </component>
+
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -114,7 +113,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="mikeBranch" />
+                        <option value="NoahBranch" />
                       </list>
                     </value>
                   </entry>
@@ -125,6 +124,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
