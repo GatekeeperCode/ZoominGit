@@ -12,13 +12,11 @@ public class Schedule {
     //Constructor
     Schedule(String SchedName, String Semest)
     {
-
+        this.ScheduleName = SchedName;
+        this.Semester = Semest;
     }
 
-    public void setSchedule()
-    {
-
-    }
+    public void setSchedule(){ } //what would this do?
 
     public Schedule getSchedule()
     {
@@ -27,7 +25,11 @@ public class Schedule {
 
     public void displaySchedule()
     {
-
+        System.out.println("Schedule name: " + this.ScheduleName + " |  Semester: " + this.Semester);
+        for (Course course: CourseList)
+        {
+            System.out.println("|" + course.getCourseCode() + "|");
+        }
     }
 
     public void removeClass()
@@ -35,9 +37,9 @@ public class Schedule {
 
     }
 
-    public void addClass()
+    public void addClass(Course course)
     {
-
+        getCourseList().add(course);
     }
 
     public void addClassToSchedule()
