@@ -25,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="mikeBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -97,7 +97,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677530923968</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Filter Changes is Search">
+      <created>1679273668470</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679273668470</updated>
+    </task>
+    <task id="LOCAL-00007" summary="gitignore change">
+      <created>1679339579086</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679339579086</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -106,12 +120,17 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="mikeBranch" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -129,6 +148,8 @@
     <MESSAGE value="gitignore line added" />
     <MESSAGE value="StubCode" />
     <MESSAGE value="StubCode pt2" />
-    <option name="LAST_COMMIT_MESSAGE" value="StubCode pt2" />
+    <MESSAGE value="Filter Changes is Search" />
+    <MESSAGE value="gitignore change" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore change" />
   </component>
 </project>
