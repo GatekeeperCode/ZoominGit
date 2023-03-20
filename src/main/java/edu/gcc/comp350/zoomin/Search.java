@@ -8,7 +8,7 @@ public class Search {
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
 	
 	
-	public ArrayList<Course> search() {
+	public ArrayList<Course> search(String inputSearch) {
 		return null;
 	}
 
