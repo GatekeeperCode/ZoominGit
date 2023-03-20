@@ -17,9 +17,8 @@ public class Course {
 
     }
 
-    public String expandInfo()
+    public void expandInfo()
     {
-        return getDescription();
     }
 
     public boolean isOnSchedule() {
