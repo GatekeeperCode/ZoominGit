@@ -13,4 +13,6 @@ class ScheduleTest {
     @Test
     void removeClassFromSchedule() {
     }
+    //this is an addition
+
 }
