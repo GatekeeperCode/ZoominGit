@@ -7,18 +7,16 @@ public class Schedule {
     String ScheduleName;
     String Semester;
     int TotalCredits;
-    ArrayList<Course> CourseList;
+    ArrayList<Course> CourseList = new ArrayList<>();
 
     //Constructor
     Schedule(String SchedName, String Semest)
     {
-
+        this.ScheduleName = SchedName;
+        this.Semester = Semest;
     }
 
-    public void setSchedule()
-    {
-
-    }
+    public void setSchedule(){ } //what would this do?
 
     public Schedule getSchedule()
     {
@@ -27,7 +25,18 @@ public class Schedule {
 
     public void displaySchedule()
     {
-
+        System.out.println("Schedule name: " + this.ScheduleName + " |  Semester: " + this.Semester);
+        for (Course course: CourseList)
+        {
+            if(course.getCorequisite() != null){
+                System.out.println("| " + course.getCourseCode() + " | " + course.getClass() + " | " + course.getTime() + "|\n" +
+                        course.getProfessor() + " | " + course.getCredits() + " | " + course.getCorequisite() + " | " +
+                        course.getPrequisite() + " |\n" + course.getDescription());
+            }else{
+                System.out.println("| " + course.getCourseCode() + " | " + " | " + course.getTime() + " |\n" +
+                        course.getProfessor() + " | Credits" + course.getCredits());
+            }
+        }
     }
 
     public void removeClass()
@@ -37,7 +46,7 @@ public class Schedule {
 
     public void addClass(Course course)
     {
-
+        getCourseList().add(course);
     }
 
     public void addClassToSchedule()

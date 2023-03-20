@@ -70,9 +70,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/BURIOKMG19/OneDrive - Grove City College/Desktop/SoftwareEngineering/ZoominGit&quot;
+  }
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -110,7 +114,21 @@
       <option name="project" value="LOCAL" />
       <updated>1678911121359</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00006" summary="Filter Changes is Search">
+      <created>1679273668470</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679273668470</updated>
+    </task>
+    <task id="LOCAL-00007" summary="gitignore change">
+      <created>1679339579086</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679339579086</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,18 +136,37 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
     <MESSAGE value="First Class" />
     <MESSAGE value="gitignore line added" />
-    <MESSAGE value="Search.addClass() work and changes to method args" />
-    <option name="LAST_COMMIT_MESSAGE" value="Search.addClass() work and changes to method args" />
+    <MESSAGE value="StubCode" />
+    <MESSAGE value="StubCode pt2" />
+    <MESSAGE value="Filter Changes is Search" />
+    <MESSAGE value="gitignore change" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore change" />
   </component>
 </project>
