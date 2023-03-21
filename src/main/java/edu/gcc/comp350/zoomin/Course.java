@@ -10,6 +10,7 @@ public class Course {
     String description;
     String corequisite;
     String prequisite;
+    String courseName;
 
     //Constructor
     Course()
@@ -19,7 +20,6 @@ public class Course {
 
     public void expandInfo()
     {
-
     }
 
     public boolean isOnSchedule() {
@@ -92,5 +92,13 @@ public class Course {
 
     public void setPrequisite(String prequisite) {
         this.prequisite = prequisite;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }
