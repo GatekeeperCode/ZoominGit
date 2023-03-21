@@ -6,10 +6,50 @@ import java.util.Scanner;
 public class Search {
 	private Filter filter = new Filter();
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
-	
-	
+
+	/**
+	 * Working in console, will update once GUI and noSQL are implemented
+	 */
 	public ArrayList<Course> search(String inputSearch) {
-		return null;
+		ArrayList<Course> AlteredSearchResults = new ArrayList<Course>();
+
+		for(int i=0; i<SearchResults.size(); i++)
+		{
+			if(filterMatch(SearchResults.get(i)))
+			{
+				AlteredSearchResults.add(SearchResults.get(i));
+			}
+		}
+
+		return AlteredSearchResults;
+	}
+
+	private boolean filterMatch(Course target)
+	{
+		boolean matchesFilters = true;
+
+		if(!target.professor.equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
+		{
+			matchesFilters = false;
+		}
+		else if(!target.time.equalsIgnoreCase(filter.getTimeSlot()) && !filter.getTimeSlot().equals(""))
+		{
+			matchesFilters = false;
+		}
+		else if(target.credits!=filter.getCreditHours() && filter.getCreditHours() != 0)
+		{
+			matchesFilters = false;
+		}
+		else if(!target.department.equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
+		{
+			matchesFilters = false;
+		}
+		else if(!target.courseCode.equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
+		{
+			matchesFilters = false;
+		}
+
+		return matchesFilters;
 	}
 
 	/**
