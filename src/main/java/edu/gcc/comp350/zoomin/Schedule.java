@@ -54,14 +54,14 @@ public class Schedule {
         getCourseList().add(course);
     }
 
-    public void addClassToSchedule()
+    public void addClassToSchedule(Course course)
     {
-
+        Schedule.put(course.courseCode, course);
     }
 
-    public void removeClassFromSchedule()
+    public void removeClassFromSchedule(Course course)
     {
-
+        Schedule.remove(course.courseCode, course);
     }
 
     public void setCourseList(ArrayList<Course> courseList) {
