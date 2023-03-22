@@ -5,7 +5,8 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode;
+    String courseCode; //Ex. The 350 of COMP350
+    String department; //Ex. The COMP of COMP350
     String description;
     String corequisite;
     String prequisite;
@@ -67,6 +68,14 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getCorequisite() {
