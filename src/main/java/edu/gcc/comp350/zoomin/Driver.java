@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Driver {
     public static ArrayList<Schedule> schedList = new ArrayList<Schedule>();
+    public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
     {
 
@@ -19,7 +20,12 @@ public class Driver {
             Scanner lnScan = new Scanner(iterLine);
             lnScan.useDelimiter(",");
             //When we get the CSV, proceed from here. This is how we read the CSV.
+            courseList.add(new Course(iterLine));
         }
+    }
+
+    public void translateToMongo(Course c) {
+        //TODO: Need to set-up MongoDB and make a JSON translator for Course
     }
 
     public Schedule createSchedule()

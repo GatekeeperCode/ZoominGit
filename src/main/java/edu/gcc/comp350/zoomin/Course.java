@@ -17,6 +17,10 @@ public class Course {
 
     }
 
+    public Course(String parseData) {
+        //Add parameters here
+    }
+
     public void expandInfo()
     {
     }

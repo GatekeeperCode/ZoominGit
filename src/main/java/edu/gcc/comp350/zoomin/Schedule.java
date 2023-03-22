@@ -39,7 +39,7 @@ public class Schedule {
         }
     }
 
-    public void removeClass(Course course)
+    public void removeClass(Course course) throws Exception
     {
         for(Course temp : CourseList) {
             if (temp.courseCode == course.courseCode && temp.professor == course.professor && temp.time == course.time) {
@@ -47,7 +47,7 @@ public class Schedule {
                 temp.setOnSchedule(false);
             }
         }
-        //Should we add a print/something here to indicate it wasn't in the schedule?
+        throw new Exception("Could not find course in schedule.");
     }
 
     public void addClass(Course course)
