@@ -39,9 +39,15 @@ public class Schedule {
         }
     }
 
-    public void removeClass()
+    public void removeClass(Course course)
     {
-
+        for(Course temp : CourseList) {
+            if (temp.courseCode == course.courseCode && temp.professor == course.professor && temp.time == course.time) {
+                CourseList.remove(temp);
+                temp.setOnSchedule(false);
+            }
+        }
+        //Should we add a print/something here to indicate it wasn't in the schedule?
     }
 
     public void addClass(Course course)
