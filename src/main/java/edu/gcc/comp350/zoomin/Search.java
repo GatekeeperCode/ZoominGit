@@ -63,10 +63,13 @@ public class Search {
 			}
 		}
 	}
-	
+
+	/**
+	 * WE NEED TO MAKE SURE NO DUPE SCHEDULE NAMES ALLOWED
+	 * @param newCourse
+	 * @param sched
+	 */
 	public void addClass(Course newCourse, Schedule sched) {
-		//WE NEED TO MAKE SURE
-		//NO DUPE SCHEDULE NAMES ALLOWED
 		for (int i = 0; i < Driver.schedList.size(); i++){
 			if(sched.getScheduleName().equals(Driver.schedList.get(i).getScheduleName())){
 				sched.addClass(newCourse);
