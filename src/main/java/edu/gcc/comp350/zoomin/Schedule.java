@@ -33,7 +33,7 @@ public class Schedule {
                 toOutput += "| " + ((Course) pair.getValue()).getCourseCode() + " | " + ((Course) pair.getValue()).getCourseName() + " | "
                         + ((Course) pair.getValue()).getTime() + "|\n" + ((Course) pair.getValue()).getProfessor() + " | "
                         + ((Course) pair.getValue()).getCredits() + " | " + ((Course) pair.getValue()).getCorequisite() + " | " +
-                        ((Course) pair.getValue()).getPrequisite() + " |\n" + ((Course) pair.getValue()).getDescription() + "\n";
+                        ((Course) pair.getValue()).getPrerequisite() + " |\n" + ((Course) pair.getValue()).getDescription() + "\n";
             }else{
                 toOutput += "| " + ((Course) pair.getValue()).getCourseCode() + " | " + ((Course) pair.getValue()).getCourseName() + " | "
                         + ((Course) pair.getValue()).getTime() + " |\n" +
@@ -54,14 +54,14 @@ public class Schedule {
         getCourseList().add(course);
     }
 
-    public void addClassToSchedule(Course course)
+    public void addClassToSchedule()
     {
-        Schedule.put(course.courseCode, course);
+
     }
 
-    public void removeClassFromSchedule(Course course)
+    public void removeClassFromSchedule()
     {
-        Schedule.remove(course.courseCode, course);
+
     }
 
     public void setCourseList(ArrayList<Course> courseList) {
