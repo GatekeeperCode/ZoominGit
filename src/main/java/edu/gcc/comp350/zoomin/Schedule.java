@@ -31,7 +31,7 @@ public class Schedule {
             if(course.getCorequisite() != null){
                 System.out.println("| " + course.getCourseCode() + " | " + course.getClass() + " | " + course.getTime() + "|\n" +
                         course.getProfessor() + " | " + course.getCredits() + " | " + course.getCorequisite() + " | " +
-                        course.getPrequisite() + " |\n" + course.getDescription());
+                        course.getPrerequisite() + " |\n" + course.getDescription());
             }else{
                 System.out.println("| " + course.getCourseCode() + " | " + " | " + course.getTime() + " |\n" +
                         course.getProfessor() + " | Credits" + course.getCredits());

@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="Search.search(method) should take an arg and just seeing if my changes are working">
+    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="new var name course">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Search.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +72,9 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/BURIOKMG19/OneDrive - Grove City College/Desktop/SoftwareEngineering/ZoominGit&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -114,21 +112,7 @@
       <option name="project" value="LOCAL" />
       <updated>1678911121359</updated>
     </task>
-    <task id="LOCAL-00006" summary="Filter Changes is Search">
-      <created>1679273668470</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1679273668470</updated>
-    </task>
-    <task id="LOCAL-00007" summary="gitignore change">
-      <created>1679339579086</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1679339579086</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,37 +120,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
     <MESSAGE value="First Class" />
     <MESSAGE value="gitignore line added" />
-    <MESSAGE value="StubCode" />
-    <MESSAGE value="StubCode pt2" />
-    <MESSAGE value="Filter Changes is Search" />
-    <MESSAGE value="gitignore change" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore change" />
+    <MESSAGE value="Search.addClass() work and changes to method args" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search.addClass() work and changes to method args" />
   </component>
 </project>
