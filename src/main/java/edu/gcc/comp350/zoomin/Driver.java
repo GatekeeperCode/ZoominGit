@@ -9,12 +9,17 @@ public class Driver {
     public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
     {
-
-
+        try {
+            readInFile("C:\\Users\\BALLMD20\\IdeaProjects\\ZoominProject\\2020-2021.csv");
+            System.out.println(courseList.get(6).credits);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 
-    public void readInFile(String filename) throws Exception {
-        Scanner scn = new Scanner(new File(""/*Insert File Name Here*/));
+    public static void readInFile(String filename) throws Exception {
+        Scanner scn = new Scanner(new File(filename));
+        scn.nextLine(); //Throw the first line away, do not need column data.
         while (scn.hasNextLine()) {
             String iterLine = scn.nextLine();
             Scanner lnScan = new Scanner(iterLine);

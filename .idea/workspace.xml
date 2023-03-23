@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="Added my methods, may need some changes should we need to edit RemoveClass">
+    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Schedule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +81,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/BURIOKMG19/OneDrive - Grove City College/Desktop/SoftwareEngineering/ZoominGit&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\BALLMD20\IdeaProjects\ZoominProject\src\main\java\edu\gcc\comp350\zoomin" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -137,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679514910718</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Created new constructor for Course, added CSV parser, added ArrayList&lt;Course&gt; to Driver.">
+      <created>1679516633506</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679516633506</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +191,7 @@
     <MESSAGE value="Filter Changes is Search" />
     <MESSAGE value="gitignore change" />
     <MESSAGE value="Added my methods, may need some changes should we need to edit RemoveClass" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added my methods, may need some changes should we need to edit RemoveClass" />
+    <MESSAGE value="Created new constructor for Course, added CSV parser, added ArrayList&lt;Course&gt; to Driver." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created new constructor for Course, added CSV parser, added ArrayList&lt;Course&gt; to Driver." />
   </component>
 </project>

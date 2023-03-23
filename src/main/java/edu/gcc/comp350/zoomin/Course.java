@@ -2,6 +2,8 @@ package edu.gcc.comp350.zoomin;
 
 public class Course {
     boolean isOnSchedule;
+
+    String days;
     String time;
     String professor;
     int credits;
@@ -19,6 +21,22 @@ public class Course {
 
     public Course(String parseData) {
         //Add parameters here
+        //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
+        String[] data = parseData.split(",");
+        courseCode = data[2] + " " + data[3];
+        credits = Integer.parseInt(data[6]);
+        time = data[14] + " - " + data[15];
+        courseName = data[5];
+        professor = data[17] + " " + data[16];
+        if (data.length > 18 && !data[18].equals("")) {
+            professor += "(" + data[18] + ")";
+        }
+        days = "";
+        for(int i = 9; i<=13; i++) {
+            if (!data[i].equals("")) {
+                days += data[i];
+            }
+        }
     }
 
     public void expandInfo()
