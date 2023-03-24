@@ -7,15 +7,28 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode;
+    String courseCode; //Ex. The 350 of COMP350
+    String department; //Ex. The COMP of COMP350
     String description;
     String corequisite;
-    String prequisite;
+    String prerequisite;
     String courseName;
 
     //Constructor
-    Course()
-    {
+
+    /**
+     * This will need to be changed once we read in csv
+     * Needs to take in a comma delimited string
+     */
+    Course(String cName, String prof, int creds, String desc, String code, String cTime, String coreq, String preq){
+       this.courseName = cName;
+       this.professor = prof;
+       this.time = cTime;
+       this.credits = creds;
+       this.courseCode = code;
+       this.description = desc;
+       this.corequisite = coreq;
+       this.prerequisite = preq;
 
     }
 
@@ -91,6 +104,14 @@ public class Course {
         this.description = description;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     public String getCorequisite() {
         return corequisite;
     }
@@ -99,12 +120,12 @@ public class Course {
         this.corequisite = corequisite;
     }
 
-    public String getPrequisite() {
-        return prequisite;
+    public String getPrerequisite() {
+        return prerequisite;
     }
 
-    public void setPrequisite(String prequisite) {
-        this.prequisite = prequisite;
+    public void setPrerequisite(String prequisite) {
+        this.prerequisite = prequisite;
     }
 
     public String getCourseName() {

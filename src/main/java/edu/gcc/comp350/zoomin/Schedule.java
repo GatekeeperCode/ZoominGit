@@ -1,6 +1,10 @@
 package edu.gcc.comp350.zoomin;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Schedule {
 
@@ -8,6 +12,7 @@ public class Schedule {
     String Semester;
     int TotalCredits;
     ArrayList<Course> CourseList = new ArrayList<>();
+    HashMap<String, Course> Schedule = new HashMap<String, Course>();
 
     //Constructor
     Schedule(String SchedName, String Semest)
@@ -16,27 +21,27 @@ public class Schedule {
         this.Semester = Semest;
     }
 
-    public void setSchedule(){ } //what would this do?
-
-    public Schedule getSchedule()
+    public String displaySchedule()
     {
-        return null;
-    }
-
-    public void displaySchedule()
-    {
+        Iterator iter = Schedule.entrySet().iterator();
+        String toOutput = "";
         System.out.println("Schedule name: " + this.ScheduleName + " |  Semester: " + this.Semester);
-        for (Course course: CourseList)
+        while(iter.hasNext())
         {
-            if(course.getCorequisite() != null){
-                System.out.println("| " + course.getCourseCode() + " | " + course.getClass() + " | " + course.getTime() + "|\n" +
-                        course.getProfessor() + " | " + course.getCredits() + " | " + course.getCorequisite() + " | " +
-                        course.getPrequisite() + " |\n" + course.getDescription());
+            HashMap.Entry pair = (HashMap.Entry)iter.next();
+            if(((Course) pair.getValue()).getCorequisite() != null){
+                toOutput += "| " + ((Course) pair.getValue()).getCourseCode() + " | " + ((Course) pair.getValue()).getCourseName() + " | "
+                        + ((Course) pair.getValue()).getTime() + "|\n" + ((Course) pair.getValue()).getProfessor() + " | "
+                        + ((Course) pair.getValue()).getCredits() + " | " + ((Course) pair.getValue()).getCorequisite() + " | " +
+                        ((Course) pair.getValue()).getPrerequisite() + " |\n" + ((Course) pair.getValue()).getDescription() + "\n";
             }else{
-                System.out.println("| " + course.getCourseCode() + " | " + " | " + course.getTime() + " |\n" +
-                        course.getProfessor() + " | Credits" + course.getCredits());
+                toOutput += "| " + ((Course) pair.getValue()).getCourseCode() + " | " + ((Course) pair.getValue()).getCourseName() + " | "
+                        + ((Course) pair.getValue()).getTime() + " |\n" +
+                        ((Course) pair.getValue()).getProfessor() + " | Credits: " + ((Course) pair.getValue()).getCredits() + "\n";
             }
         }
+        System.out.println(toOutput);
+        return toOutput;
     }
 
     public void removeClass(Course course) throws Exception
@@ -55,14 +60,14 @@ public class Schedule {
         getCourseList().add(course);
     }
 
-    public void addClassToSchedule()
+    public void addClassToSchedule(Course course)
     {
-
+        Schedule.put(course.courseCode, course);
     }
 
-    public void removeClassFromSchedule()
+    public void removeClassFromSchedule(Course course)
     {
-
+        Schedule.remove(course.courseCode, course);
     }
 
     public void setCourseList(ArrayList<Course> courseList) {

@@ -21,36 +21,24 @@ public class Filter {
     //    return null;
     //}
 
-    /** Mike Buriok
+    /**
      * Gets the filter for the time slot.
      * @return The time slot to filter the class list against
-     * @throws Exception If there is not a timeslot filter determined.
      */
-    public String getTimeSlot() throws Exception
+    public String getTimeSlot()
     {
-        if(timeSlot == "")
-        {
-            throw new Exception("No Filter Present");
-        }
-
         return timeSlot;
     }
     public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
     }
 
-    /** Mike Buriok
+    /**
      * Gets the filter for the professor.
      * @return The professor to filter the class list against
-     * @throws Exception If there is not a timeslot filter determined.
      */
-    public String getProfessor() throws Exception
+    public String getProfessor()
     {
-        if(professor == "")
-        {
-            throw new Exception("No Filter Present");
-        }
-
         return professor;
     }
 
@@ -62,18 +50,12 @@ public class Filter {
         this.professor = professor;
     }
 
-    /** Mike Buriok
+    /**
      * Gets the filter for the credit hours.
      * @return The credit hours to filter the class list against
-     * @throws Exception If there is not a credit hours filter determined.
      */
-    public int getCreditHours() throws Exception
+    public int getCreditHours()
     {
-        if(creditHours==0)
-        {
-            throw new Exception("No Filter Present");
-        }
-
         return creditHours;
     }
 
@@ -85,12 +67,11 @@ public class Filter {
         this.creditHours = creditHours;
     }
 
-    /** Mike Buriok
+    /**
      *  Gets the filter for the class's department.
      * @return The department to filter the class list against
-     * @throws Exception If there is not a department filter determined.
      */
-    public String getDepartment() throws Exception
+    public String getDepartment()
     {
         return department;
     }
@@ -103,12 +84,11 @@ public class Filter {
         this.department = department;
     }
 
-    /** Mike Buriok
+    /**
      * Gets the filter for the class's course code.
      * @return The course code to filter the class list against
-     * @throws Exception If there is not a Course Code filter determined.
      */
-    public String getCourseCode() throws Exception
+    public String getCourseCode()
     {
         return CourseCode;
     }
