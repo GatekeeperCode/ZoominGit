@@ -2,6 +2,8 @@ package edu.gcc.comp350.zoomin;
 
 public class Course {
     boolean isOnSchedule;
+
+    String days;
     String time;
     String professor;
     int credits;
@@ -14,23 +16,28 @@ public class Course {
 
     //Constructor
 
-    /**
-     * This will need to be changed once we read in csv
-     * Needs to take in a comma delimited string
-     */
-    Course(String cName, String prof, int creds, String desc, String code, String cTime, String coreq, String preq){
-       this.courseName = cName;
-       this.professor = prof;
-       this.time = cTime;
-       this.credits = creds;
-       this.courseCode = code;
-       this.description = desc;
-       this.corequisite = coreq;
-       this.prerequisite = preq;
 
+    public Course(String parseData) {
+        //Add parameters here
+        //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
+        String[] data = parseData.split(",");
+        courseCode = data[2] + " " + data[3];
+        credits = Integer.parseInt(data[6]);
+        time = data[14] + " - " + data[15];
+        courseName = data[5];
+        professor = data[17] + " " + data[16];
+        if (data.length > 18 && !data[18].equals("")) {
+            professor += "(" + data[18] + ")";
+        }
+        days = "";
+        for(int i = 9; i<=13; i++) {
+            if (!data[i].equals("")) {
+                days += data[i];
+            }
+        }
     }
 
-    public String expandInfo()
+    public void expandInfo()
     {
         return "Course: " + this.courseName + "\n" +
                 "Professor: " + this.professor + "\n" +
