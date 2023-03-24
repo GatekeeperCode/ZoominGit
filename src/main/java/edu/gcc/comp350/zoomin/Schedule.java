@@ -44,9 +44,15 @@ public class Schedule {
         return toOutput;
     }
 
-    public void removeClass()
+    public void removeClass(Course course) throws Exception
     {
-
+        for(Course temp : CourseList) {
+            if (temp.courseCode == course.courseCode && temp.professor == course.professor && temp.time == course.time) {
+                CourseList.remove(temp);
+                temp.setOnSchedule(false);
+            }
+        }
+        throw new Exception("Could not find course in schedule.");
     }
 
     public void addClass(Course course)
