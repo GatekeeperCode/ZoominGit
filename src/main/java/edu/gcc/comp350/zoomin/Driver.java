@@ -11,7 +11,7 @@ public class Driver {
     {
         try {
             readInFile("C:\\Users\\BALLMD20\\IdeaProjects\\ZoominProject\\2020-2021.csv");
-            System.out.println(courseList.get(6).credits);
+            System.out.println(courseList.get(463).courseName);
         } catch(Exception e) {
             System.out.println(e);
         }

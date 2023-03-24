@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="b023a38c-2b5b-45ed-917c-3d502fcec756" name="Changes" comment="Created new constructor for Course, added CSV parser. SEE TODO BEFORE ENDING SPRINT TASK.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/gcc/comp350/zoomin/Driver.java" afterDir="false" />
@@ -74,13 +71,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/BURIOKMG19/OneDrive - Grove City College/Desktop/SoftwareEngineering/ZoominGit&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/BALLMD20/IdeaProjects/ZoominProject"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\BALLMD20\IdeaProjects\ZoominProject\src\main\java\edu\gcc\comp350\zoomin" />
@@ -151,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679516633506</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Created new constructor for Course, added CSV parser. SEE TODO BEFORE ENDING SPRINT TASK.">
+      <created>1679614248573</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679614248573</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,6 +196,7 @@
     <MESSAGE value="gitignore change" />
     <MESSAGE value="Added my methods, may need some changes should we need to edit RemoveClass" />
     <MESSAGE value="Created new constructor for Course, added CSV parser, added ArrayList&lt;Course&gt; to Driver." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created new constructor for Course, added CSV parser, added ArrayList&lt;Course&gt; to Driver." />
+    <MESSAGE value="Created new constructor for Course, added CSV parser. SEE TODO BEFORE ENDING SPRINT TASK." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created new constructor for Course, added CSV parser. SEE TODO BEFORE ENDING SPRINT TASK." />
   </component>
 </project>

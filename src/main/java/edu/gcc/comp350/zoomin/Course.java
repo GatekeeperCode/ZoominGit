@@ -8,6 +8,7 @@ public class Course {
     String professor;
     int credits;
     String courseCode;
+    String courseHandle;
     String description;
     String corequisite;
     String prequisite;
@@ -23,10 +24,11 @@ public class Course {
         //Add parameters here
         //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
         String[] data = parseData.split(",");
-        courseCode = data[2] + " " + data[3];
+        courseHandle = data[2];
+        courseCode = data[3];
         credits = Integer.parseInt(data[6]);
         time = data[14] + " - " + data[15];
-        courseName = data[5];
+        courseName = data[5].replace("`", ",");
         professor = data[17] + " " + data[16];
         if (data.length > 18 && !data[18].equals("")) {
             professor += "(" + data[18] + ")";
