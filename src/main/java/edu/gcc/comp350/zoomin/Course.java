@@ -30,8 +30,14 @@ public class Course {
 
     }
 
-    public void expandInfo()
+    public String expandInfo()
     {
+        return "Course: " + this.courseName + "\n" +
+                "Professor: " + this.professor + "\n" +
+                "Credit hours: " + this.credits + "\n" +
+                "Corequisites: " + this.corequisite + "\n" +
+                "Prerequisites: " + this.prerequisite + "\n" +
+                "Description: " + this.description;
     }
 
     public boolean isOnSchedule() {
