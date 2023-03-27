@@ -28,23 +28,23 @@ public class Search {
 	{
 		boolean matchesFilters = true;
 
-		if(!target.professor.equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
+		if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
 		{
 			matchesFilters = false;
 		}
-		else if(!target.time.equalsIgnoreCase(filter.getTimeSlot()) && !filter.getTimeSlot().equals(""))
+		else if(!target.getTime().equalsIgnoreCase(filter.getTimeSlot()) && !filter.getTimeSlot().equals(""))
 		{
 			matchesFilters = false;
 		}
-		else if(target.credits!=filter.getCreditHours() && filter.getCreditHours() != 0)
+		else if(target.getCredits()!=filter.getCreditHours() && filter.getCreditHours() != 0)
 		{
 			matchesFilters = false;
 		}
-		else if(!target.department.equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
+		else if(!target.getDepartment().equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
 		{
 			matchesFilters = false;
 		}
-		else if(!target.courseCode.equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
+		else if(!target.getCourseCode().equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
 		{
 			matchesFilters = false;
 		}
