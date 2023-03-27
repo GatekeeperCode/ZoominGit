@@ -10,8 +10,8 @@ public class Driver {
     public static void main(String[] args)
     {
         try {
-            readInFile("C:\\Users\\BALLMD20\\IdeaProjects\\ZoominProject\\2020-2021.csv");
-            System.out.println(courseList.get(463).courseName);
+            readInFile("./CSV/2020-2021.csv");
+            System.out.println(courseList.get(6).credits);
         } catch(Exception e) {
             System.out.println(e);
         }

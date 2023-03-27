@@ -23,7 +23,6 @@ class ScheduleTest {
 
     @Test
     void removeClass() {
-
     }
 
     @Test
