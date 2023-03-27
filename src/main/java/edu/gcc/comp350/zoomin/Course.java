@@ -7,24 +7,21 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode;
-    String courseHandle;
+    String courseCode; //Ex. The 350 of COMP350
+    String department; //Ex. The COMP of COMP350
     String description;
     String corequisite;
-    String prequisite;
+    String prerequisite;
     String courseName;
 
     //Constructor
-    Course()
-    {
 
-    }
 
     public Course(String parseData) {
         //Add parameters here
         //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
         String[] data = parseData.split(",");
-        courseHandle = data[2];
+        department = data[2];
         courseCode = data[3];
         credits = Integer.parseInt(data[6]);
         time = data[14] + " - " + data[15];
@@ -41,8 +38,14 @@ public class Course {
         }
     }
 
-    public void expandInfo()
+    public String expandInfo()
     {
+        return "Course: " + this.courseName + "\n" +
+                "Professor: " + this.professor + "\n" +
+                "Credit hours: " + this.credits + "\n" +
+                "Corequisites: " + this.corequisite + "\n" +
+                "Prerequisites: " + this.prerequisite + "\n" +
+                "Description: " + this.description;
     }
 
     public boolean isOnSchedule() {
@@ -93,6 +96,14 @@ public class Course {
         this.description = description;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     public String getCorequisite() {
         return corequisite;
     }
@@ -101,12 +112,12 @@ public class Course {
         this.corequisite = corequisite;
     }
 
-    public String getPrequisite() {
-        return prequisite;
+    public String getPrerequisite() {
+        return prerequisite;
     }
 
-    public void setPrequisite(String prequisite) {
-        this.prequisite = prequisite;
+    public void setPrerequisite(String prequisite) {
+        this.prerequisite = prequisite;
     }
 
     public String getCourseName() {
