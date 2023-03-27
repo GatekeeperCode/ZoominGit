@@ -16,21 +16,6 @@ public class Course {
 
     //Constructor
 
-    /**
-     * This will need to be changed once we read in csv
-     * Needs to take in a comma delimited string
-     */
-    Course(String cName, String prof, int creds, String desc, String code, String cTime, String coreq, String preq){
-       this.courseName = cName;
-       this.professor = prof;
-       this.time = cTime;
-       this.credits = creds;
-       this.courseCode = code;
-       this.description = desc;
-       this.corequisite = coreq;
-       this.prerequisite = preq;
-
-    }
 
     public Course(String parseData) {
         //Add parameters here
@@ -54,6 +39,12 @@ public class Course {
 
     public void expandInfo()
     {
+        return "Course: " + this.courseName + "\n" +
+                "Professor: " + this.professor + "\n" +
+                "Credit hours: " + this.credits + "\n" +
+                "Corequisites: " + this.corequisite + "\n" +
+                "Prerequisites: " + this.prerequisite + "\n" +
+                "Description: " + this.description;
     }
 
     public boolean isOnSchedule() {
