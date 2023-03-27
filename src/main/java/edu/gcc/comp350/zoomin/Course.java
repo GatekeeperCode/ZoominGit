@@ -7,7 +7,7 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode; //Ex. The 350 of COMP350
+    String courseCode;//Ex. The 350 of COMP350
     String department; //Ex. The COMP of COMP350
     String description;
     String corequisite;
@@ -37,8 +37,7 @@ public class Course {
         }
     }
 
-    public void expandInfo()
-    {
+    public String expandInfo(){
         return "Course: " + this.courseName + "\n" +
                 "Professor: " + this.professor + "\n" +
                 "Credit hours: " + this.credits + "\n" +
