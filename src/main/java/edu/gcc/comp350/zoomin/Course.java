@@ -21,14 +21,16 @@ public class Course {
         //Add parameters here
         //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
         String[] data = parseData.split(",");
-        courseCode = data[2] + " " + data[3];
+        department = data[2];
+        courseCode = data[3];
         credits = Integer.parseInt(data[6]);
         time = data[14] + " - " + data[15];
-        courseName = data[5];
+        courseName = data[5].replace("`", ",");
         professor = data[17] + " " + data[16];
         if (data.length > 18 && !data[18].equals("")) {
             professor += "(" + data[18] + ")";
         }
+
         days = "";
         for(int i = 9; i<=13; i++) {
             if (!data[i].equals("")) {
@@ -36,6 +38,7 @@ public class Course {
             }
         }
     }
+
 
     public String expandInfo(){
         return "Course: " + this.courseName + "\n" +
