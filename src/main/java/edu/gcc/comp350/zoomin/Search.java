@@ -7,10 +7,27 @@ public class Search {
 	private Filter filter = new Filter();
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
 
+
 	/**
 	 * Working in console, will update once GUI and noSQL are implemented
+	 *
+	 * if inputSearch is ''(nothing), i am unable to know whether this method will work properly or not.
+	 * it might just work out and return all the courses in the department,
+	 * or it will return nothing because theoretically none of the names contain ''?
+	 *
+	 * in that second case we just overload the constructer and copy paste relevant code
 	 */
-	public ArrayList<Course> search(String inputSearch) {
+	public ArrayList<Course> search(String dept, String inputSearch, ArrayList<Course> courseList) {
+
+		for(int i = 0; i< courseList.size(); i++){
+			if(dept == courseList.get(i).getDepartment()){
+				if(courseList.get(i).getCourseName().toUpperCase().contains(inputSearch.toUpperCase())){
+					SearchResults.add(courseList.get(i));
+				}
+			}
+		}
+
+
 		ArrayList<Course> AlteredSearchResults = new ArrayList<Course>();
 
 		for(int i=0; i<SearchResults.size(); i++)
