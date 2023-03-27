@@ -30,6 +30,7 @@ public class Course {
         if (data.length > 18 && !data[18].equals("")) {
             professor += "(" + data[18] + ")";
         }
+
         days = "";
         for(int i = 9; i<=13; i++) {
             if (!data[i].equals("")) {
