@@ -4,9 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Search {
-	private Filter filter = new Filter();
+	private Filter filter;
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
 
+
+	/**
+	 * Constructs the filter and the possible search results.
+	 * @param filePath The filepath of where the CSV file is located.
+	 */
+	public Search(String filePath)
+	{
+		filter = new Filter();
+		try {
+			SearchResults = Driver.readInFile(filePath);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * Working in console, will update once GUI and noSQL are implemented
@@ -41,6 +55,11 @@ public class Search {
 		return AlteredSearchResults;
 	}
 
+	/**Mike Buriok
+	 * Compares a course to the filters.
+	 * @param target The Class to be compared to the filters.
+	 * @return True if target matches the filters, false otherwise.
+	 */
 	private boolean filterMatch(Course target)
 	{
 		boolean matchesFilters = true;
@@ -69,7 +88,8 @@ public class Search {
 		return matchesFilters;
 	}
 
-	/**
+	/**Mike Buriok
+	 * Allows users to set the filters to compare the course list against.
 	 * Working in console, will update once GUI and noSQL are implemented
 	 */
 	public void setFilters() {
@@ -131,6 +151,30 @@ public class Search {
 			if(sched.getScheduleName().equals(Driver.schedList.get(i).getScheduleName())){
 				sched.addClass(newCourse);
 			}
+		}
+	}
+
+	/**
+	 * Compares the SearchResults to the Filters, and prints the results
+	 * Works in console, When display changes, can be updated
+	 */
+	public void displayCourseSearch()
+	{
+		ArrayList<Course> results = new ArrayList<>();
+
+		for(int i=0; i<SearchResults.size(); i++)
+		{
+			if(filterMatch(SearchResults.get(i)))
+			{
+				results.add(SearchResults.get(i));
+			}
+		}
+
+		System.out.println("Course Code |||     Name     |||   Professor   |||  Days  |||   Time   ||| Credits");
+
+		for(int i=0; i<results.size(); i++)
+		{
+			System.out.println(results.get(i).toString());
 		}
 	}
 
