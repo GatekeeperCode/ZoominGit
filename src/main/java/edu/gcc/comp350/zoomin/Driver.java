@@ -71,21 +71,20 @@ public class Driver {
         }
     }
 
-    public static void deleteSchedule()
-    {
+    public static void deleteSchedule() {
         //test
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter the schedule Name you would like to delete: ");
         System.out.print("(without the extension)");
         String toDelete = scan.nextLine();
         File file = new File("./src/main/java/edu/gcc/comp350/zoomin/Schedules/");
-        for(File f: file.listFiles()) {
+        for (File f : file.listFiles()) {
             System.out.println(f.getName());
-            if(f.getName().equals(toDelete)){
+            if (f.getName().equals(toDelete)) {
                 f.delete();
             }
         }
-
+    }
     public String viewSchedule(Schedule s){
         return s.displaySchedule();
     }
