@@ -72,7 +72,9 @@ public class Schedule {
             }
         }
 
-        Schedule.put(course.courseCode, course);
+        if (addTo) {
+            Schedule.put(course.courseCode, course);
+        }
     }
 
     public void removeClassFromSchedule(Course course)
