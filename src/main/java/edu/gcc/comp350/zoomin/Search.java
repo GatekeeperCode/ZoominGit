@@ -31,11 +31,50 @@ public class Search {
 	 *
 	 * in that second case we just overload the constructer and copy paste relevant code
 	 */
-	public ArrayList<Course> search(String inputSearch) {
+	public ArrayList<Course> search(String inputSearch, String courseCode, String timeTarget) {
 
 		ArrayList<Course> AlteredSearchResults = new ArrayList<Course>();
 
-		filter.setCourseName(inputSearch);
+		if(!inputSearch.equals(""))
+		{
+			filter.setCourseName(inputSearch);
+		}
+
+		if(!timeTarget.equals(""))
+		{
+			filter.setPrimaryTimeCheck(timeTarget);
+		}
+
+		if(!courseCode.equals(""))
+		{
+			String dept = "";
+			String code = "";
+
+			if(courseCode.length()<4)
+			{
+				System.out.println("Sorry, that is an invalid Course Code");
+
+			}
+			else
+			{
+				for(int i=0; i<4; i++)
+				{
+					dept += courseCode.charAt(i);
+				}
+
+				filter.setDepartment(dept);
+			}
+
+			if(courseCode.length()>4)
+			{
+				for(int i=4; i<courseCode.length(); i++)
+				{
+					code += courseCode.charAt(i);
+				}
+
+				filter.setCourseCode(code);
+			}
+		}
 
 		for(int i=0; i<SearchResults.size(); i++)
 		{
@@ -57,15 +96,12 @@ public class Search {
 	{
 		boolean matchesFilters = true;
 
+
 		if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
 		{
 			matchesFilters = false;
 		}
 		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else if(!target.getTime().equalsIgnoreCase(filter.getTimeSlot()) && !filter.getTimeSlot().equals(""))
 		{
 			matchesFilters = false;
 		}
@@ -81,6 +117,25 @@ public class Search {
 		{
 			matchesFilters = false;
 		}
+		else
+		{
+			//Time Schedule Checking
+			if(filter.getPrimaryTimeCheck().equals(""))
+			{
+				if(!target.getTime().contains(filter.getStartTime()) && !filter.getStartTime().equals(""))
+				{
+					matchesFilters = false;
+				}
+				else if (!target.getTime().contains(filter.getEndTime()) && !filter.getEndTime().equals(""))
+				{
+					matchesFilters = false;
+				}
+			}
+			else if(!target.getTime().contains(filter.getPrimaryTimeCheck()))
+			{
+				matchesFilters = false;
+			}
+		}
 
 		return matchesFilters;
 	}
@@ -93,6 +148,8 @@ public class Search {
 		while(true)
 		{
 			System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
+			System.out.println("If don't want to add that filter, just hit enter.");
+
 			Scanner scnr = new Scanner(System.in);
 
 			boolean correctInput = false;
@@ -109,8 +166,14 @@ public class Search {
 				}
 				else if(input.equalsIgnoreCase("TimeSlot"))
 				{
-					System.out.println("What do you want to set the filter to?");
-					filter.setTimeSlot(scnr.next());
+					System.out.println("What is the Start time that you want to search for?");
+					filter.setStartTime(scnr.next());
+
+					System.out.println("What is the End time that you want to search for?");
+					filter.setEndTime(scnr.next());
+
+					System.out.println("What days of the week are you checking for?");
+					filter.setDaysOffered(scnr.next());
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("CreditHours"))
