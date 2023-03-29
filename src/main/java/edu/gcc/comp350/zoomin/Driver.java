@@ -72,7 +72,11 @@ public class Driver {
                     searches.setFilters();
                     break;
 
-                case ("STOP"):
+                case ("Quit"):
+                    doStuff = false;
+                    break;
+
+                case ("Exit"):
                     doStuff = false;
                     break;
             }
