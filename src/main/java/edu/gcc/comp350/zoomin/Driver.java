@@ -47,4 +47,8 @@ public class Driver {
     {
 
     }
+
+    public void viewSchedule(Schedule s){
+
+    }
 }
