@@ -1,21 +1,27 @@
 package edu.gcc.comp350.zoomin;
 
 public class Filter {
-    private String timeSlot;
+    private String startTime;
+    private String endTime;
+    private String daysOffered;
     private String professor;
     private int creditHours;
     private String department;
     private String CourseCode;
     private String courseName;
+    private String primaryTimeCheck;
 
     Filter()
     {
-        timeSlot = "";
+        startTime = "";
+        endTime = "";
         professor = "";
         creditHours = 0;
         department = "";
         CourseCode = "";
         courseName = "";
+        daysOffered = "";
+        primaryTimeCheck = "";
     }
 
     //public Boolean FilterStatus()
@@ -27,13 +33,16 @@ public class Filter {
      * Gets the filter for the time slot.
      * @return The time slot to filter the class list against
      */
-    public String getTimeSlot()
+    public String getStartTime()
     {
-        return timeSlot;
+        return startTime;
     }
-    public void setTimeSlot(String timeSlot) {
-        this.timeSlot = timeSlot;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
+
+    public String getEndTime(){return endTime;}
+    public void setEndTime(String endTime) {this.endTime =  endTime;}
 
     /**
      * Gets the filter for the professor.
@@ -109,5 +118,24 @@ public class Filter {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public void setDaysOffered(String daysOffered)
+    {
+        this.daysOffered = daysOffered;
+    }
+
+    public String getDaysOffered() {
+        return daysOffered;
+    }
+
+    public void setPrimaryTimeCheck(String primaryTimeCheck)
+    {
+        this.primaryTimeCheck = primaryTimeCheck;
+    }
+
+    public String getPrimaryTimeCheck()
+    {
+        return primaryTimeCheck;
     }
 }
