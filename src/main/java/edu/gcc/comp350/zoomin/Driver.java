@@ -34,22 +34,23 @@ public class Driver {
         //TODO: Need to set-up MongoDB and make a JSON translator for Course
     }
 
-    public Schedule createSchedule()
+    public Schedule createSchedule(String schedName, String semester)
     {
-        return null;
+        Schedule nSched = new Schedule(schedName, semester);
+        return nSched;
     }
 
     public void saveSchedule(Schedule s)
     {
-
+        schedList.add(s);
     }
 
     public void deleteSchedule(Schedule s)
     {
-
+        schedList.remove(s);
     }
 
-    public void viewSchedule(Schedule s){
-
+    public String viewSchedule(Schedule s){
+        return s.displaySchedule();
     }
 }
