@@ -4,9 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Search {
-	private Filter filter = new Filter();
+	private Filter filter;
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
 
+
+	/**
+	 * Constructs the filter and the possible search results.
+	 * @param filePath The filepath of where the CSV file is located.
+	 */
+	public Search(String filePath)
+	{
+		filter = new Filter();
+		try {
+			SearchResults = Driver.readInFile(filePath);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * Working in console, will update once GUI and noSQL are implemented
@@ -41,6 +55,11 @@ public class Search {
 		return AlteredSearchResults;
 	}
 
+	/**Mike Buriok
+	 * Compares a course to the filters.
+	 * @param target The Class to be compared to the filters.
+	 * @return True if target matches the filters, false otherwise.
+	 */
 	private boolean filterMatch(Course target)
 	{
 		boolean matchesFilters = true;
@@ -69,54 +88,66 @@ public class Search {
 		return matchesFilters;
 	}
 
-	/**
+	/**Mike Buriok
+	 * Allows users to set the filters to compare the course list against.
 	 * Working in console, will update once GUI and noSQL are implemented
 	 */
 	public void setFilters() {
-		System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
-		Scanner scnr = new Scanner(System.in);
-
-		boolean correctInput = false;
-
-		while(!correctInput)
+		while(true)
 		{
-			String input = scnr.next();
+			System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
+			Scanner scnr = new Scanner(System.in);
 
-			if(input.equalsIgnoreCase("Professor"))
+			boolean correctInput = false;
+
+			while(!correctInput)
 			{
-				System.out.println("What do you want to set the filter to?");
-				filter.setProfessor(scnr.next());
-				correctInput=true;
-			}
-			else if(input.equalsIgnoreCase("TimeSlot"))
-			{
-				System.out.println("What do you want to set the filter to?");
-				filter.setTimeSlot(scnr.next());
-				correctInput=true;
-			}
-			else if(input.equalsIgnoreCase("CreditHours"))
-			{
-				System.out.println("What do you want to set the filter to?");
-				filter.setCreditHours(scnr.nextInt());
-				scnr.next();
-				correctInput=true;
-			}
-			else if(input.equalsIgnoreCase("Department"))
-			{
-				System.out.println("What do you want to set the filter to?");
-				filter.setDepartment(scnr.next());
-				correctInput=true;
-			}
-			else if(input.equalsIgnoreCase("CourseCode"))
-			{
-				System.out.println("What do you want to set the filter to?");
-				filter.setCourseCode(scnr.next());
-				correctInput=true;
-			}
-			else
-			{
-				System.out.println("The given input does not match the specifications.");
-				System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
+				String input = scnr.next();
+
+				if(input.equalsIgnoreCase("Professor"))
+				{
+					System.out.println("What do you want to set the filter to?");
+					filter.setProfessor(scnr.next());
+					correctInput=true;
+				}
+				else if(input.equalsIgnoreCase("TimeSlot"))
+				{
+					System.out.println("What do you want to set the filter to?");
+					filter.setTimeSlot(scnr.next());
+					correctInput=true;
+				}
+				else if(input.equalsIgnoreCase("CreditHours"))
+				{
+					System.out.println("What do you want to set the filter to?");
+					filter.setCreditHours(scnr.nextInt());
+					scnr.next();
+					correctInput=true;
+				}
+				else if(input.equalsIgnoreCase("Department"))
+				{
+					System.out.println("What do you want to set the filter to?");
+					filter.setDepartment(scnr.next());
+					correctInput=true;
+				}
+				else if(input.equalsIgnoreCase("CourseCode"))
+				{
+					System.out.println("What do you want to set the filter to?");
+					filter.setCourseCode(scnr.next());
+					correctInput=true;
+				}
+				else
+				{
+					System.out.println("The given input does not match the specifications.");
+					System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
+				}
+
+				System.out.println("Would you like to add another filter (Y/N)");
+				String loopContinue = scnr.next();
+
+				if(loopContinue.equals("N"))
+				{
+					return;
+				}
 			}
 		}
 	}
@@ -131,6 +162,30 @@ public class Search {
 			if(sched.getScheduleName().equals(Driver.schedList.get(i).getScheduleName())){
 				sched.addClass(newCourse);
 			}
+		}
+	}
+
+	/**
+	 * Compares the SearchResults to the Filters, and prints the results
+	 * Works in console, When display changes, can be updated
+	 */
+	public void displayCourseSearch()
+	{
+		ArrayList<Course> results = new ArrayList<>();
+
+		for(int i=0; i<SearchResults.size(); i++)
+		{
+			if(filterMatch(SearchResults.get(i)))
+			{
+				results.add(SearchResults.get(i));
+			}
+		}
+
+		System.out.println("Course Code |||     Name     |||   Professor   |||  Days  |||   Time   ||| Credits");
+
+		for(int i=0; i<results.size(); i++)
+		{
+			System.out.println(results.get(i).toString());
 		}
 	}
 
