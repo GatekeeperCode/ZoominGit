@@ -32,7 +32,7 @@ public class Course {
         }
 
         days = "";
-        for(int i = 9; i<=13; i++) {
+        for (int i = 9; i <= 13; i++) {
             if (!data[i].equals("")) {
                 days += data[i];
             }
@@ -40,7 +40,7 @@ public class Course {
     }
 
 
-    public String expandInfo(){
+    public String expandInfo() {
         return "Course: " + this.courseName + "\n" +
                 "Professor: " + this.professor + "\n" +
                 "Credit hours: " + this.credits + "\n" +
@@ -127,5 +127,14 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    /**
+     * Mike Buriok
+     * @return A string listing the course with the Full Course code (COMP350), Course Name, Professor, Days, Time, and Credits;
+     */
+    public String toString()
+    {
+        return department + courseCode + " " + courseName + " " + professor + " " + days + " " + time + " " +  credits;
     }
 }
