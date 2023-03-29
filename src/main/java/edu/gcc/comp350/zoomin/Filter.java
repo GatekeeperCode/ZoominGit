@@ -6,6 +6,7 @@ public class Filter {
     private int creditHours;
     private String department;
     private String CourseCode;
+    private String courseName;
 
     Filter()
     {
@@ -14,6 +15,7 @@ public class Filter {
         creditHours = 0;
         department = "";
         CourseCode = "";
+        courseName = "";
     }
 
     //public Boolean FilterStatus()
@@ -99,5 +101,13 @@ public class Filter {
      */
     public void setCourseCode(String courseCode) {
         CourseCode = courseCode;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }

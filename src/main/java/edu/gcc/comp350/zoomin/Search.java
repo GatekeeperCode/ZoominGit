@@ -31,18 +31,11 @@ public class Search {
 	 *
 	 * in that second case we just overload the constructer and copy paste relevant code
 	 */
-	public ArrayList<Course> search(String dept, String inputSearch, ArrayList<Course> courseList) {
-
-		for(int i = 0; i< courseList.size(); i++){
-			if(dept == courseList.get(i).getDepartment()){
-				if(courseList.get(i).getCourseName().toUpperCase().contains(inputSearch.toUpperCase())){
-					SearchResults.add(courseList.get(i));
-				}
-			}
-		}
-
+	public ArrayList<Course> search(String inputSearch) {
 
 		ArrayList<Course> AlteredSearchResults = new ArrayList<Course>();
+
+		filter.setCourseName(inputSearch);
 
 		for(int i=0; i<SearchResults.size(); i++)
 		{
@@ -64,7 +57,11 @@ public class Search {
 	{
 		boolean matchesFilters = true;
 
-		if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
+		if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+		{
+			matchesFilters = false;
+		}
+		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
 		{
 			matchesFilters = false;
 		}
