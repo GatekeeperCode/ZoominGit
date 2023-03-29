@@ -23,7 +23,7 @@ public class Driver {
         }
     }
 
-    public static void readInFile(String filename) throws Exception {
+    public static ArrayList<Course> readInFile(String filename) throws Exception {
         Scanner scn = new Scanner(new File(filename));
         scn.nextLine(); //Throw the first line away, do not need column data.
         while (scn.hasNextLine()) {
@@ -33,15 +33,17 @@ public class Driver {
             //When we get the CSV, proceed from here. This is how we read the CSV.
             courseList.add(new Course(iterLine));
         }
+        return courseList;
     }
 
     public void translateToMongo(Course c) {
         //TODO: Need to set-up MongoDB and make a JSON translator for Course
     }
 
-    public Schedule createSchedule()
+    public Schedule createSchedule(String schedName, String semester)
     {
-        return null;
+        Schedule nSched = new Schedule(schedName, semester);
+        return nSched;
     }
 
     public static void saveSchedule(Schedule s)
@@ -75,5 +77,8 @@ public class Driver {
                 f.delete();
             }
         }
+
+    public String viewSchedule(Schedule s){
+        return s.displaySchedule();
     }
 }
