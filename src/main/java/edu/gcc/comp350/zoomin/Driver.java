@@ -13,21 +13,69 @@ public class Driver {
     public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
     {
+        boolean doStuff = true;
+        Search searches = new Search("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
         try {
             readInFile("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
-            System.out.println(courseList.get(6).credits);
-            Schedule s = new Schedule("testSchedule", "Fall");
-            deleteSchedule();
+            //System.out.println(courseList.get(6).credits);
+            //Schedule s = new Schedule("testSchedule", "Fall");
+            //deleteSchedule();
         } catch(Exception e) {
             System.out.println(e);
+            doStuff = false;
         }
 
+        Schedule s = new Schedule("tempsch", "tempsem");
         Scanner scn = new Scanner(System.in);
-        while (true) {
+        while (doStuff) {
             System.out.println("Enter a command:");
-            String cmd = scn.nextLine();
+            String cmd = scn.nextLine().toUpperCase();
+            Scanner lscan = new Scanner(cmd);
 
-            //
+            String command = lscan.next();
+            switch (command) {
+                case ("HELP"):
+                    //Clear line here
+                    helpUser();
+                    break;
+
+                case ("ADDCOURSE"):
+                    break;
+
+                case ("REMOVE"):
+                    break;
+
+                case ("SEARCH"):
+                    String tempCourseName = "";
+                    while (lscan.hasNext()) {
+                        tempCourseName += lscan.next();
+                        if (lscan.hasNext()) {
+                            tempCourseName += " ";
+                        }
+                    }
+                    searches.search(tempCourseName);
+                    break;
+
+                case ("SAVE"):
+                    saveSchedule(s);
+                    break;
+
+                case ("DELETE"):
+                    deleteSchedule();
+                    break;
+
+                case ("DISPLAY"):
+                    s.displaySchedule();
+                    break;
+
+                case ("ADDFILTERS"):
+                    searches.setFilters();
+                    break;
+
+                case ("STOP"):
+                    doStuff = false;
+                    break;
+            }
         }
     }
 
@@ -87,5 +135,18 @@ public class Driver {
     }
     public String viewSchedule(Schedule s){
         return s.displaySchedule();
+    }
+
+    private static void helpUser() {
+        System.out.println("Available Commands:\n" +
+                "HELP: Shows all commands\n" +
+                "ADDCOURSE <course code>: Adds course to schedule\n" +
+                "REMOVE <course code>: Removes course (if applicable) from schedule\n" +
+                "SAVE: Saves current schedule\n" +
+                "DELETE: Deletes specified schedule\n" +
+                "SEARCH <course info>: Searches for courses based on filters & keyword\n" +
+                "ADDFILTERS: Adds filters to the search tool\n" +
+                "DISPLAY: Displays the current schedule\n" +
+                "QUIT: Stops the program");
     }
 }
