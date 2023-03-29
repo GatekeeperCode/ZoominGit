@@ -1,11 +1,10 @@
 package edu.gcc.comp350.zoomin;
 
-import com.google.gson.Gson;
-
 import javax.swing.text.html.HTMLDocument;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Schedule {
 
