@@ -2,6 +2,9 @@ package edu.gcc.comp350.zoomin;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScheduleTest {
@@ -72,7 +75,18 @@ class ScheduleTest {
 
     @Test
     void setCourseList() {
+        Schedule s = new Schedule("sched1", "Fall2020");
+        ArrayList<Course> cList = new ArrayList<Course>();
+        Course cOne = new Course("2020,10,ACCT,201,B,PRINCIPLES OF ACCOUNTING I,3,30,32,M,,W,,F,11:00:00 AM,11:50:00 AM,Snyder,Richard,,Online materials fee");
+        Course cTwo = new Course("2020,10,ACCT,201,B,PRINCIPLES OF ACCOUNTING I,3,30,32,M,,W,,F,11:00:00 AM,11:50:00 AM,Snyder,Richard,,Online materials fee");
+        Course cThree = new Course("2020,10,ACCT,201,B,PRINCIPLES OF ACCOUNTING I,3,30,32,M,,W,,F,11:00:00 AM,11:50:00 AM,Snyder,Richard,,Online materials fee");
 
+        cList.add(cOne);
+        cList.add(cTwo);
+        cList.add(cThree);
+
+        s.setCourseList(cList);
+        assertEquals(s.getCourseList().size(), 3);
     }
 
     @Test
