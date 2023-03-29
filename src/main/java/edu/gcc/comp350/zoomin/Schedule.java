@@ -63,7 +63,18 @@ public class Schedule {
 
     public void addClassToSchedule(Course course)
     {
-        Schedule.put(course.courseCode, course);
+        boolean addTo = true;
+        for(String key : this.Schedule.keySet()) {
+            Course ctest = this.Schedule.get(key);
+            if (ctest.getTime().equals(course.getTime())) {
+                addTo = false;
+                break;
+            }
+        }
+
+        if (addTo) {
+            Schedule.put(course.courseCode, course);
+        }
     }
 
     public void removeClassFromSchedule(Course course)

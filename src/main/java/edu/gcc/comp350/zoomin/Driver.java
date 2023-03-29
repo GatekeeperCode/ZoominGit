@@ -21,6 +21,14 @@ public class Driver {
         } catch(Exception e) {
             System.out.println(e);
         }
+
+        Scanner scn = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter a command:");
+            String cmd = scn.nextLine();
+
+            //
+        }
     }
 
     public static ArrayList<Course> readInFile(String filename) throws Exception {

@@ -91,29 +91,31 @@ class ScheduleTest {
 
     @Test
     void setScheduleName() {
+        Schedule s = new Schedule("falsename", "Fall2020");
+        s.setScheduleName("truename");
+
+        assertEquals(s.getScheduleName(), "truename");
     }
 
     @Test
     void setSemester() {
+        Schedule s = new Schedule("sched1", "Fall2020");
+        s.setSemester("Fall2021");
+
+        assertEquals(s.getSemester(), "Fall2021");
     }
 
     @Test
     void setTotalCredits() {
+        Schedule s = new Schedule("sched1", "Fall2020");
+        s.setTotalCredits(10);
+
+        assertEquals(s.getTotalCredits(), 10);
     }
 
     @Test
     void getScheduleName() {
-    }
-
-    @Test
-    void getCourseList() {
-    }
-
-    @Test
-    void getTotalCredits() {
-    }
-
-    @Test
-    void getSemester() {
+        Schedule s = new Schedule("sched1", "Fall2020");
+        assertEquals(s.getScheduleName(), "sched1");
     }
 }
