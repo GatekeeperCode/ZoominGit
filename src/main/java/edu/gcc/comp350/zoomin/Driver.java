@@ -2,9 +2,7 @@ package edu.gcc.comp350.zoomin;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +14,7 @@ public class Driver {
         boolean doStuff = true;
         Search searches = new Search("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
         try {
-            readInFile("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
+            courseList = readInFile("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
             //System.out.println(courseList.get(6).credits);
             //Schedule s = new Schedule("testSchedule", "Fall");
             //deleteSchedule();
@@ -35,6 +33,7 @@ public class Driver {
             String command = lscan.next();
             String tempName;
             String tempCode;
+            String tempTime;
             String tempLetter;
             Course cAdd = null;
             switch (command) {
@@ -68,21 +67,53 @@ public class Driver {
                     }
                     break;
 
-                case ("SEARCH"):
-                    String tempCourseName = "";
+                case ("SEARCHNAME"):
+                    tempName = "";
                     while (lscan.hasNext()) {
-                        tempCourseName += lscan.next();
+                        tempName += lscan.next();
                         if (lscan.hasNext()) {
-                            tempCourseName += " ";
+                            tempName += " ";
                         }
                     }
-                    searches.search(tempCourseName);
+                    searches.search(tempName, "", "");
+                    searches.displayCourseSearch();
+                    break;
+
+                case ("SEARCHCODE"):
+                    tempCode = "";
+                    while (lscan.hasNext()) {
+                        tempCode += lscan.next();
+                        if (lscan.hasNext()) {
+                            tempCode += " ";
+                        }
+                    }
+                    searches.search("", tempCode, "");
+                    searches.displayCourseSearch();
+                    break;
+
+                case ("SEARCHTIME"):
+                    tempTime = "";
+                    while (lscan.hasNext()) {
+                        tempTime += lscan.next();
+                        if (lscan.hasNext()) {
+                            tempTime += " ";
+                        }
+                    }
+                    searches.search("", "", tempTime);
+                    searches.displayCourseSearch();
                     break;
 
                 case ("SAVE"):
                     saveSchedule(s);
                     break;
-
+                case ("LOAD"):
+                    if (lscan.hasNext()){
+                       String filename = lscan.next();
+                       s = openSchedule(filename);
+                    }else{
+                        System.out.println("please type a filename after 'LOAD' ");
+                    }
+                    break;
                 case ("DELETE"):
                     deleteSchedule();
                     break;
@@ -99,7 +130,7 @@ public class Driver {
 
                     break;
 
-                case ("STOP"):
+                case ("QUIT"):
                     doStuff = false;
                     break;
             }
@@ -150,11 +181,9 @@ public class Driver {
         //test
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter the schedule Name you would like to delete: ");
-        System.out.print("(without the extension)");
         String toDelete = scan.nextLine();
         File file = new File("./src/main/java/edu/gcc/comp350/zoomin/Schedules/");
         for (File f : file.listFiles()) {
-            System.out.println(f.getName());
             if (f.getName().equals(toDelete)) {
                 f.delete();
             }
@@ -170,11 +199,15 @@ public class Driver {
                 "ADDCOURSE <course code>: Adds course to schedule\n" +
                 "REMOVE <course code>: Removes course (if applicable) from schedule\n" +
                 "SAVE: Saves current schedule\n" +
+                "LOAD <filename>: loads schedule with name <filename>\n" +
                 "DELETE: Deletes specified schedule\n" +
-                "SEARCH <course info>: Searches for courses based on filters & keyword\n" +
+                "SEARCHNAME <course name>: Searches for courses based on filters & course name\n" +
+                "SEARCHCODE <course name>: Searches for courses based on filters & course code\n" +
+                "SEARCHTIME <course name>: Searches for courses based on filters & course time\n" +
                 "ADDFILTERS: Adds filters to the search tool\n" +
                 "DISPLAY: Displays the current schedule\n" +
                 "NEWSCHEDULE <name> <semester>: Creates a new, empty schedule\n" +
+                "CLEARSEARCH: empties out search filters / values\n" +
                 "QUIT: Stops the program");
     }
 
@@ -185,5 +218,17 @@ public class Driver {
             }
         }
         return null;
+    }
+
+    private static Schedule openSchedule(String filename){
+        Gson gson = new Gson();
+        try {
+            Schedule sched = gson.fromJson(new FileReader("./src/main/java/edu/gcc/comp350/zoomin/Schedules/"
+                    + filename), Schedule.class);
+            return sched;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
