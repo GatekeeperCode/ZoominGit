@@ -7,8 +7,9 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode;//Ex. The 350 of COMP350
-    String department; //Ex. The COMP of COMP350
+    String courseCode;//Ex. The 350 of COMP350B
+    String department; //Ex. The COMP of COMP350B
+    String courseLetter; //Ex. The B of COMP350B
     String description;
     String corequisite;
     String prerequisite;
