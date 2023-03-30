@@ -68,6 +68,12 @@ public class Schedule {
             Course ctest = this.Schedule.get(key);
             if (ctest.getTime().equals(course.getTime())) {
                 addTo = false;
+                System.out.println("Cannot add that course as it conflicts with: " + ctest.courseCode + ",\nwhich is also at " +
+                        ctest.time);
+                break;
+            } else if (ctest.getCourseName().equals(course.getCourseName())) {
+                addTo = false;
+                System.out.println("Cannot add a duplicate course");
                 break;
             }
         }

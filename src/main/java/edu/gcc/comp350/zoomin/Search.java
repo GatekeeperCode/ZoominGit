@@ -240,6 +240,9 @@ public class Search {
 				results.add(SearchResults.get(i));
 			}
 		}
+		if (results.size() < 1){
+		System.out.println("no results match criteria");
+	}
 
 		System.out.println("Course Code |||     Name     |||   Professor   |||  Days  |||   Time   ||| Credits");
 

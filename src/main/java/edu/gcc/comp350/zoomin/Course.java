@@ -24,6 +24,7 @@ public class Course {
         String[] data = parseData.split(",");
         department = data[2];
         courseCode = data[3];
+        courseLetter = data[4];
         credits = Integer.parseInt(data[6]);
         time = data[14] + " - " + data[15];
         courseName = data[5].replace("`", ",");
