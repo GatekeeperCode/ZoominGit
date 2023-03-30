@@ -33,16 +33,39 @@ public class Driver {
             Scanner lscan = new Scanner(cmd);
 
             String command = lscan.next();
+            String tempName;
+            String tempCode;
+            String tempLetter;
+            Course cAdd = null;
             switch (command) {
                 case ("HELP"):
-                    //Clear line here
                     helpUser();
                     break;
 
                 case ("ADDCOURSE"):
+                    if (lscan.hasNext()) {
+                        tempName = lscan.next();
+                        tempCode = lscan.next();
+                        tempLetter = lscan.next();
+                        cAdd = findCourse(tempName, tempCode, tempLetter);
+                    }
+
+                    if (cAdd != null) {
+                        s.addClassToSchedule(cAdd);
+                    }
                     break;
 
                 case ("REMOVE"):
+                    if (lscan.hasNext()) {
+                        tempName = lscan.next();
+                        tempCode = lscan.next();
+                        tempLetter = lscan.next();
+                        cAdd = findCourse(tempName, tempCode, tempLetter);
+                    }
+
+                    if (cAdd != null) {
+                        s.removeClassFromSchedule(cAdd);
+                    }
                     break;
 
                 case ("SEARCH"):
@@ -72,11 +95,11 @@ public class Driver {
                     searches.setFilters();
                     break;
 
-                case ("Quit"):
-                    doStuff = false;
+                case ("NEWSCHEDULE"):
+
                     break;
 
-                case ("Exit"):
+                case ("STOP"):
                     doStuff = false;
                     break;
             }
@@ -151,6 +174,16 @@ public class Driver {
                 "SEARCH <course info>: Searches for courses based on filters & keyword\n" +
                 "ADDFILTERS: Adds filters to the search tool\n" +
                 "DISPLAY: Displays the current schedule\n" +
+                "NEWSCHEDULE <name> <semester>: Creates a new, empty schedule\n" +
                 "QUIT: Stops the program");
+    }
+
+    private static Course findCourse(String dept, String code, String spec) {
+        for(Course temp : courseList) {
+            if (temp.department.equals(dept) && temp.courseCode.equals(code) && temp.courseLetter.equals(spec)) {
+                return temp;
+            }
+        }
+        return null;
     }
 }
