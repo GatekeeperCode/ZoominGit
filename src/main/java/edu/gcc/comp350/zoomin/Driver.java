@@ -29,24 +29,32 @@ public class Driver {
             System.out.println("Enter a command:");
             String cmd = scn.nextLine().toUpperCase();
             Scanner lscan = new Scanner(cmd);
+            String command = "";
 
-            String command = lscan.next();
+            //Command separation
+            if (lscan.hasNext())
+                command = lscan.next();
+
+            //Usage variable formation
             String tempName;
             String tempCode;
             String tempTime;
-            String tempLetter;
+            String[] parseList;
             Course cAdd = null;
+
+            //Checks for proper commands
             switch (command) {
                 case ("HELP"):
                     helpUser();
                     break;
 
                 case ("ADDCOURSE"):
-                    if (lscan.hasNext()) {
-                        tempName = lscan.next();
-                        tempCode = lscan.next();
-                        tempLetter = lscan.next();
-                        cAdd = findCourse(tempName, tempCode, tempLetter);
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command ADDCOURSE <name> <code> <letter>");
                     }
 
                     if (cAdd != null) {
@@ -55,11 +63,12 @@ public class Driver {
                     break;
 
                 case ("REMOVE"):
-                    if (lscan.hasNext()) {
-                        tempName = lscan.next();
-                        tempCode = lscan.next();
-                        tempLetter = lscan.next();
-                        cAdd = findCourse(tempName, tempCode, tempLetter);
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command REMOVE <name> <code> <letter>");
                     }
 
                     if (cAdd != null) {
@@ -106,20 +115,27 @@ public class Driver {
                 case ("SAVE"):
                     saveSchedule(s);
                     break;
+
                 case ("LOAD"):
                     if (lscan.hasNext()){
-                       String filename = lscan.next();
+                       String filename = lscan.nextLine();
+                       filename = filename.replaceFirst("\\s+", "");
                        s = openSchedule(filename);
-                    }else{
-                        System.out.println("please type a filename after 'LOAD' ");
+                    }
+                    else{
+                        System.out.println("Please type LOAD <filename>");
                     }
                     break;
+
                 case ("DELETE"):
                     deleteSchedule();
                     break;
 
                 case ("DISPLAY"):
-                    s.displaySchedule();
+                    if (s != null)
+                        s.displaySchedule();
+                    else
+                        System.out.println("File is empty, create a new schedule.");
                     break;
 
                 case ("ADDFILTERS"):
@@ -127,7 +143,14 @@ public class Driver {
                     break;
 
                 case ("NEWSCHEDULE"):
-
+                    if (lscan.hasNext()) {
+                        parseList = lscan.nextLine().split("\\s+");
+                        if (parseList.length != 3) {
+                            System.out.println("Please enter NEWSCHEDULE <name> <semester>");
+                            break;
+                        }
+                        s = new Schedule(parseList[1], parseList[2]);
+                    }
                     break;
 
                 case ("QUIT"):
@@ -208,7 +231,7 @@ public class Driver {
                 "DISPLAY: Displays the current schedule\n" +
                 "NEWSCHEDULE <name> <semester>: Creates a new, empty schedule\n" +
                 "CLEARSEARCH: empties out search filters / values\n" +
-                "QUIT: Stops the program");
+                "QUIT: Stops the program\n");
     }
 
     private static Course findCourse(String dept, String code, String spec) {
@@ -227,7 +250,7 @@ public class Driver {
                     + filename), Schedule.class);
             return sched;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("There was a problem loading the file: " + e.getMessage());
             return null;
         }
     }
