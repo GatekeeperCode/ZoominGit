@@ -197,7 +197,9 @@ public class Driver {
         System.out.println("Available Commands:\n" +
                 "HELP: Shows all commands\n" +
                 "ADDCOURSE <course code>: Adds course to schedule\n" +
+                "syntax should be <course code> <class section> ex: COMM 101 A" +
                 "REMOVE <course code>: Removes course (if applicable) from schedule\n" +
+                "syntax should be <course code> <class section> ex: COMM 101 A" +
                 "SAVE: Saves current schedule\n" +
                 "LOAD <filename>: loads schedule with name <filename>\n" +
                 "DELETE: Deletes specified schedule\n" +
@@ -206,7 +208,6 @@ public class Driver {
                 "SEARCHTIME <course name>: Searches for courses based on filters & course time\n" +
                 "ADDFILTERS: Adds filters to the search tool\n" +
                 "DISPLAY: Displays the current schedule\n" +
-                "NEWSCHEDULE <name> <semester>: Creates a new, empty schedule\n" +
                 "CLEARSEARCH: empties out search filters / values\n" +
                 "QUIT: Stops the program");
     }

@@ -180,7 +180,7 @@ public class Search {
 				{
 					System.out.println("What do you want to set the filter to?");
 					filter.setCreditHours(scnr.nextInt());
-					scnr.next();
+//					scnr.next();
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("Department"))
