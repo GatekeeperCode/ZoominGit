@@ -7,8 +7,9 @@ public class Course {
     String time;
     String professor;
     int credits;
-    String courseCode;//Ex. The 350 of COMP350
-    String department; //Ex. The COMP of COMP350
+    String courseCode;//Ex. The 350 of COMP350B
+    String department; //Ex. The COMP of COMP350B
+    String courseLetter; //Ex. The B of COMP350B
     String description;
     String corequisite;
     String prerequisite;
@@ -23,6 +24,7 @@ public class Course {
         String[] data = parseData.split(",");
         department = data[2];
         courseCode = data[3];
+        courseLetter = data[4];
         credits = Integer.parseInt(data[6]);
         time = data[14] + " - " + data[15];
         courseName = data[5].replace("`", ",");
