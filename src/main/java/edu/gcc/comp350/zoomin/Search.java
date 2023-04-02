@@ -1,5 +1,4 @@
 package edu.gcc.comp350.zoomin;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Search {
 	{
 		filter = new Filter();
 		try {
-			SearchResults = Driver.readInFile(filePath);
+			SearchResults = Main.readInFile(filePath);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -218,8 +217,8 @@ public class Search {
 	 * @param sched
 	 */
 	public void addClass(Course newCourse, Schedule sched) {
-		for (int i = 0; i < Driver.schedList.size(); i++){
-			if(sched.getScheduleName().equals(Driver.schedList.get(i).getScheduleName())){
+		for (int i = 0; i < Main.schedList.size(); i++){
+			if(sched.getScheduleName().equals(Main.schedList.get(i).getScheduleName())){
 				sched.addClass(newCourse);
 			}
 		}

@@ -1,0 +1,5 @@
+1. Copy the Github repo here: https://github.com/GatekeeperCode/ZoominGit.git
+2. Install into IDE using VC
+3. Wait for Gradle to build
+4. Build the project
+5. Run the Driver class from the project
