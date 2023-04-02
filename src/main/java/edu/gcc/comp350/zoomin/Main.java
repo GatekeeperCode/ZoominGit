@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Driver {
+public class Main {
     public static ArrayList<Schedule> schedList = new ArrayList<Schedule>();
     public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
