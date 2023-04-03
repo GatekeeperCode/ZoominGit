@@ -191,7 +191,7 @@ public class Main {
         String name = scan.nextLine();
         String json = gson.toJson(s);
         try {
-            FileWriter file = new FileWriter("./src/main/java/edu/gcc/comp350/zoomin/Schedules/" + name + ".json");
+            FileWriter file = new FileWriter("src/main/resources/Schedules/" + name + ".json");
             file.write(json);
             file.close();
         } catch (IOException e) {
@@ -205,7 +205,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter the schedule Name you would like to delete: ");
         String toDelete = scan.nextLine();
-        File file = new File("./src/main/java/edu/gcc/comp350/zoomin/Schedules/");
+        File file = new File("src/main/resources/Schedules/");
         for (File f : file.listFiles()) {
             if (f.getName().equals(toDelete)) {
                 f.delete();
@@ -247,7 +247,7 @@ public class Main {
     private static Schedule openSchedule(String filename){
         Gson gson = new Gson();
         try {
-            Schedule sched = gson.fromJson(new FileReader("./src/main/java/edu/gcc/comp350/zoomin/Schedules/"
+            Schedule sched = gson.fromJson(new FileReader("src/main/resources/Schedules/"
                     + filename), Schedule.class);
             return sched;
         } catch (FileNotFoundException e) {
