@@ -200,6 +200,7 @@ public class Main {
         }
     }
 
+    //deletes specified schedule
     public static void deleteSchedule() {
         //test
         Scanner scan = new Scanner(System.in);
