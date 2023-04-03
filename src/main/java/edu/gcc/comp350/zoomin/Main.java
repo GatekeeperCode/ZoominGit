@@ -12,9 +12,9 @@ public class Main {
     public static void main(String[] args)
     {
         boolean doStuff = true;
-        Search searches = new Search("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
+        Search searches = new Search("src/main/resources/CSV/2020-2021.csv");
         try {
-            courseList = readInFile("./src/main/java/edu/gcc/comp350/zoomin/CSV/2020-2021.csv");
+            courseList = readInFile("src/main/resources/CSV/2020-2021.csv");
             //System.out.println(courseList.get(6).credits);
             //Schedule s = new Schedule("testSchedule", "Fall");
             //deleteSchedule();
