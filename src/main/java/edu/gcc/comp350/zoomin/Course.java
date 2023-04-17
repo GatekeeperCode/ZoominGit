@@ -1,19 +1,19 @@
 package edu.gcc.comp350.zoomin;
 
 public class Course {
-    boolean isOnSchedule;
+    private boolean isOnSchedule;
 
-    String days;
-    String time;
-    String professor;
-    int credits;
-    String courseCode;//Ex. The 350 of COMP350B
-    String department; //Ex. The COMP of COMP350B
-    String courseLetter; //Ex. The B of COMP350B
-    String description;
-    String corequisite;
-    String prerequisite;
-    String courseName;
+    private String days;
+    private String time;
+    private String professor;
+    private int credits;
+    private String courseCode;//Ex. The 350 of COMP350B
+    private String department; //Ex. The COMP of COMP350B
+    private String courseLetter; //Ex. The B of COMP350B
+    private String description;
+    private String corequisite;
+    private String prerequisite;
+    private String courseName;
 
     //Constructor
 
@@ -130,6 +130,8 @@ public class Course {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
+
+    public String getCourseLetter(){return this.courseLetter;}
 
     /**
      * Mike Buriok
