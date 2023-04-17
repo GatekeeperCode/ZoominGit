@@ -237,14 +237,14 @@ public class Main {
 
     private static Course findCourse(String dept, String code, String spec) {
         for(Course temp : courseList) {
-            if (temp.department.equals(dept) && temp.courseCode.equals(code) && temp.courseLetter.equals(spec)) {
+            if (temp.getDepartment().equals(dept) && temp.getCourseCode().equals(code) && temp.getCourseLetter().equals(spec)) {
                 return temp;
             }
         }
         return null;
     }
 
-    private static Schedule openSchedule(String filename){
+    private static Schedule openSchedule(String filename) {
         Gson gson = new Gson();
         try {
             Schedule sched = gson.fromJson(new FileReader("src/main/resources/Schedules/"

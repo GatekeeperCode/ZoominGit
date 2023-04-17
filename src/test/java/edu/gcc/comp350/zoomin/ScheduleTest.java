@@ -19,7 +19,7 @@ class ScheduleTest {
 
         try {
             s.removeClass(one);
-            assertEquals(s.CourseList.size(), 1);
+            assertEquals(s.getCourseList().size(), 1);
         }
         catch (Exception e) {
             fail("Course was not removed due to an Exception.");
@@ -34,7 +34,7 @@ class ScheduleTest {
 
         s.addClass(one);
 
-        assertEquals(s.CourseList.size(), 1);
+        assertEquals(s.getCourseList().size(), 1);
     }
 
     @Test
@@ -44,7 +44,7 @@ class ScheduleTest {
 
         s.addClassToSchedule(one);
 
-        assertEquals(s.Schedule.size(), 1);
+        assertEquals(s.getSchedule().size(), 1);
     }
 
     @Test
@@ -55,7 +55,7 @@ class ScheduleTest {
         s.addClassToSchedule(one);
 
         s.removeClassFromSchedule(one);
-        assertEquals(s.Schedule.size(), 0);
+        assertEquals(s.getSchedule().size(), 0);
     }
 
     @Test

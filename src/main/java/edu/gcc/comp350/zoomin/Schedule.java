@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class Schedule {
 
-    String ScheduleName;
-    String Semester;
-    int TotalCredits;
-    ArrayList<Course> CourseList = new ArrayList<>();
-    HashMap<String, Course> Schedule = new HashMap<String, Course>();
+    private String ScheduleName;
+    private String Semester;
+    private int TotalCredits;
+    private ArrayList<Course> CourseList = new ArrayList<>();
+    private HashMap<String, Course> Schedule = new HashMap<String, Course>();
 
     //Constructor
     Schedule(String SchedName, String Semest)
@@ -47,7 +47,7 @@ public class Schedule {
     public void removeClass(Course course) throws Exception
     {
         for(Course temp : CourseList) {
-            if (temp.courseCode.equals(course.courseCode) && temp.professor.equals(course.professor) && temp.time.equals(course.time)) {
+            if (temp.getCourseCode().equals(course.getCourseCode()) && temp.getProfessor().equals(course.getProfessor()) && temp.getTime().equals(course.getTime())) {
                 CourseList.remove(temp);
                 temp.setOnSchedule(false);
                 return;
@@ -68,8 +68,8 @@ public class Schedule {
             Course ctest = this.Schedule.get(key);
             if (ctest.getTime().equals(course.getTime())) {
                 addTo = false;
-                System.out.println("Cannot add that course as it conflicts with: " + ctest.courseCode + ",\nwhich is also at " +
-                        ctest.time);
+                System.out.println("Cannot add that course as it conflicts with: " + ctest.getCourseCode() + ",\nwhich is also at " +
+                        ctest.getTime());
                 break;
             } else if (ctest.getCourseName().equals(course.getCourseName())) {
                 addTo = false;
@@ -79,13 +79,13 @@ public class Schedule {
         }
 
         if (addTo) {
-            Schedule.put(course.courseCode, course);
+            Schedule.put(course.getCourseCode(), course);
         }
     }
 
     public void removeClassFromSchedule(Course course)
     {
-        Schedule.remove(course.courseCode, course);
+        Schedule.remove(course.getCourseCode(), course);
     }
 
     public void setCourseList(ArrayList<Course> courseList) {
@@ -119,4 +119,6 @@ public class Schedule {
     public String getSemester() {
         return Semester;
     }
+
+    public HashMap<String, Course> getSchedule(){return this.Schedule;}
 }
