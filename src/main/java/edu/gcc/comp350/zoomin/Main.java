@@ -48,6 +48,13 @@ public class Main {
                     helpUser();
                     break;
 
+
+                case ("ADDMINORREQ"):
+                    break;
+
+                case ("TAKENCLASS"):
+                    break;
+
                 case ("ADDCOURSE"):
                     if (lscan.hasNext() && (s != null)) {
                         parseList = lscan.nextLine().split(" ");
@@ -221,6 +228,8 @@ public class Main {
         System.out.println("Available Commands:\n" +
                 "HELP: Shows all commands\n" +
                 "ADDCOURSE <course code>: Adds course to schedule\n" +
+                "ADDMINORREQ <course code>: Adds minor requirement to a list\n" +
+                "TAKENCLASS <course code>: Removes the (previously taken) class from all search results\n" +
                 "syntax should be <course code> <class section> ex: COMM 101 A" +
                 "REMOVE <course code>: Removes course (if applicable) from schedule\n" +
                 "syntax should be <course code> <class section> ex: COMM 101 A" +
