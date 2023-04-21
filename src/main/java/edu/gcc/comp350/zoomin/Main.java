@@ -20,8 +20,8 @@ public class Main {
     public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
     {
-
-        String atlasPass = "mongodb+srv://ZMMN:NvseFCpkp94R1tIC@zmmncluster.jod4gfc.mongodb.net/test";
+        //Use the access pass here:
+        String atlasPass = "";
 
         // Construct a ServerApi instance using the ServerApi.builder() method
         ServerApi serverApi = ServerApi.builder()
