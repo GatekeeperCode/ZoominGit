@@ -77,6 +77,7 @@ public class Search {
 
 		for(int i=0; i<SearchResults.size(); i++)
 		{
+
 			if(filterMatch(SearchResults.get(i)))
 			{
 				AlteredSearchResults.add(SearchResults.get(i));
@@ -95,8 +96,10 @@ public class Search {
 	{
 		boolean matchesFilters = true;
 
-
-		if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+		if(TakenCourses.taken.contains(target)){
+			matchesFilters = false;
+		}
+		else if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
 		{
 			matchesFilters = false;
 		}

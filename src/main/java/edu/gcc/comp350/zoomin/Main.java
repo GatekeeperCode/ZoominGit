@@ -53,6 +53,19 @@ public class Main {
                     break;
 
                 case ("TAKENCLASS"):
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command TAKENCLASS <name> <code> <letter>");
+                    }
+
+                    if (cAdd != null) {
+                        TakenCourses.taken.add(cAdd);
+                    }
+
+
                     break;
 
                 case ("ADDCOURSE"):
