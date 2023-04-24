@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="754.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.GUIDriver">
+   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+         <AnchorPane maxHeight="1148.0" maxWidth="1370.0" BorderPane.alignment="CENTER">
+            <children>
+               <Button id="create" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="190.0" layoutY="65.0" mnemonicParsing="false" text="Create Schedule" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+                  <font>
+                     <Font size="48.0" />
+                  </font>
+                  <padding>
+                     <Insets top="50.0" />
+                  </padding>
+                  <stylesheets>
+                     <URL value="@CSS/BootstrapTest.css" />
+                     <URL value="@CSS/modifications.css" />
+                  </stylesheets>
+                  <styleClass>
+                     <String fx:value="btn-lg" />
+                     <String fx:value="btn-danger" />
+                  </styleClass>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+               </Button>
+               <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="198.0" layoutY="166.0" mnemonicParsing="false" text="Create Recommended Schedule" textAlignment="CENTER" textFill="#e8293f" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+                  <font>
+                     <Font size="48.0" />
+                  </font>
+                  <padding>
+                     <Insets top="50.0" />
+                  </padding>
+                  <stylesheets>
+                     <URL value="@CSS/BootstrapTest.css" />
+                     <URL value="@CSS/modifications.css" />
+                  </stylesheets>
+                  <styleClass>
+                     <String fx:value="btn-lg" />
+                     <String fx:value="btn-danger" />
+                  </styleClass>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+               </Button>
+            </children></AnchorPane>
+      </center>
+      <top>
+         <AnchorPane id="top" BorderPane.alignment="TOP_CENTER">
+            <children>
+               <Pane prefHeight="9.0" />
+               <ImageView id="roof" fitHeight="5.0" fitWidth="706.0" layoutY="-4.0" pickOnBounds="true" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <image>
+                     <Image url="@Images/bar.jpg" />
+                  </image>
+               </ImageView>
+               <ImageView id="Logo" fitHeight="59.0" fitWidth="366.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@Images/GCC_logo.jpg" />
+                  </image>
+                  <viewport>
+                     <Rectangle2D />
+                  </viewport>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </top>
+      <bottom>
+         <AnchorPane maxHeight="500.0" maxWidth="1412.0" BorderPane.alignment="BOTTOM_CENTER">
+            <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="39.0" prefHeight="46.0" prefWidth="326.0" text="Saved Schedules:" textFill="#ff152a" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="39.0">
+                  <font>
+                     <Font size="31.0" />
+                  </font></Label>
+               <ListView layoutX="193.0" layoutY="107.0" maxHeight="201.0" maxWidth="348.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="107.0" />
+            </children>
+         </AnchorPane>
+      </bottom>
+   </BorderPane>
+</AnchorPane>
