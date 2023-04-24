@@ -11,7 +11,6 @@ public class Filter {
     private String CourseCode;
     private String courseName;
     private String primaryTimeCheck;
-    private ArrayList<Course> taken;
 
     Filter()
     {
