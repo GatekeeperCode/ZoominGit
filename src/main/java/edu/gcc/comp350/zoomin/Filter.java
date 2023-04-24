@@ -1,4 +1,5 @@
 package edu.gcc.comp350.zoomin;
+import java.util.ArrayList;
 
 public class Filter {
     private String startTime;
@@ -10,6 +11,7 @@ public class Filter {
     private String CourseCode;
     private String courseName;
     private String primaryTimeCheck;
+    private ArrayList<Course> taken;
 
     Filter()
     {
