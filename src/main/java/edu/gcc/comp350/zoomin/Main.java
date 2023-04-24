@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
@@ -35,9 +36,11 @@ public class Main {
         // Create a new client and connect to the server
         MongoClient mongoClient = null;
         MongoDatabase database = null;
+        MongoCollection collection = null;
         try {
             mongoClient = MongoClients.create(settings);
-            database = mongoClient.getDatabase("admin");
+            database = mongoClient.getDatabase("ZMMN");
+            collection = database.getCollection("Courses");
             try {
                 // Send a ping to confirm a successful connection
                 Bson command = new BsonDocument("ping", new BsonInt64(1));
