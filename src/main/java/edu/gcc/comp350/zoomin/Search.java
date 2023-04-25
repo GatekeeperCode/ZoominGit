@@ -1,10 +1,17 @@
 package edu.gcc.comp350.zoomin;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Search {
 	private Filter filter;
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
+	MongoCollection collection;
 
 
 	/**
@@ -19,6 +26,11 @@ public class Search {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public Search(MongoCollection colllect)
+	{
+		collection = colllect;
 	}
 
 	/**
@@ -75,71 +87,108 @@ public class Search {
 			}
 		}
 
-		for(int i=0; i<SearchResults.size(); i++)
-		{
-
-			if(filterMatch(SearchResults.get(i)))
-			{
-				AlteredSearchResults.add(SearchResults.get(i));
-			}
-		}
+		filterMatch();
 
 		return AlteredSearchResults;
 	}
 
 	/**Mike Buriok
 	 * Compares a course to the filters.
-	 * @param target The Class to be compared to the filters.
 	 * @return True if target matches the filters, false otherwise.
 	 */
-	private boolean filterMatch(Course target)
+	private void filterMatch()
 	{
 		boolean matchesFilters = true;
+		Scanner scnr = new Scanner(filter.getProfessor());
+		scnr.useDelimiter(" ");
+		String profLName = scnr.next();
+		String profFName = "";
 
-		if(TakenCourses.taken.contains(target)){
-			matchesFilters = false;
-		}
-		else if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+		if(scnr.hasNext())
 		{
-			matchesFilters = false;
-		}
-		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else if(target.getCredits()!=filter.getCreditHours() && filter.getCreditHours() != 0)
-		{
-			matchesFilters = false;
-		}
-		else if(!target.getDepartment().equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else if(!target.getCourseCode().equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else
-		{
-			//Time Schedule Checking
-			if(filter.getPrimaryTimeCheck().equals(""))
-			{
-				if(!target.getTime().contains(filter.getStartTime()) && !filter.getStartTime().equals(""))
-				{
-					matchesFilters = false;
-				}
-				else if (!target.getTime().contains(filter.getEndTime()) && !filter.getEndTime().equals(""))
-				{
-					matchesFilters = false;
-				}
-			}
-			else if(!target.getTime().contains(filter.getPrimaryTimeCheck()))
-			{
-				matchesFilters = false;
-			}
+			profFName = scnr.next();
 		}
 
-		return matchesFilters;
+		//Wanted Classes
+		Bson filterOne = Filters.regex("lastName", profLName, "i");
+		Bson filterTwo = Filters.regex("firstName", profFName, "i");
+		Bson filterThree = Filters.regex("coursePrefix", filter.getDepartment(), "i");
+		Bson filterFour = Filters.regex("courseNumber", filter.getCourseCode(), "i");
+		Bson filterFive = Filters.regex("courseTitle", filter.getCourseName(), "i");
+		Bson filterSix = Filters.regex("startTime", filter.getStartTime(), "i");
+		Bson filterSeven = Filters.regex("endTime", filter.getEndTime(), "i");
+
+		ArrayList<Bson> takenClasses = new ArrayList<>();
+		//TakenClasses
+		for(int i=0; i<TakenCourses.taken.size(); i++)
+		{
+			takenClasses.add(Filters.not(Filters.regex("coursePrefix", TakenCourses.taken.get(i).getDepartment())));
+			takenClasses.add(Filters.not(Filters.regex("courseNumber", TakenCourses.taken.get(i).getCourseCode())));
+		}
+
+		Bson filterAnd = Filters.and(filterOne, filterTwo, filterThree, filterFour, filterFive, filterSix, filterSeven);
+
+		for(int i=0; i<takenClasses.size(); i++)
+		{
+			filterAnd = Filters.and(filterAnd, takenClasses.get(i));
+		}
+
+		ArrayList<Course> sE = getSearchResults();
+		for(int i=0; i<sE.size(); i++)
+		{
+			sE.remove(i);
+		}
+		setSearchResults(sE);
+
+		ArrayList<Document> docList = new ArrayList<>();
+		FindIterable<Document> results = collection.find(filterAnd);
+		//results.forEach(doc -> SearchResults.add(Course(doc)));
+
+		//Commented out after noSQL addition
+//		if(TakenCourses.taken.contains(target)){
+//			matchesFilters = false;
+//		}
+//		else if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(target.getCredits()!=filter.getCreditHours() && filter.getCreditHours() != 0)
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getDepartment().equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getCourseCode().equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else
+//		{
+//			//Time Schedule Checking
+//			if(filter.getPrimaryTimeCheck().equals(""))
+//			{
+//				if(!target.getTime().contains(filter.getStartTime()) && !filter.getStartTime().equals(""))
+//				{
+//					matchesFilters = false;
+//				}
+//				else if (!target.getTime().contains(filter.getEndTime()) && !filter.getEndTime().equals(""))
+//				{
+//					matchesFilters = false;
+//				}
+//			}
+//			else if(!target.getTime().contains(filter.getPrimaryTimeCheck()))
+//			{
+//				matchesFilters = false;
+//			}
+//		}
+//
+//		return matchesFilters;
 	}
 
 	/**Mike Buriok
@@ -162,7 +211,7 @@ public class Search {
 
 				if(input.equalsIgnoreCase("Professor"))
 				{
-					System.out.println("What do you want to set the filter to?");
+					System.out.println("What do you want to set the filter to? Please format it LastName, FirstName or LastName");
 					filter.setProfessor(scnr.next());
 					correctInput=true;
 				}
@@ -235,13 +284,10 @@ public class Search {
 	{
 		ArrayList<Course> results = new ArrayList<>();
 
-		for(int i=0; i<SearchResults.size(); i++)
-		{
-			if(filterMatch(SearchResults.get(i)))
-			{
-				results.add(SearchResults.get(i));
-			}
-		}
+		filterMatch();
+
+		results = getSearchResults();
+
 		if (results.size() < 1){
 		System.out.println("no results match criteria");
 	}
