@@ -87,7 +87,7 @@ public class Search {
 			}
 		}
 
-		filterMatch();
+		AlteredSearchResults = filterMatch();
 
 		return AlteredSearchResults;
 	}
@@ -96,8 +96,9 @@ public class Search {
 	 * Compares a course to the filters.
 	 * @return True if target matches the filters, false otherwise.
 	 */
-	private void filterMatch()
+	private ArrayList<Course> filterMatch()
 	{
+		ArrayList<Course> newResults = new ArrayList<>();
 		boolean matchesFilters = true;
 		Scanner scnr = new Scanner(filter.getProfessor());
 		scnr.useDelimiter(" ");
@@ -133,16 +134,10 @@ public class Search {
 			filterAnd = Filters.and(filterAnd, takenClasses.get(i));
 		}
 
-		ArrayList<Course> sE = getSearchResults();
-		for(int i=0; i<sE.size(); i++)
-		{
-			sE.remove(i);
-		}
-		setSearchResults(sE);
-
 		ArrayList<Document> docList = new ArrayList<>();
 		FindIterable<Document> results = collection.find(filterAnd);
-		//results.forEach(doc -> SearchResults.add(Course(doc)));
+		//results.forEach(doc -> newResults.add(Course(doc)));
+		return newResults;
 
 		//Commented out after noSQL addition
 //		if(TakenCourses.taken.contains(target)){
@@ -284,9 +279,7 @@ public class Search {
 	{
 		ArrayList<Course> results = new ArrayList<>();
 
-		filterMatch();
-
-		results = getSearchResults();
+		results = filterMatch();
 
 		if (results.size() < 1){
 		System.out.println("no results match criteria");
