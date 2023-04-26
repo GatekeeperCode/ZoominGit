@@ -17,6 +17,8 @@ public class Course {
     private String corequisite;
     private String prerequisite;
     private String courseName;
+    private String semester;
+    private int year;
 
     //Constructor
 
@@ -46,12 +48,14 @@ public class Course {
 
     public Course(Document c) {
         department = c.getString("coursePrefix");
-        courseCode = c.getString("courseNumber");
+        courseCode = "" + c.getInteger("courseNumber");
         courseLetter = c.getString("courseSection");
         credits = c.getInteger("creditHours");
         time = c.getString("startTime") + " - " + c.getString("endTime");
         courseName = c.getString("courseTitle");
         professor = c.getString("firstName") + " " + c.getString("lastName");
+        semester = c.getString("semester");
+        year = c.getInteger("year");
         String preferred = c.getString("preferred_name");
         if (preferred != "") {
             professor += " (" +preferred+ ")";
