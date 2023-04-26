@@ -2,7 +2,7 @@ package edu.gcc.comp350.zoomin;
 import java.util.ArrayList;
 
 public class Minor {
-    private ArrayList<Course> minorReqs;
+    public static ArrayList<Course> minorReqs;
 
 
     public Minor(ArrayList<Course> reqs){

@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.mongodb.*;
-import com.mongodb.client.MongoCollection;
+import com.mongodb.client.*;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 
 public class Main {
     public static ArrayList<Schedule> schedList = new ArrayList<Schedule>();
@@ -54,6 +51,7 @@ public class Main {
             System.err.println(e + " - Second Catch.");
         }
 
+        //Old method of importing courses
         boolean doStuff = true;
         Search searches = new Search("src/main/resources/CSV/2020-2021.csv");
         try {
@@ -65,6 +63,10 @@ public class Main {
             System.out.println(e);
             doStuff = false;
         }
+
+        //Setting all courses (new method through database)
+        FindIterable<Document> allCourses = collection.find();
+        allCourses.forEach(doc -> courseList.add(new Course(doc)));
 
         Schedule s = new Schedule("tempsch", "tempsem");
         Scanner scn = new Scanner(System.in);
@@ -93,6 +95,18 @@ public class Main {
 
 
                 case ("ADDMINORREQ"):
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command ADDMINORREQ <name> <code> <letter>");
+                    }
+
+                    if (cAdd != null) {
+                        Minor.minorReqs.add(cAdd);
+                    }
+
                     break;
 
                 case ("TAKENCLASS"):
