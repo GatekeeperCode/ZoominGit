@@ -93,6 +93,18 @@ public class Main {
 
 
                 case ("ADDMINORREQ"):
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command ADDMINORREQ <name> <code> <letter>");
+                    }
+
+                    if (cAdd != null) {
+                        Minor.minorReqs.add(cAdd);
+                    }
+
                     break;
 
                 case ("TAKENCLASS"):
