@@ -13,7 +13,6 @@ public class FxmlLoader {
     public Pane getPane(String fileName){
         try {
             URL fileURL = GUIDriver.class.getResource(fileName+ ".fxml");
-            System.out.println(fileURL);
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("FXML File cannot be found");
             }

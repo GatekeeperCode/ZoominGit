@@ -1,6 +1,7 @@
 package edu.gcc.comp350.zoomin;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class GUIDriver extends Application {
-    protected Scene StartScene, CreateScene, CalendarScene;
+    protected Scene StartScene;
 
     public static void main(String[] args) {
         launch(args);
@@ -40,8 +41,8 @@ public class GUIDriver extends Application {
         primaryStage.show();
     }
 
-    @FXML
-    private void loadCreateScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
-    }
+//    @FXML
+//    private void loadCreateScene(ActionEvent event) throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+//    }
 }
