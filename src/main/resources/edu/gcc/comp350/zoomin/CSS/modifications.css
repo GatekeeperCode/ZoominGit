@@ -33,19 +33,54 @@
        -fx-font-size: 12px !important;
        -fx-border-radius: 10px !important;
        -fx-border-width: 3px !important;
-       -fx-background-radius: 10px !important;
-       -fx-background-color: #ffffff;
-       -fx-border-color: #ff152a;
-       -fx-text-fill: #ff152a;}
-              #Recommended:hover{
-              -fx-background-color: #e4e4e4;
+       -fx-background-radius: 10px !important ;
+       -fx-background-color: #ffffff !important;
+       -fx-border-color: #ff152a !important;
+       -fx-text-fill: #ff152a !important;}
+              #Delete:hover{
+              -fx-background-color: #e4e4e4 !important;
               }
-              #Recommended:pressed{
-              -fx-background-color: #cbc8c8;
+              #Delete:pressed{
+              -fx-background-color: #cbc8c8 !important;
                }
 #Save{
        -fx-padding: 8px 10px 8px 10px !important;
        -fx-font-size: 24px !important;
        -fx-border-radius: 10px !important;
        -fx-background-radius: 10px !important;
-       }
+       }#Save:hover{
+              -fx-background-color: #c50202 !important;
+              }
+              #Save:pressed{
+              -fx-background-color: #a70000 !important;
+               }
+#Submit{
+       -fx-padding: 8px 10px 8px 10px !important;
+       -fx-font-size: 24px !important;
+       -fx-border-radius: 6px !important;
+       -fx-background-radius: 10px !important;
+       }#Submit:hover{
+              -fx-background-color: #c50202 !important;
+              }
+              #Submit:pressed{
+              -fx-background-color: #a70000 !important;
+               }
+
+#Cancel {
+        -fx-padding: 8px 10px 8px 10px !important;
+        -fx-font-size: 24px !important;
+        -fx-border-radius: 10px !important;
+        -fx-border-width: 3px !important;
+       -fx-background-radius: 10px !important;
+        -fx-background-color: #ffffff !important;
+        -fx-border-color: #ff152a !important;
+        -fx-text-fill: #ff152a !important;
+        }
+              
+              #Cancel:hover {
+                      -fx-background-color: #e4e4e4 !important;
+                             }
+              
+              #Cancel:pressed {
+                      -fx-background-color: #cbc8c8 !important;
+                      }

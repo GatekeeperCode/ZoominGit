@@ -72,6 +72,39 @@ public class SceneController{
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private void handleAIButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("AIWindow.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void handleSaveButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void handleDeleteButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void handleEditButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("CourseSearch.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
