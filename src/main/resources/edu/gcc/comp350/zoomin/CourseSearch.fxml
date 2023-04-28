@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="677.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.SceneController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <stylesheets>
+                  <URL value="@CSS/BootstrapTest.css" />
+                  <URL value="@CSS/modifications.css" />
+               </stylesheets>
+               <children>
+                  <Pane HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button id="search" defaultButton="true" focusTraversable="false" layoutX="680.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleCalendarButton" stylesheets="@CSS/modifications.css" text="View Schedule">
+                           <styleClass>
+                              <String fx:value="btn-lg" />
+                              <String fx:value="btn-danger" />
+                           </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="554.0" layoutY="56.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="104.0" text="Filters" textAlignment="CENTER" textFill="#e8293f">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                           <padding>
+                              <Insets top="50.0" />
+                           </padding>
+                           <stylesheets>
+                              <URL value="@CSS/BootstrapTest.css" />
+                              <URL value="@CSS/modifications.css" />
+                           </stylesheets>
+                           <styleClass>
+                              <String fx:value="btn-lg" />
+                              <String fx:value="btn-danger" />
+                           </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <TextField focusTraversable="false" layoutX="59.0" layoutY="56.0" maxWidth="600.0" prefHeight="64.0" promptText="Search">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </TextField>
+                        <ScrollPane hbarPolicy="ALWAYS" layoutX="32.0" layoutY="165.0" vbarPolicy="ALWAYS">
+                           <content>
+                              <TableView>
+                                 <columns>
+                                    <TableColumn prefWidth="98.0" text="Course Code" />
+                                    <TableColumn prefWidth="166.0" text="Course Name" />
+                                    <TableColumn prefWidth="119.0" text="Professor" />
+                                    <TableColumn prefWidth="171.0" text="Time Slot" />
+                                    <TableColumn prefWidth="92.0" text="Availability" />
+                                    <TableColumn prefWidth="173.0" text="Credit Hours" />
+                                    <TableColumn prefWidth="104.0" text="Add to Schedule" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <AnchorPane id="top" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane />
+                  <ImageView id="Logo" fitHeight="59.0" fitWidth="366.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/GCC_logo.jpg" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="69.0" prefWidth="224.0" style="-fx-background-color: #00000000;" text="Button" textFill="TRANSPARENT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Return Home" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

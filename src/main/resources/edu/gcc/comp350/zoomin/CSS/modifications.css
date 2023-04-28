@@ -28,3 +28,24 @@
               #Recommended:pressed{
               -fx-background-color: #cbc8c8;
                }
+#Delete{
+       -fx-padding: 8px 10px 8px 10px !important;
+       -fx-font-size: 12px !important;
+       -fx-border-radius: 10px !important;
+       -fx-border-width: 3px !important;
+       -fx-background-radius: 10px !important;
+       -fx-background-color: #ffffff;
+       -fx-border-color: #ff152a;
+       -fx-text-fill: #ff152a;}
+              #Recommended:hover{
+              -fx-background-color: #e4e4e4;
+              }
+              #Recommended:pressed{
+              -fx-background-color: #cbc8c8;
+               }
+#Save{
+       -fx-padding: 8px 10px 8px 10px !important;
+       -fx-font-size: 24px !important;
+       -fx-border-radius: 10px !important;
+       -fx-background-radius: 10px !important;
+       }

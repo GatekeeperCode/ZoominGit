@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.calendarfx.view.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.SceneController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <DetailedWeekView enableCurrentTimeMarker="false" entryViewAvailabilityEditingBehaviour="HIDE" prefHeight="650.0" prefWidth="1000.0" showAllDayView="false" showToday="false" trimTimeBounds="true" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <AnchorPane id="top" prefHeight="108.0" prefWidth="999.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane />
+                  <ImageView id="Logo" fitHeight="69.0" fitWidth="236.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/GCC_logo.jpg" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="78.0" prefWidth="246.0" style="-fx-background-color: #00000000;" text="Button" textFill="TRANSPARENT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Return Home" />
+                     </tooltip>
+                  </Button>
+                  <Label layoutX="276.0" layoutY="8.0" prefHeight="27.0" prefWidth="279.0" text="Current Schedule">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <Button id="Delete" layoutX="600.0" layoutY="22.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="121.0" text="Delete Schedule">
+                     <font>
+                        <Font size="7.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <stylesheets>
+                        <URL value="@CSS/modifications.css" />
+                        <URL value="@CSS/BootstrapTest.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="btn-danger" />
+                        <String fx:value="btn-lg" />
+                     </styleClass></Button>
+                  <Label layoutX="305.0" layoutY="47.0" prefHeight="36.0" prefWidth="195.0" text="Credit Hours: 50">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Button id="Save" layoutX="735.0" layoutY="22.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="118.0" style="-fx-background-color: #ff152a;" text="Edit" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <stylesheets>
+                        <URL value="@CSS/modifications.css" />
+                        <URL value="@CSS/BootstrapTest.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="btn-lg" />
+                        <String fx:value="btn-danger" />
+                     </styleClass></Button>
+                  <Button id="Save" layoutX="867.0" layoutY="22.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="122.0" style="-fx-background-color: #ff152a;" text="Save" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <stylesheets>
+                        <URL value="@CSS/modifications.css" />
+                        <URL value="@CSS/BootstrapTest.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="btn-lg" />
+                        <String fx:value="btn-danger" />
+                     </styleClass></Button>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
