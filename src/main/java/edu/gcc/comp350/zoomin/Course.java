@@ -1,4 +1,7 @@
 package edu.gcc.comp350.zoomin;
+import org.bson.BsonDocument;
+import org.bson.BsonInt64;
+import org.bson.Document;
 
 public class Course {
     private boolean isOnSchedule;
@@ -14,6 +17,8 @@ public class Course {
     private String corequisite;
     private String prerequisite;
     private String courseName;
+    private String semester;
+    private int year;
 
     //Constructor
 
@@ -37,6 +42,33 @@ public class Course {
         for (int i = 9; i <= 13; i++) {
             if (!data[i].equals("")) {
                 days += data[i];
+            }
+        }
+    }
+
+    public Course(Document c) {
+        department = c.getString("coursePrefix");
+        courseCode = "" + c.getInteger("courseNumber");
+        courseLetter = c.getString("courseSection");
+        credits = c.getInteger("creditHours");
+        time = c.getString("startTime") + " - " + c.getString("endTime");
+        courseName = c.getString("courseTitle");
+        professor = c.getString("firstName") + " " + c.getString("lastName");
+        semester = c.getString("semester");
+        year = c.getInteger("year");
+        String preferred = c.getString("preferred_name");
+        if (preferred != "") {
+            professor += " (" +preferred+ ")";
+        }
+
+        days = "";
+        char[] weekchars = {'M', 'T', 'W', 'R', 'F'};
+        boolean[] weekdays = {c.getBoolean("onMonday"), c.getBoolean("onTuesday"),
+                              c.getBoolean("onWednesday"), c.getBoolean("onThursday"),
+                              c.getBoolean("onFriday")};
+        for (int i=0; i<5; i++) {
+            if (weekdays[i]) {
+                days += weekchars[i];
             }
         }
     }

@@ -6,11 +6,52 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mongodb.*;
+import com.mongodb.client.*;
+import org.bson.BsonDocument;
+import org.bson.BsonInt64;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
 public class Main {
     public static ArrayList<Schedule> schedList = new ArrayList<Schedule>();
     public static ArrayList<Course> courseList = new ArrayList<Course>();
     public static void main(String[] args)
     {
+        //Use the access pass here:
+        String atlasPass = "";
+
+        // Construct a ServerApi instance using the ServerApi.builder() method
+        ServerApi serverApi = ServerApi.builder()
+                .version(ServerApiVersion.V1)
+                .build();
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(atlasPass))
+                .serverApi(serverApi)
+                .build();
+
+        // Create a new client and connect to the server
+        MongoClient mongoClient = null;
+        MongoDatabase database = null;
+        MongoCollection collection = null;
+        try {
+            mongoClient = MongoClients.create(settings);
+            database = mongoClient.getDatabase("ZMMN");
+            collection = database.getCollection("Courses");
+            try {
+                // Send a ping to confirm a successful connection
+                Bson command = new BsonDocument("ping", new BsonInt64(1));
+                Document commandResult = database.runCommand(command);
+                System.out.println("MongoDB connection has been successfully established.\n" + commandResult);
+            } catch (MongoException e) {
+                System.err.println(e + " - First Catch.");
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e + " - Second Catch.");
+        }
+
+        //Old method of importing courses
         boolean doStuff = true;
         Search searches = new Search("src/main/resources/CSV/2020-2021.csv");
         try {
@@ -22,6 +63,10 @@ public class Main {
             System.out.println(e);
             doStuff = false;
         }
+
+        //Setting all courses (new method through database)
+        FindIterable<Document> allCourses = collection.find();
+        allCourses.forEach(doc -> courseList.add(new Course(doc)));
 
         Schedule s = new Schedule("tempsch", "tempsem");
         Scanner scn = new Scanner(System.in);
@@ -41,6 +86,9 @@ public class Main {
             String tempTime;
             String[] parseList;
             Course cAdd = null;
+            ArrayList<Course> minorReqs = new ArrayList<>();
+            Minor minor = new Minor(minorReqs);
+            ArrayList<Minor> minors = new ArrayList<>();
 
             //Checks for proper commands
             switch (command) {
@@ -50,9 +98,34 @@ public class Main {
 
 
                 case ("ADDMINORREQ"):
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command ADDMINORREQ <name> <code> <letter>");
+                    }
+
+                    if (cAdd != null) {
+                        minor.getMinorReqs().add(cAdd);
+                    }
+
                     break;
 
                 case ("TAKENCLASS"):
+                    if (lscan.hasNext() && (s != null)) {
+                        parseList = lscan.nextLine().split(" ");
+                        if (parseList.length == 4)
+                            cAdd = findCourse(parseList[1], parseList[2], parseList[3]);
+                        else
+                            System.out.println("Please use the command TAKENCLASS <name> <code> <letter>");
+                    }
+
+                    if (cAdd != null) {
+                        TakenCourses.taken.add(cAdd);
+                    }
+
+
                     break;
 
                 case ("ADDCOURSE"):
@@ -124,12 +197,11 @@ public class Main {
                     break;
 
                 case ("LOAD"):
-                    if (lscan.hasNext()){
-                       String filename = lscan.nextLine();
-                       filename = filename.replaceFirst("\\s+", "");
-                       s = openSchedule(filename);
-                    }
-                    else{
+                    if (lscan.hasNext()) {
+                        String filename = lscan.nextLine();
+                        filename = filename.replaceFirst("\\s+", "");
+                        s = openSchedule(filename);
+                    } else {
                         System.out.println("Please type LOAD <filename>");
                     }
                     break;
