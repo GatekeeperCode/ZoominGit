@@ -214,7 +214,7 @@ public class Main {
                     break;
 
                 case ("DELETE"):
-                    deleteSchedule();
+                    deleteSchedule("temp");
                     break;
 
                 case ("DISPLAY"):

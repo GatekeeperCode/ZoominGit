@@ -43,11 +43,9 @@ public class GUIDriver extends Application {
         }
     }
 
-    public static void deleteSchedule() {
+    public static void deleteSchedule(String toDelete) {
         //test
         Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the schedule Name you would like to delete: ");
-        String toDelete = scan.nextLine();
         File file = new File("src/main/resources/Schedules/");
         for (File f : file.listFiles()) {
             if (f.getName().equals(toDelete)) {

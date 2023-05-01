@@ -14,7 +14,7 @@
       <center>
          <AnchorPane fx:id="homeCenter" maxHeight="1148.0" maxWidth="1370.0" BorderPane.alignment="CENTER">
             <children>
-               <Button id="create" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="190.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCreateButton" text="Create Schedule" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+               <Button id="create" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="190.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleCreateButton" text="Create Schedule" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
                   <font>
                      <Font size="48.0" />
                   </font>
@@ -52,17 +52,31 @@
                      <URL value="@CSS/modifications.css" />
                   </stylesheets>
                </Button>
+               <Button id="create" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" layoutX="183.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleCreateButton" text="Continue with current" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font size="48.0" />
+                  </font>
+                  <padding>
+                     <Insets top="50.0" />
+                  </padding>
+                  <styleClass>
+                     <String fx:value="btn-lg" />
+                     <String fx:value="btn-danger" />
+                  </styleClass>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <stylesheets>
+                     <URL value="@CSS/BootstrapTest.css" />
+                     <URL value="@CSS/modifications.css" />
+                  </stylesheets>
+               </Button>
             </children></AnchorPane>
       </center>
       <top>
          <AnchorPane id="top" BorderPane.alignment="TOP_CENTER">
             <children>
-               <Pane prefHeight="9.0" />
-               <ImageView id="roof" fitHeight="5.0" fitWidth="706.0" layoutY="-4.0" pickOnBounds="true" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <image>
-                     <Image url="@Images/bar.jpg" />
-                  </image>
-               </ImageView>
+               <Pane prefHeight="5.0" style="-fx-background-color: #ff152a;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                <ImageView id="Logo" fitHeight="59.0" fitWidth="366.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@Images/GCC_logo.jpg" />
@@ -89,7 +103,7 @@
                   <font>
                      <Font size="31.0" />
                   </font></Label>
-               <ListView fx:id="list" layoutX="193.0" layoutY="107.0" maxHeight="201.0" maxWidth="348.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="107.0" />
+               <ListView fx:id="list" layoutX="193.0" layoutY="107.0" maxHeight="201.0" maxWidth="348.0" style="-fx-font-size: 18;" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="107.0" />
             </children>
          </AnchorPane>
       </bottom>

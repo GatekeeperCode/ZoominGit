@@ -2,6 +2,7 @@ package edu.gcc.comp350.zoomin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -40,6 +38,8 @@ public class SearchController implements Initializable {
     @FXML TableColumn<Course, String> time;
     @FXML TableColumn<Course, Integer> CreditHours;
     @FXML TableColumn <Course, Button> Add;
+    @FXML TextField SearchBar;
+    @FXML ChoiceBox<String> choice;
 
     @FXML
     private void handleHomeButton(ActionEvent event) throws IOException {
@@ -57,6 +57,7 @@ public class SearchController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     public void addButton(ActionEvent event) throws IOException {
 
@@ -81,12 +82,41 @@ public class SearchController implements Initializable {
         CreditHours.setCellValueFactory(new PropertyValueFactory<Course, Integer>("credits"));
         CourseList.setItems(getCourses());
 
+        choice.getItems().addAll("Course Code", "Course Name", "Professor");
+        choice.setValue("Course Code");
         addButtonToTable();
     }
     public ObservableList<Course> getCourses() {
         ObservableList<Course> courses = FXCollections.observableArrayList(courseList);
-        return courses;
+        FilteredList<Course> flcourses = new FilteredList(courses, p -> true);
+
+        SearchBar.textProperty().addListener((obs, oldValue, newValue) -> {
+            switch (choice.getValue())//Switch on choiceBox value
+            {
+                case "Course Code":
+                    flcourses.setPredicate(p -> p.getCourseCode().toLowerCase().contains(newValue.toLowerCase().trim()));//filter table by first name
+                    break;
+                case "Course Name":
+                    flcourses.setPredicate(p -> p.getCourseName().toLowerCase().contains(newValue.toLowerCase().trim()));//filter table by last name
+                    break;
+                case "Professor":
+                    flcourses.setPredicate(p -> p.getProfessor().toLowerCase().contains(newValue.toLowerCase().trim()));//filter table by email
+                    break;
+                case "Days":
+                    flcourses.setPredicate(p -> p.getDays().toUpperCase().contains(newValue.toLowerCase().trim()));//filter table by email
+                    break;
+            }
+        });
+        choice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal)
+                -> {//reset table and textfield when new choice is selected
+            if (newVal != null) {
+                SearchBar.setText("");
+            }
+        });
+        return flcourses;
     }
+
+
 
     public ArrayList<Course> getCourseList() {
         return courseList;
@@ -101,28 +131,22 @@ public class SearchController implements Initializable {
                     private final Button btn = new Button("Add Course");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-//                            try {
-//                                Course toAdd = (Course) ((TableCell) ((Button) event.getSource()).getParent()).getTableRow().getItem();
-//                                if (!GUIDriver.schedList.contains(toAdd)) {
-//                                    GUIDriver.schedList.add(toAdd);
-//                                    toAdd.setOnSchedule(true);
-//                                    btn.setText("Remove");
-//                                } else {
-//                                    GUIDriver.schedList.remove(toAdd);
-//                                    btn.setText("Add Course");
-//                                }
-//                            } catch (Exception e) {
-//                            }
                             Course course = (Course) getTableRow().getItem();
                             if (!course.isOnSchedule()) {
                                 GUIDriver.schedList.add(course);
                                 course.setOnSchedule(true);
                                 btn.setText("Remove");
                             } else {
-                                for (Course c: GUIDriver.schedList) {
-                                    if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())){
-                                        GUIDriver.schedList.remove(c);
+                                Course toRemove = null;
+                                if(!GUIDriver.schedList.isEmpty()){
+                                    for (Course c: GUIDriver.schedList) {
+                                        if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())){
+                                            toRemove = c;
+                                        }
                                     }
+                                }
+                                if(toRemove != null){
+                                    GUIDriver.schedList.remove(toRemove);
                                 }
                                 course.setOnSchedule(false);
                                 btn.setText("Add Course");

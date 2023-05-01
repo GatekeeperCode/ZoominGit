@@ -51,14 +51,6 @@ public class SceneController implements Initializable{
 
     @FXML
     private void handleCreateButton(ActionEvent event) throws IOException {
-//        System.out.println("clicked create");
-//        FxmlLoader loader = new FxmlLoader();
-//        Pane pane = loader.getPane("CreateDefault");
-//        Pane botpane = loader.getPane("ClassList");
-//        mainPane.setCenter(pane);
-//        mainPane.setBottom(botpane);
-//        Stage stage = (Stage) mainPane.getScene().getWindow();
-//        stage.sizeToScene();
         root = FXMLLoader.load(getClass().getResource("CourseSearch.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -97,11 +89,13 @@ public class SceneController implements Initializable{
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                GUIDriver.schedList.clear();
                 for (Course c: GUIDriver.openSchedule(newValue).getSchedule().values()) {
                     GUIDriver.schedList.add(c);
                     c.setOnSchedule(true);
                 }
                 try {
+
                     loadCalendar();
                 } catch (IOException e) {
                     throw new RuntimeException(e);

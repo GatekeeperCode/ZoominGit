@@ -11,9 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -60,22 +58,14 @@ public class CalendarController  implements Initializable {
     }
     @FXML
     private void handleDeleteButton(ActionEvent event) throws IOException {
-        if(GUIDriver.schedList.size() > 0 ){
-            for (Course c: GUIDriver.schedList) {
-                c.setOnSchedule(false);
-            }
-            M.getChildren().clear();
-            T.getChildren().clear();
-            W.getChildren().clear();
-            R.getChildren().clear();
-            F.getChildren().clear();
-            GUIDriver.schedList.clear();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete Schedule?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            deleteAndLeave();
+        }else{
+            alert.close();
         }
-        root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
     @FXML
     private void handleSaveButton(ActionEvent event) throws IOException {
@@ -194,6 +184,25 @@ public class CalendarController  implements Initializable {
             if (!timeSlots.contains(slot)) {
                 timeSlots.add(slot);
         }
+    }
+    private void deleteAndLeave() throws IOException {
+        if(GUIDriver.schedList.size() > 0 ){
+            for (Course c: GUIDriver.schedList) {
+                c.setOnSchedule(false);
+            }
+            M.getChildren().clear();
+            T.getChildren().clear();
+            W.getChildren().clear();
+            R.getChildren().clear();
+            F.getChildren().clear();
+            GUIDriver.schedList.clear();
+        }
+
+        root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        stage = (Stage) schedule.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     class TimeSlot  implements Comparable<TimeSlot>{
