@@ -1,11 +1,24 @@
 package edu.gcc.comp350.zoomin;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import com.google.gson.stream.JsonWriter;
+
+import static javafx.scene.Cursor.HAND;
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
 
-public class Course {
-    private boolean isOnSchedule;
+import java.io.IOException;
 
+public class Course {
+    boolean isOnSchedule;
     private String days;
     private String time;
     private String professor;
@@ -19,7 +32,6 @@ public class Course {
     private String courseName;
     private String semester;
     private int year;
-
     //Constructor
 
 
@@ -44,8 +56,8 @@ public class Course {
                 days += data[i];
             }
         }
+        isOnSchedule = false;
     }
-
     public Course(Document c) {
         department = c.getString("coursePrefix");
         courseCode = "" + c.getInteger("courseNumber");
@@ -164,6 +176,14 @@ public class Course {
     }
 
     public String getCourseLetter(){return this.courseLetter;}
+
+    public String getDays() {
+        return days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
 
     /**
      * Mike Buriok

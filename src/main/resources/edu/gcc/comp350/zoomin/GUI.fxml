@@ -89,7 +89,7 @@
                   <font>
                      <Font size="31.0" />
                   </font></Label>
-               <ListView layoutX="193.0" layoutY="107.0" maxHeight="201.0" maxWidth="348.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="107.0" />
+               <ListView fx:id="list" layoutX="193.0" layoutY="107.0" maxHeight="201.0" maxWidth="348.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="107.0" />
             </children>
          </AnchorPane>
       </bottom>

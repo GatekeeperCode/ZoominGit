@@ -1,5 +1,6 @@
 package edu.gcc.comp350.zoomin;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,17 +11,60 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.hildan.fxgson.FxGson;
+import org.hildan.fxgson.FxGsonBuilder;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GUIDriver extends Application {
     protected Scene StartScene;
+    public static ArrayList<Course> schedList = new ArrayList<Course>();
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void saveSchedule(Schedule s, String name) {
+        Gson gson = FxGson.create();
+        String json = gson.toJson(s);
+        try {
+            FileWriter file = new FileWriter("src/main/resources/Schedules/" + name + ".json");
+            file.write(json);
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteSchedule() {
+        //test
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter the schedule Name you would like to delete: ");
+        String toDelete = scan.nextLine();
+        File file = new File("src/main/resources/Schedules/");
+        for (File f : file.listFiles()) {
+            if (f.getName().equals(toDelete)) {
+                f.delete();
+            }
+        }
+    }
+    public static Schedule openSchedule(String filename) {
+        Gson gson = new Gson();
+        try {
+            Schedule sched = gson.fromJson(new FileReader("src/main/resources/Schedules/"
+                    + filename), Schedule.class);
+            return sched;
+        } catch (FileNotFoundException e) {
+            System.out.println("There was a problem loading the file: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
