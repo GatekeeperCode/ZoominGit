@@ -87,7 +87,13 @@ public class Main {
             String[] parseList;
             Course cAdd = null;
             ArrayList<Course> minorReqs = new ArrayList<>();
-            Minor minor = new Minor(minorReqs);
+            Minor minor;
+            try {
+                minor = new Minor(minorReqs);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
             ArrayList<Minor> minors = new ArrayList<>();
 
             //Checks for proper commands
@@ -107,7 +113,13 @@ public class Main {
                     }
 
                     if (cAdd != null) {
-                        minor.getMinorReqs().add(cAdd);
+                        try {
+                            minor = new Minor(minorReqs);
+                            minor.getMinorReqs().add(cAdd);
+                        }
+                        catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
                     }
 
                     break;
