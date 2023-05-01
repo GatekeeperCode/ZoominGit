@@ -86,6 +86,9 @@ public class Main {
             String tempTime;
             String[] parseList;
             Course cAdd = null;
+            ArrayList<Course> minorReqs = new ArrayList<>();
+            Minor minor = new Minor(minorReqs);
+            ArrayList<Minor> minors = new ArrayList<>();
 
             //Checks for proper commands
             switch (command) {
@@ -104,7 +107,7 @@ public class Main {
                     }
 
                     if (cAdd != null) {
-                        Minor.minorReqs.add(cAdd);
+                        minor.getMinorReqs().add(cAdd);
                     }
 
                     break;
