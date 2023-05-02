@@ -61,7 +61,7 @@ public class AISuggestion {
 
 		if(schedCredits<12)
 		{
-			//TODO Add new method for huma class addition
+			addExtraCourse(AISched);
 		}
 
 
