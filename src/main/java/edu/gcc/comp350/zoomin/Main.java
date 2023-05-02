@@ -13,6 +13,8 @@ import org.bson.BsonInt64;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import static edu.gcc.comp350.zoomin.GUIDriver.*;
+
 public class Main {
     public static ArrayList<Schedule> schedList = new ArrayList<Schedule>();
     public static ArrayList<Course> courseList = new ArrayList<Course>();
@@ -53,9 +55,14 @@ public class Main {
 
         //Old method of importing courses
         boolean doStuff = true;
-        Search searches = new Search("src/main/resources/CSV/2020-2021.csv");
+        String temp = Main.class.getResource("CSV/2020-2021.csv").toExternalForm();
+        String csv = "";
+        for (int i = 6; i<temp.length(); i++){
+            csv += temp.charAt(i);
+        }
+        Search searches = new Search(csv);
         try {
-            courseList = readInFile("src/main/resources/CSV/2020-2021.csv");
+            courseList = readInFile(csv);
             //System.out.println(courseList.get(6).credits);
             //Schedule s = new Schedule("testSchedule", "Fall");
             //deleteSchedule();
@@ -87,7 +94,13 @@ public class Main {
             String[] parseList;
             Course cAdd = null;
             ArrayList<Course> minorReqs = new ArrayList<>();
-            Minor minor = new Minor(minorReqs);
+            Minor minor;
+            try {
+                minor = new Minor(minorReqs);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
             ArrayList<Minor> minors = new ArrayList<>();
 
             //Checks for proper commands
@@ -107,7 +120,13 @@ public class Main {
                     }
 
                     if (cAdd != null) {
-                        minor.getMinorReqs().add(cAdd);
+                        try {
+                            minor = new Minor(minorReqs);
+                            minor.getMinorReqs().add(cAdd);
+                        }
+                        catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
                     }
 
                     break;
@@ -193,7 +212,7 @@ public class Main {
                     break;
 
                 case ("SAVE"):
-                    saveSchedule(s);
+                    saveSchedule(s, "test");
                     break;
 
                 case ("LOAD"):
@@ -207,7 +226,7 @@ public class Main {
                     break;
 
                 case ("DELETE"):
-                    deleteSchedule();
+                    deleteSchedule("temp");
                     break;
 
                 case ("DISPLAY"):
@@ -262,36 +281,8 @@ public class Main {
         return nSched;
     }
 
-    public static void saveSchedule(Schedule s)
-    {
-        Gson gson = new Gson();
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter a schedule Name: ");
-        String name = scan.nextLine();
-        String json = gson.toJson(s);
-        try {
-            FileWriter file = new FileWriter("src/main/resources/Schedules/" + name + ".json");
-            file.write(json);
-            file.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
     //deletes specified schedule
-    public static void deleteSchedule() {
-        //test
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the schedule Name you would like to delete: ");
-        String toDelete = scan.nextLine();
-        File file = new File("src/main/resources/Schedules/");
-        for (File f : file.listFiles()) {
-            if (f.getName().equals(toDelete)) {
-                f.delete();
-            }
-        }
-    }
+
     public String viewSchedule(Schedule s){
         return s.displaySchedule();
     }
@@ -326,15 +317,5 @@ public class Main {
         return null;
     }
 
-    private static Schedule openSchedule(String filename) {
-        Gson gson = new Gson();
-        try {
-            Schedule sched = gson.fromJson(new FileReader("src/main/resources/Schedules/"
-                    + filename), Schedule.class);
-            return sched;
-        } catch (FileNotFoundException e) {
-            System.out.println("There was a problem loading the file: " + e.getMessage());
-            return null;
-        }
-    }
+
 }

@@ -20,11 +20,15 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
     implementation 'org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0'
     implementation 'org.apache.tika:tika-core:2.7.0'
     implementation 'org.apache.tika:tika-parsers-standard-package:2.7.0'
+    implementation group: 'com.calendarfx', name: 'view', version: '11.12.5'
+    implementation "org.slf4j:slf4j-simple:1.7.9"
+    implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+    implementation 'org.hildan.fxgson:fx-gson:5.0.0'
 }
+
 
 test {
     useJUnitPlatform()

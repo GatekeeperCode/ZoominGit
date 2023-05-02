@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="677.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.SearchController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox BorderPane.alignment="CENTER">
+               <stylesheets>
+                  <URL value="@CSS/BootstrapTest.css" />
+                  <URL value="@CSS/modifications.css" />
+               </stylesheets>
+               <children>
+                  <Pane HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button id="search" focusTraversable="false" layoutX="680.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleCalendarButton" stylesheets="@CSS/modifications.css" text="View Schedule" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="btn-lg" />
+                              <String fx:value="btn-danger" />
+                           </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="554.0" layoutY="56.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="104.0" text="Filters" textAlignment="CENTER" textFill="#e8293f">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                           <padding>
+                              <Insets top="50.0" />
+                           </padding>
+                           <stylesheets>
+                              <URL value="@CSS/BootstrapTest.css" />
+                              <URL value="@CSS/modifications.css" />
+                           </stylesheets>
+                           <styleClass>
+                              <String fx:value="btn-lg" />
+                              <String fx:value="btn-danger" />
+                           </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <TextField fx:id="SearchBar" focusTraversable="false" layoutX="162.0" layoutY="56.0" maxWidth="600.0" prefHeight="64.0" prefWidth="331.0" promptText="Search">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </TextField>
+                        <TableView fx:id="CourseList" layoutX="46.0" layoutY="170.0" style="-fx-background-color: #ffcbcb;">
+                           <columns>
+                              <TableColumn fx:id="CourseCode" prefWidth="98.0" text="Course Code" />
+                              <TableColumn fx:id="CourseName" prefWidth="166.0" text="Course Name" />
+                              <TableColumn fx:id="Professor" prefWidth="119.0" text="Professor" />
+                              <TableColumn fx:id="Days" prefWidth="81.0" text="Days" />
+                              <TableColumn fx:id="time" prefWidth="215.0" text="Time Slot" />
+                              <TableColumn fx:id="CreditHours" prefWidth="89.0" text="Credit Hours" />
+                              <TableColumn fx:id="Add" prefWidth="140.0" text="Add to Schedule" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <ChoiceBox fx:id="choice" focusTraversable="false" layoutX="47.0" layoutY="56.0" prefHeight="62.0" prefWidth="116.0" style="-fx-font-size: 18;" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <AnchorPane id="top" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="6.0" prefWidth="1004.0" style="-fx-background-color: FF152A;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <ImageView id="Logo" fitHeight="59.0" fitWidth="366.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/GCC_logo.jpg" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="69.0" prefWidth="224.0" style="-fx-background-color: #00000000;" text="Button" textFill="TRANSPARENT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Return Home" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
