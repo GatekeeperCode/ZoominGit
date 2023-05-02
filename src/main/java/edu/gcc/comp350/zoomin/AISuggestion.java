@@ -18,6 +18,7 @@ public class AISuggestion {
 	private ArrayList<String> timesCant = new ArrayList<String>();
 	private String schedName;
 	private String semest;
+	int schedCredits;
 	MongoCollection collection;
 
 	AISuggestion(String name, String semester, MongoCollection c)
@@ -26,6 +27,7 @@ public class AISuggestion {
 		semest = semester;
 		collection = c;
 		timesCant.add("Blank"); //This is so I can reference timesCant later without a null call
+		schedCredits = 0;
 	}
 
 	
@@ -55,6 +57,11 @@ public class AISuggestion {
 		for(int i=0; i<ClassCodes.size(); i++)
 		{
 			AISched = addCourse(AISched, i);
+		}
+
+		if(schedCredits<12)
+		{
+			//TODO Add new method for huma class addition
 		}
 
 
@@ -112,6 +119,7 @@ public class AISuggestion {
 				hold.addClass(secondList.get(0));
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
 				scnr.useDelimiter("-");
+				schedCredits += secondList.get(0).getCredits();
 
 				timesCant.add(scnr.next());
 				scnr.close();
@@ -124,6 +132,55 @@ public class AISuggestion {
 		}
 
 		System.out.println("Class " + DeptCodes.get(index) + ClassCodes.get(index) + " could not be added because of time conflicts with higher priority class or because the class doesn't exits.");
+		return hold;
+	}
+
+	Schedule addExtraCourse(Schedule sched)
+	{
+		Schedule hold = sched;
+
+		Bson humaFilter = Filters.regex("coursePrefix", "Huma", "i");
+		Bson codeFilter = Filters.not(Filters.regex("courseNumber", "102", "i"));
+		Bson mainFilter = Filters.and(humaFilter, codeFilter);
+
+		for(int i=0; i<timesCant.size(); i++)
+		{
+			Bson cantFilter = Filters.not(Filters.regex("startTime", timesCant.get(i), "i"));
+			mainFilter = Filters.and(mainFilter, cantFilter);
+		}
+
+		for(int i=0; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
+		{
+			Bson avoidFilter = Filters.not(Filters.regex("courseNumber", ClassCodes.get(i), "i"));
+			mainFilter = Filters.and(mainFilter, avoidFilter);
+		}
+
+		ArrayList<Course> humaList = new ArrayList<>();
+		FindIterable<Document> results = collection.find(mainFilter);
+		results.forEach(doc -> humaList.add(new Course(doc)));
+
+		if(humaList.size()>0)
+		{
+			hold.addClass(humaList.get(0));
+			schedCredits += humaList.get(0).getCredits();
+			ClassCodes.add(humaList.get(0).getCourseCode());
+			return hold;
+		}
+
+
+		Bson mainFilter2 = Filters.not(Filters.regex("courseNumber", ClassCodes.get(0), "i"));
+		for(int i=1; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
+		{
+			Bson avoidFilter = Filters.not(Filters.regex("courseNumber", ClassCodes.get(i), "i"));
+			mainFilter2 = Filters.and(mainFilter2, avoidFilter);
+		}
+
+		FindIterable<Document> results2 = collection.find(mainFilter2);
+		results2.forEach(doc -> humaList.add(new Course(doc)));
+
+		hold.addClass(humaList.get(0));
+		schedCredits += humaList.get(0).getCredits();
+		ClassCodes.add(humaList.get(0).getCourseCode());
 		return hold;
 	}
 
