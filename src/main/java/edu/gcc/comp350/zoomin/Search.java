@@ -141,7 +141,7 @@ public class Search {
 
 		ArrayList<Document> docList = new ArrayList<>();
 		FindIterable<Document> results = collection.find(filterAnd);
-		//results.forEach(doc -> newResults.add(Course(doc)));
+		results.forEach(doc -> newResults.add(new Course(doc)));
 		return newResults;
 
 		//Commented out after noSQL addition
