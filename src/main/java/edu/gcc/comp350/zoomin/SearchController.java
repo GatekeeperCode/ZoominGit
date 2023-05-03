@@ -1,5 +1,7 @@
 package edu.gcc.comp350.zoomin;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,9 +73,16 @@ public class SearchController implements Initializable {
             for (int i = 6; i<temp.length(); i++){
                 filename += temp.charAt(i);
             }
-            courseList = readInFile(filename);
+
+            //This part needs expanding; we need a dropdown for the semesters
+            MongoCollection collection = GUIDriver.getDatabase();
+            FindIterable<Document> allCourses = collection.find();
+            System.out.println("Got here just fine");
+            allCourses.forEach(doc -> courseList.add(new Course(doc)));
+
         } catch(Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
         CourseCode.setCellValueFactory(new PropertyValueFactory<Course, String>("courseCode"));
         CourseName.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));

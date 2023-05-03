@@ -75,9 +75,9 @@ public class Course {
 
         days = "";
         char[] weekchars = {'M', 'T', 'W', 'R', 'F'};
-        boolean[] weekdays = {c.getBoolean("onMonday"), c.getBoolean("onTuesday"),
-                              c.getBoolean("onWednesday"), c.getBoolean("onThursday"),
-                              c.getBoolean("onFriday")};
+        boolean[] weekdays = {c.containsKey("onMonday"), c.containsKey("onTuesday"),
+                              c.containsKey("onWednesday"), c.containsKey("onThursday"),
+                              c.containsKey("onFriday")};
         for (int i=0; i<5; i++) {
             if (weekdays[i]) {
                 days += weekchars[i];
