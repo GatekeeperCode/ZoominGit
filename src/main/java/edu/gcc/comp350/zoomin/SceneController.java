@@ -118,11 +118,13 @@ public class SceneController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(list != null){
-            list.setItems(Schedules);
-        }
+        Schedules.clear();
+        list.getItems().removeAll();
         for (File f : getResourceFolderFiles("Schedules")) {
             Schedules.add(f.getName());
+        }
+        if(list != null){
+            list.setItems(Schedules);
         }
         if(!GUIDriver.schedList.isEmpty()){
             contButton.setDisable(false);
@@ -133,12 +135,12 @@ public class SceneController implements Initializable{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 GUIDriver.schedList.clear();
+                GUIDriver.openedSchedule = newValue;
                 for (Course c: GUIDriver.openSchedule(newValue).getSchedule().values()) {
                     GUIDriver.schedList.add(c);
                     c.setOnSchedule(true);
                 }
                 try {
-
                     loadCalendar();
                 } catch (IOException e) {
                     throw new RuntimeException(e);

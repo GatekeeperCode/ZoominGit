@@ -45,16 +45,7 @@ public class CalendarController  implements Initializable {
 
 
     @FXML GridPane schedule;
-    @FXML
-    FlowPane M;
-    @FXML
-    FlowPane T;
-    @FXML
-    FlowPane W;
-    @FXML
-    FlowPane R;
-    @FXML
-    FlowPane F;
+    @FXML FlowPane M, T, W, R, F;
     @FXML Label Credits;
     @FXML
     private void handleHomeButton(ActionEvent event) throws IOException {
@@ -199,8 +190,8 @@ public class CalendarController  implements Initializable {
         }
     }
     private void deleteAndLeave(Boolean leave) throws IOException {
-        if(!GUIDriver.schedList.isEmpty()){
-            for (Course c: GUIDriver.schedList) {
+        if (!GUIDriver.schedList.isEmpty()) {
+            for (Course c : GUIDriver.schedList) {
                 c.setOnSchedule(false);
             }
             M.getChildren().clear();
@@ -210,9 +201,13 @@ public class CalendarController  implements Initializable {
             F.getChildren().clear();
             GUIDriver.schedList.clear();
         }
-        if(leave){
+        if (GUIDriver.openedSchedule != null) {
+            GUIDriver.deleteSchedule(GUIDriver.openedSchedule);
+        }
+        if (leave) {
             leave();
         }
+
     }
 
     private void leave() throws IOException {
