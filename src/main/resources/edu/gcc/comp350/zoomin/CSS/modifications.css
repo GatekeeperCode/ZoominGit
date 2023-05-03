@@ -4,6 +4,12 @@
        -fx-border-radius: 10px !important;
        -fx-background-radius: 10px !important;
 }
+#continue{
+       -fx-padding: 15px 15px 15px 15px !important;
+       -fx-font-size: 20px !important;
+       -fx-border-radius: 10px !important;
+       -fx-background-radius: 10px !important;
+}
 #search{
        -fx-padding: 20px 40px 20px 52px !important;
        -fx-font-size: 28px !important;

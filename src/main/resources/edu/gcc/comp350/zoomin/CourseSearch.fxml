@@ -72,7 +72,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <ChoiceBox fx:id="choice" focusTraversable="false" layoutX="47.0" layoutY="56.0" prefHeight="62.0" prefWidth="116.0" style="-fx-font-size: 18;" />
+                        <ChoiceBox fx:id="choice" focusTraversable="false" layoutX="47.0" layoutY="56.0" prefHeight="62.0" prefWidth="116.0" style="-fx-font-size: 14;" />
                      </children>
                   </Pane>
                </children>

@@ -1,6 +1,5 @@
 package edu.gcc.comp350.zoomin;
 
-import com.calendarfx.view.DetailedWeekView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +45,16 @@ public class CalendarController  implements Initializable {
 
 
     @FXML GridPane schedule;
-    @FXML FlowPane M, T, W, R, F;
+    @FXML
+    FlowPane M;
+    @FXML
+    FlowPane T;
+    @FXML
+    FlowPane W;
+    @FXML
+    FlowPane R;
+    @FXML
+    FlowPane F;
     @FXML Label Credits;
     @FXML
     private void handleHomeButton(ActionEvent event) throws IOException {
@@ -62,7 +70,7 @@ public class CalendarController  implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            deleteAndLeave();
+            deleteAndLeave(true);
         }else{
             alert.close();
         }
@@ -109,6 +117,11 @@ public class CalendarController  implements Initializable {
 
     private void placeClasses(){
         int fonsize = 16;
+        M.getChildren().clear();
+        T.getChildren().clear();
+        W.getChildren().clear();
+        R.getChildren().clear();
+        F.getChildren().clear();
         for (TimeSlot time : timeSlots) {
             Label l;
             if(time.days.contains("M")){
@@ -185,8 +198,8 @@ public class CalendarController  implements Initializable {
                 timeSlots.add(slot);
         }
     }
-    private void deleteAndLeave() throws IOException {
-        if(GUIDriver.schedList.size() > 0 ){
+    private void deleteAndLeave(Boolean leave) throws IOException {
+        if(!GUIDriver.schedList.isEmpty()){
             for (Course c: GUIDriver.schedList) {
                 c.setOnSchedule(false);
             }
@@ -197,7 +210,12 @@ public class CalendarController  implements Initializable {
             F.getChildren().clear();
             GUIDriver.schedList.clear();
         }
+        if(leave){
+            leave();
+        }
+    }
 
+    private void leave() throws IOException {
         root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         stage = (Stage) schedule.getScene().getWindow();
         scene = new Scene(root);

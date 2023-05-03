@@ -33,7 +33,7 @@
                      <URL value="@CSS/modifications.css" />
                   </stylesheets>
                </Button>
-               <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="198.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleAIButton" text="Create Recommended Schedule" textAlignment="CENTER" textFill="#e8293f" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+               <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="190.0" layoutY="101.0" mnemonicParsing="false" onAction="#handleAIButton" text="Create Recommended Schedule" textAlignment="CENTER" textFill="#e8293f" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
                   <font>
                      <Font size="48.0" />
                   </font>
@@ -52,9 +52,9 @@
                      <URL value="@CSS/modifications.css" />
                   </stylesheets>
                </Button>
-               <Button id="create" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" layoutX="183.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleCreateButton" text="Continue with current" textAlignment="CENTER" textFill="WHITE">
+               <Button id="continue" fx:id="contButton" alignment="CENTER" contentDisplay="CENTER" disable="true" focusTraversable="false" layoutX="236.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleContinueButton" prefHeight="55.0" prefWidth="233.0" text="Continue with current" textAlignment="CENTER" textFill="WHITE">
                   <font>
-                     <Font size="48.0" />
+                     <Font size="25.0" />
                   </font>
                   <padding>
                      <Insets top="50.0" />
@@ -71,6 +71,24 @@
                      <URL value="@CSS/modifications.css" />
                   </stylesheets>
                </Button>
+               <Pane fx:id="choicePane" disable="true" layoutX="171.0" layoutY="-2.0" prefHeight="255.0" prefWidth="362.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="-2.0">
+                  <children>
+                     <ChoiceBox fx:id="year" layoutX="200.0" layoutY="84.0" prefHeight="70.0" prefWidth="121.0" style="-fx-font-size: 18;" />
+                     <ChoiceBox fx:id="Semester" layoutX="42.0" layoutY="84.0" prefHeight="70.0" prefWidth="121.0" style="-fx-font-size: 18;" />
+                     <Label layoutX="14.0" layoutY="14.0" text="Select Year and Semester" textFill="#ff152a">
+                        <font>
+                           <Font size="30.0" />
+                        </font>
+                     </Label>
+                     <Button layoutX="269.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="37.0" prefWidth="77.0" style="-fx-background-color: #ff152a;" text="Submit" textFill="WHITE">
+                        <font>
+                           <Font size="14.0" />
+                        </font></Button>
+                     <Button layoutX="181.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="37.0" prefWidth="77.0" style="-fx-border-radius: 10px; -fx-background-color: #ff152a;" text="Cancel" textFill="WHITE">
+                        <font>
+                           <Font size="14.0" />
+                        </font></Button>
+                  </children></Pane>
             </children></AnchorPane>
       </center>
       <top>
@@ -97,7 +115,7 @@
          </AnchorPane>
       </top>
       <bottom>
-         <AnchorPane fx:id="homeBottom" maxHeight="500.0" maxWidth="1412.0" BorderPane.alignment="BOTTOM_CENTER">
+         <AnchorPane fx:id="homeBottom" maxHeight="500.0" maxWidth="1412.0" prefHeight="405.0" prefWidth="706.0" BorderPane.alignment="BOTTOM_CENTER">
             <children>
                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="39.0" prefHeight="46.0" prefWidth="326.0" text="Saved Schedules:" textFill="#ff152a" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="39.0">
                   <font>
