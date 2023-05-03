@@ -69,6 +69,24 @@ public class CalendarController  implements Initializable {
     }
     @FXML
     private void handleSaveButton(ActionEvent event) throws IOException {
+        //Check to see if the person has between 12 and 17 credits.
+        //If not, send a warning & confirmation.
+        int numHours = 0;
+        for (Course c : GUIDriver.schedList) {
+            numHours += c.getCredits();
+        }
+        if (numHours > 17 || numHours < 12) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "NOTE: You do not have 12 - 17 credit hours. Continue?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() != ButtonType.YES) {
+                alert.close();
+                return;
+            }
+            alert.close();
+        }
+
+
         Schedule schedule = new Schedule("test", "test");
         for (Course c: GUIDriver.schedList){
             schedule.addClassToSchedule(c);
