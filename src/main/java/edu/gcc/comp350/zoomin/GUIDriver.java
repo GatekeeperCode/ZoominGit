@@ -1,6 +1,11 @@
 package edu.gcc.comp350.zoomin;
 
 import com.google.gson.Gson;
+import com.mongodb.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,6 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.bson.BsonDocument;
+import org.bson.BsonInt64;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.hildan.fxgson.FxGson;
 import org.hildan.fxgson.FxGsonBuilder;
 import org.kordamp.bootstrapfx.BootstrapFX;
@@ -108,4 +117,39 @@ public class GUIDriver extends Application {
 //    private void loadCreateScene(ActionEvent event) throws IOException {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
 //    }
+    public static MongoCollection getDatabase() {
+        //Use the access pass here:
+        String atlasPass = "mongodb+srv://ZMMN:pTnsKDeiP5QPDiI5@zmmncluster.jod4gfc.mongodb.net/test";
+
+        // Construct a ServerApi instance using the ServerApi.builder() method
+        ServerApi serverApi = ServerApi.builder()
+                .version(ServerApiVersion.V1)
+                .build();
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(atlasPass))
+                .serverApi(serverApi)
+                .build();
+
+        // Create a new client and connect to the server
+        MongoClient mongoClient = null;
+        MongoDatabase database = null;
+        MongoCollection collection = null;
+        try {
+            mongoClient = MongoClients.create(settings);
+            database = mongoClient.getDatabase("ZMMN");
+            collection = database.getCollection("Courses");
+            try {
+                // Send a ping to confirm a successful connection
+                Bson command = new BsonDocument("ping", new BsonInt64(1));
+                Document commandResult = database.runCommand(command);
+                System.out.println("MongoDB connection has been successfully established.\n" + commandResult);
+            } catch (MongoException e) {
+                System.err.println(e + " - First Catch.");
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e + " - Second Catch.");
+        }
+        return collection;
+    }
 }

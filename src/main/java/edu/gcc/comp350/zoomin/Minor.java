@@ -16,6 +16,10 @@ public class Minor {
     private String minorName;
     public HashMap minorSheet = new HashMap();
 
+    /**
+     * Loads the HashMap using the .pdf with the keys being the Minor names (all caps)
+     * and the values are a String description
+     */
     public Minor(ArrayList<Course> reqs) throws Exception {
 
         this.minorReqs = reqs;
@@ -53,26 +57,7 @@ public class Minor {
         Scanner scan = new Scanner(contentString);
         Scanner nScanner = new Scanner(contentString);
 //        HashMap hashing = new HashMap();
-//
-        //scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine(); //this is "minor...
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        scan.nextLine();
-//        System.out.println(scan.nextLine());
+
         int check = 0;
         String marker = "";
         String val = "";
@@ -80,18 +65,6 @@ public class Minor {
         String key = scan.next();
         String newStuff = key;
         while(true) {
-//            scan.useDelimiter("\\.");
-//            scan.nextLine();
-//            scan.nextLine();
-//            scan.nextLine();
-//            scan.nextLine();
-
-
-
-
-
-
-
             newStuff = newStuff.strip();
             newStuff = newStuff.replaceAll("[\r\n]+", "\r\n");
             String holdStuff = newStuff.replace("and", "AND");
@@ -116,58 +89,17 @@ public class Minor {
                 marker = key;
                 System.out.println(val);
                 System.out.println("STARTS HERE! " + key + "! ENDS HERE!");
-                //hashing.put(key,val);
                 val = "";
             }
             if(newStuff.equals("")){
                 break;
             }
             newStuff = scan.next();
-//            scan.useDelimiter(" ");
-//            scan.next();
-//            scan.useDelimiter("");
-//            scan.next();
-//            scan.useDelimiter("\n\n");
-//            String val = scan.nextLine();scan.nextLine();
-//            val += scan.next();
-//            if(key.equals(key.toUpperCase())) {
-//                hashing.put(key, val);
-//                System.out.println("!!!STARTS HERE!!!" + key + "!!!ENDS HERE!!!");
-//            }
 
-//            System.out.println(hashing.get(key));
         }
 
-
-//        while(scan.hasNext()){
-//
-//            scan.useDelimiter("\\.");
-//
-//            String key = "";
-//            if(scan.hasNext()) {
-//                key = scan.next();
-//            }
-//            scan.useDelimiter(" ");
-//            if(scan.hasNext()) {
-//                scan.next();
-//            }
-//            scan.useDelimiter("");
-//            if(scan.hasNext()) {
-//                scan.next();
-//            }
-//            scan.useDelimiter("\n\n");
-//            String val = "";
-//            if(scan.hasNext()) {
-//                val = scan.nextLine();
-//                scan.nextLine();
-//                val += scan.next();
-//            }
-//
-//
-//            hashing.put(key, val);
-//        }
-        System.out.println(check);
-        System.out.println(minorSheet.get("INTERNATIONAL STUDIES"));
+//        System.out.println(check);
+//        System.out.println(minorSheet.get("INTERNATIONAL STUDIES"));
         fstream.close();
         
     }
