@@ -189,7 +189,6 @@ public class AISuggestion {
 			{
 				hold.addClassToSchedule(secondList.get(0));
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
-				scnr.useDelimiter(":00-");
 
 				timesCant.add(scnr.next());
 				scnr.close();
@@ -237,6 +236,9 @@ public class AISuggestion {
 
 			Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
 			ClassCodes.add(intTranslator.nextInt());
+
+			Scanner scnr = new Scanner(humaList.get(0).getTime());
+			timesCant.add(scnr.next());
 			return hold;
 		}
 
@@ -255,6 +257,9 @@ public class AISuggestion {
 
 		Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
 		ClassCodes.add(intTranslator.nextInt());
+
+		Scanner scnr = new Scanner(humaList.get(0).getTime());
+		timesCant.add(scnr.next());
 		return hold;
 	}
 
