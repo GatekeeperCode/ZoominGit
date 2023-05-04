@@ -1,10 +1,18 @@
 package edu.gcc.comp350.zoomin;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Search {
 	private Filter filter;
 	private ArrayList<Course> SearchResults = new ArrayList<Course>();
+	MongoCollection collection;
 
 
 	/**
@@ -19,6 +27,11 @@ public class Search {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public Search(MongoCollection colllect)
+	{
+		collection = colllect;
 	}
 
 	/**
@@ -75,71 +88,107 @@ public class Search {
 			}
 		}
 
-		for(int i=0; i<SearchResults.size(); i++)
-		{
-
-			if(filterMatch(SearchResults.get(i)))
-			{
-				AlteredSearchResults.add(SearchResults.get(i));
-			}
-		}
+		AlteredSearchResults = filterMatch();
 
 		return AlteredSearchResults;
 	}
 
 	/**Mike Buriok
 	 * Compares a course to the filters.
-	 * @param target The Class to be compared to the filters.
 	 * @return True if target matches the filters, false otherwise.
 	 */
-	private boolean filterMatch(Course target)
+	private ArrayList<Course> filterMatch()
 	{
-		boolean matchesFilters = true;
+		ArrayList<Course> newResults = new ArrayList<>();
+		//boolean matchesFilters = true;
+		Scanner scnr = new Scanner(filter.getProfessor());
+		scnr.useDelimiter(", ");
+		String profLName = scnr.next();
+		String profFName = "";
 
-		if(TakenCourses.taken.contains(target)){
-			matchesFilters = false;
-		}
-		else if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+		if(scnr.hasNext())
 		{
-			matchesFilters = false;
-		}
-		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else if(target.getCredits()!=filter.getCreditHours() && filter.getCreditHours() != 0)
-		{
-			matchesFilters = false;
-		}
-		else if(!target.getDepartment().equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else if(!target.getCourseCode().equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
-		{
-			matchesFilters = false;
-		}
-		else
-		{
-			//Time Schedule Checking
-			if(filter.getPrimaryTimeCheck().equals(""))
-			{
-				if(!target.getTime().contains(filter.getStartTime()) && !filter.getStartTime().equals(""))
-				{
-					matchesFilters = false;
-				}
-				else if (!target.getTime().contains(filter.getEndTime()) && !filter.getEndTime().equals(""))
-				{
-					matchesFilters = false;
-				}
-			}
-			else if(!target.getTime().contains(filter.getPrimaryTimeCheck()))
-			{
-				matchesFilters = false;
-			}
+			profFName = scnr.next();
 		}
 
-		return matchesFilters;
+		scnr.close();
+
+		//Wanted Classes
+		Bson filterOne = Filters.regex("lastName", profLName, "i");
+		Bson filterTwo = Filters.regex("firstName", profFName, "i");
+		Bson filterThree = Filters.regex("coursePrefix", filter.getDepartment(), "i");
+		Bson filterFour = Filters.regex("courseNumber", filter.getCourseCode(), "i");
+		Bson filterFive = Filters.regex("courseTitle", filter.getCourseName(), "i");
+		Bson filterSix = Filters.regex("startTime", filter.getStartTime(), "i");
+		Bson filterSeven = Filters.regex("endTime", filter.getEndTime(), "i");
+		Bson filterEight = Filters.regex("year", filter.getYear(), "i");
+		Bson filterNine = Filters.regex("semester", filter.getSemester(), "i");
+
+		ArrayList<Bson> takenClasses = new ArrayList<>();
+		//TakenClasses
+		for(int i=0; i<TakenCourses.taken.size(); i++)
+		{
+			takenClasses.add(Filters.not(Filters.regex("coursePrefix", TakenCourses.taken.get(i).getDepartment())));
+			takenClasses.add(Filters.not(Filters.regex("courseNumber", TakenCourses.taken.get(i).getCourseCode())));
+		}
+
+		Bson filterAnd = Filters.and(filterOne, filterTwo, filterThree, filterFour, filterFive, filterSix, filterSeven, filterEight, filterNine);
+
+		for(int i=0; i<takenClasses.size(); i++)
+		{
+			filterAnd = Filters.and(filterAnd, takenClasses.get(i));
+		}
+
+		ArrayList<Document> docList = new ArrayList<>();
+		FindIterable<Document> results = collection.find(filterAnd);
+		results.forEach(doc -> newResults.add(new Course(doc)));
+		return newResults;
+
+		//Commented out after noSQL addition
+//		if(TakenCourses.taken.contains(target)){
+//			matchesFilters = false;
+//		}
+//		else if(!target.getCourseName().contains(filter.getCourseName()) && !filter.getCourseName().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getProfessor().equalsIgnoreCase(filter.getProfessor()) && !filter.getProfessor().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(target.getCredits()!=filter.getCreditHours() && filter.getCreditHours() != 0)
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getDepartment().equals(filter.getDepartment()) && !filter.getDepartment().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else if(!target.getCourseCode().equals(filter.getCourseCode()) && !filter.getCourseCode().equals(""))
+//		{
+//			matchesFilters = false;
+//		}
+//		else
+//		{
+//			//Time Schedule Checking
+//			if(filter.getPrimaryTimeCheck().equals(""))
+//			{
+//				if(!target.getTime().contains(filter.getStartTime()) && !filter.getStartTime().equals(""))
+//				{
+//					matchesFilters = false;
+//				}
+//				else if (!target.getTime().contains(filter.getEndTime()) && !filter.getEndTime().equals(""))
+//				{
+//					matchesFilters = false;
+//				}
+//			}
+//			else if(!target.getTime().contains(filter.getPrimaryTimeCheck()))
+//			{
+//				matchesFilters = false;
+//			}
+//		}
+//
+//		return matchesFilters;
 	}
 
 	/**Mike Buriok
@@ -149,7 +198,7 @@ public class Search {
 	public void setFilters() {
 		while(true)
 		{
-			System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE");
+			System.out.println("What filter do you want to change? TIMESLOT, PROFESSOR, CREDITHOURS, DEPARTMENT, COURSECODE, SEMESTER");
 			System.out.println("If don't want to add that filter, just hit enter.");
 
 			Scanner scnr = new Scanner(System.in);
@@ -162,40 +211,49 @@ public class Search {
 
 				if(input.equalsIgnoreCase("Professor"))
 				{
-					System.out.println("What do you want to set the filter to?");
+					System.out.println("What do you want to set the filter to? Please format it LastName, FirstName or only LastName (ex. Hutchins, Johnathan or Hutchins)");
 					filter.setProfessor(scnr.next());
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("TimeSlot"))
 				{
-					System.out.println("What is the Start time that you want to search for?");
+					System.out.println("What is the Start time that you want to search for? (ex. 9:00)");
 					filter.setStartTime(scnr.next());
 
-					System.out.println("What is the End time that you want to search for?");
+					System.out.println("What is the End time that you want to search for? (ex. 3:00)");
 					filter.setEndTime(scnr.next());
 
-					System.out.println("What days of the week are you checking for?");
+					System.out.println("What days of the week are you checking for? (ex. M, W, F)");
 					filter.setDaysOffered(scnr.next());
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("CreditHours"))
 				{
-					System.out.println("What do you want to set the filter to?");
+					System.out.println("What do you want to set the filter to? (ex. 3)");
 					filter.setCreditHours(scnr.nextInt());
 //					scnr.next();
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("Department"))
 				{
-					System.out.println("What do you want to set the filter to?");
+					System.out.println("What do you want to set the filter to? (ex. COMP)");
 					filter.setDepartment(scnr.next());
 					correctInput=true;
 				}
 				else if(input.equalsIgnoreCase("CourseCode"))
 				{
-					System.out.println("What do you want to set the filter to?");
+					System.out.println("What do you want to set the filter to? (ex. 101)");
 					filter.setCourseCode(scnr.next());
 					correctInput=true;
+				}
+				else if(input.equalsIgnoreCase("SEMESTER"))
+				{
+					System.out.println("What semester do you want to search through? YEAR, SEMESTER (ex. 2023, Spring)");
+					Pattern hold = scnr.delimiter();
+					scnr.useDelimiter(", ");
+					filter.setYear(scnr.next());
+					filter.setSemester(scnr.next());
+					scnr.useDelimiter(hold);
 				}
 				else
 				{
@@ -208,6 +266,7 @@ public class Search {
 
 				if(loopContinue.equals("N"))
 				{
+					scnr.close();
 					return;
 				}
 			}
@@ -235,13 +294,8 @@ public class Search {
 	{
 		ArrayList<Course> results = new ArrayList<>();
 
-		for(int i=0; i<SearchResults.size(); i++)
-		{
-			if(filterMatch(SearchResults.get(i)))
-			{
-				results.add(SearchResults.get(i));
-			}
-		}
+		results = filterMatch();
+
 		if (results.size() < 1){
 		System.out.println("no results match criteria");
 	}
