@@ -89,7 +89,7 @@ public class AISuggestion {
 
 			for(int j=0; j<4; j++)
 			{
-				dept += courseCodes.get(i).charAt(i);
+				dept += Character.toUpperCase(courseCodes.get(i).charAt(i));
 			}
 			DeptCodes.add(dept);
 
