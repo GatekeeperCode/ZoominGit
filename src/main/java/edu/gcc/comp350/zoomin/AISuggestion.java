@@ -112,7 +112,7 @@ public class AISuggestion {
 
 		while(schedCredits<12)
 		{
-			addExtraCourse(AISched);
+			AISched = addExtraCourse(AISched);
 		}
 
 		return AISched;
@@ -173,7 +173,7 @@ public class AISuggestion {
 
 			if(secondList.size()>0)
 			{
-				hold.addClass(secondList.get(0));
+				hold.addClassToSchedule(secondList.get(0));
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
 				scnr.useDelimiter(":00-");
 				schedCredits += secondList.get(0).getCredits();
@@ -221,7 +221,7 @@ public class AISuggestion {
 
 		if(humaList.size()>0)
 		{
-			hold.addClass(humaList.get(0));
+			hold.addClassToSchedule(humaList.get(0));
 			schedCredits += humaList.get(0).getCredits();
 			hold.setTotalCredits(schedCredits);
 
@@ -241,7 +241,7 @@ public class AISuggestion {
 		FindIterable<Document> results2 = collection.find(mainFilter2);
 		results2.forEach(doc -> humaList.add(new Course(doc)));
 
-		hold.addClass(humaList.get(0));
+		hold.addClassToSchedule(humaList.get(0));
 		schedCredits += humaList.get(0).getCredits();
 
 		Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
