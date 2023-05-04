@@ -150,7 +150,8 @@ public class SearchController implements Initializable {
                                 Course toRemove = null;
                                 if(!GUIDriver.schedList.isEmpty()){
                                     for (Course c: GUIDriver.schedList) {
-                                        if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())){
+                                        if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())
+                                                && course.getCourseName().equals(c.getCourseName())){
                                             toRemove = c;
                                         }
                                     }
@@ -172,7 +173,8 @@ public class SearchController implements Initializable {
                         } else {
                             Course course = getTableView().getItems().get(getIndex());
                             for (Course c: GUIDriver.schedList) {
-                                if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())) {
+                                if(course.getCourseCode().equals(c.getCourseCode()) && course.getTime().equals(c.getTime())
+                                        && course.getCourseName().equals(c.getCourseName())) {
                                     btn.setText("Remove");
                                     course.setOnSchedule(true);
                                 }

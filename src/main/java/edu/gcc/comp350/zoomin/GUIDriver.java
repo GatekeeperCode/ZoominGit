@@ -27,36 +27,42 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GUIDriver extends Application {
     protected Scene StartScene;
     public static ArrayList<Course> schedList = new ArrayList<Course>();
+    public static String openedSchedule;
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws URISyntaxException {
         launch(args);
+        System.out.println();
     }
 
     public static void saveSchedule(Schedule s, String name) {
         Gson gson = FxGson.create();
         String json = gson.toJson(s);
         try {
-            FileWriter file = new FileWriter("src/main/resources/Schedules/" + name + ".json");
+            FileWriter file = new FileWriter(Paths.get(GUIDriver.class.getResource("/Schedules/").toURI()) + "/" + name + ".json");
             file.write(json);
             file.flush();
             file.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public static void deleteSchedule(String toDelete) {
-        //test
-        Scanner scan = new Scanner(System.in);
-        File file = new File("src/main/resources/Schedules/");
-        for (File f : file.listFiles()) {
+        for (File f : getResourceFolderFiles("Schedules")) {
             if (f.getName().equals(toDelete)) {
                 f.delete();
             }
@@ -65,13 +71,28 @@ public class GUIDriver extends Application {
     public static Schedule openSchedule(String filename) {
         Gson gson = new Gson();
         try {
-            Schedule sched = gson.fromJson(new FileReader("src/main/resources/Schedules/"
-                    + filename), Schedule.class);
+            URI uri = GUIDriver.class.getResource("/Schedules/").toURI();
+            String path = Paths.get(uri).toString() + "/";
+            FileReader fr = new FileReader(path + filename);
+            Schedule sched = gson.fromJson(fr, Schedule.class);
+            fr.close();
             return sched;
         } catch (FileNotFoundException e) {
             System.out.println("There was a problem loading the file: " + e.getMessage());
             return null;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private static File[] getResourceFolderFiles (String folder) {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource(folder);
+        String path = url.getPath();
+        System.out.println(path);
+        return new File(path).listFiles();
     }
 
     @Override
