@@ -38,6 +38,7 @@ public class AISuggestion {
 
 	/**
 	 * Main Workhorse of the AI
+	 * Console Method
 	 * @return The Schedule Generated
 	 */
 	public Schedule generateSchedule() {
@@ -65,6 +66,7 @@ public class AISuggestion {
 		for(int i=0; i<ClassCodes.size(); i++)
 		{
 			AISched = addCourse(AISched, i);
+			System.out.println("it's working");
 		}
 
 		while(schedCredits<12)
@@ -72,6 +74,43 @@ public class AISuggestion {
 			addExtraCourse(AISched);
 		}
 
+
+		return AISched;
+	}
+
+	public Schedule generateSchedule(ArrayList<String> courseCodes, ArrayList<String> badTimes)
+	{
+		TimesAvoid = badTimes;
+		Schedule AISched = new Schedule(schedName, semestSession+semestYear);
+
+		for(int i=0; i<courseCodes.size(); i++)
+		{
+			String dept = "";
+
+			for(int j=0; j<4; j++)
+			{
+				dept += courseCodes.get(i).charAt(i);
+			}
+			DeptCodes.add(dept);
+
+			String code = "";
+			for(int j=4; j<courseCodes.get(i).length(); j++)
+			{
+				code += courseCodes.get(i).charAt(i);
+			}
+			Scanner intTranslator = new Scanner(code);
+			ClassCodes.add(intTranslator.nextInt());
+		}
+
+		for(int i=0; i<ClassCodes.size(); i++)
+		{
+			AISched = addCourse(AISched, i);
+		}
+
+		while(schedCredits<12)
+		{
+			addExtraCourse(AISched);
+		}
 
 		return AISched;
 	}
@@ -84,9 +123,9 @@ public class AISuggestion {
 
 		Bson deptFilter = Filters.eq("coursePrefix", DeptCodes.get(index));
 		Bson codeFilter = Filters.eq("courseNumber", ClassCodes.get(index));
-//		Bson yearFilter = Filters.eq("year", semestYear);
+		Bson yearFilter = Filters.eq("year", semestYear);
 		Bson semestFilter = Filters.eq("semester", semestSession);
-		Bson mainFilter = Filters.and(deptFilter, codeFilter, semestFilter);
+		Bson mainFilter = Filters.and(deptFilter, codeFilter, semestFilter, yearFilter);
 
 		if(timesCant.size()>1)
 		{
