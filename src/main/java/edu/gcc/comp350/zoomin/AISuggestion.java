@@ -89,14 +89,17 @@ public class AISuggestion {
 
 			for(int j=0; j<4; j++)
 			{
-				dept += Character.toUpperCase(courseCodes.get(i).charAt(i));
+				dept += Character.toUpperCase(courseCodes.get(i).charAt(j));
 			}
 			DeptCodes.add(dept);
 
 			String code = "";
 			for(int j=4; j<courseCodes.get(i).length(); j++)
 			{
-				code += courseCodes.get(i).charAt(i);
+				if(!(courseCodes.get(i).charAt(j)==' '))
+				{
+					code += courseCodes.get(i).charAt(j);
+				}
 			}
 			Scanner intTranslator = new Scanner(code);
 			ClassCodes.add(intTranslator.nextInt());
