@@ -110,6 +110,7 @@ public class GUIDriver extends Application {
         StartScene.getStylesheets().add(getClass().getResource( "CSS/BootstrapTest.css").toExternalForm());
         primaryStage.setScene(StartScene);
         primaryStage.setTitle("Zoomin");
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 

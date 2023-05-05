@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,9 +24,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -55,6 +59,7 @@ public class AIController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -78,6 +83,7 @@ public class AIController implements Initializable {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
         } else if(Year.getValue() == null && Season.getValue() == null){
             showFlashMessage("You Must enter a Semester and Year!");
@@ -93,6 +99,7 @@ public class AIController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -107,8 +114,10 @@ public class AIController implements Initializable {
     private void showFlashMessage(String message) {
         Stage window = new Stage();
         window.initStyle(StageStyle.TRANSPARENT);
-        VBox layout = new VBox(10, new Text(message));
-        layout.setPadding(new Insets(3));
+        Text output = new Text(message);
+        VBox layout = new VBox(10, output);
+        output.setStyle("-fx-font-size: 24;");
+        layout.setPadding(new Insets(9));
         layout.setBackground(new Background(new BackgroundFill(Color.PINK, new CornerRadii(3), Insets.EMPTY)));
         window.setScene(new Scene(layout, Color.TRANSPARENT));
         window.setAlwaysOnTop(true);
