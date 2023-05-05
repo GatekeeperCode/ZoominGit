@@ -95,12 +95,12 @@ public class Main {
             Course cAdd = null;
             ArrayList<Course> minorReqs = new ArrayList<>();
             Minor minor;
-            try {
-                minor = new Minor(minorReqs);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
-            }
+            //try {
+                //minor = new Minor(minorReqs);
+            //}
+            //catch (Exception e){
+                //System.out.println(e.getMessage());
+            //}
             ArrayList<Minor> minors = new ArrayList<>();
 
             //Checks for proper commands
@@ -120,13 +120,13 @@ public class Main {
                     }
 
                     if (cAdd != null) {
-                        try {
-                            minor = new Minor(minorReqs);
-                            minor.getMinorReqs().add(cAdd);
-                        }
-                        catch (Exception e){
-                            System.out.println(e.getMessage());
-                        }
+//                        try {
+//                            minor = new Minor(minorReqs);
+//                            minor.getMinorReqs().add(cAdd);
+//                        }
+//                        catch (Exception e){
+//                            System.out.println(e.getMessage());
+//                        }
                     }
 
                     break;

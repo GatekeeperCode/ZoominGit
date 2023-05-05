@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.apache.poi.hslf.record.CString;
 
@@ -41,6 +42,9 @@ public class MinorController  implements Initializable {
     private Scene scene;
     private Parent root;
 
+    @FXML ChoiceBox<String> minorSelect;
+    @FXML Text minorDesc;
+
     @FXML
     private void handleHomeButton(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
@@ -56,5 +60,29 @@ public class MinorController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
+        try {
+            if(Minor.minorSheet.isEmpty()){
+                Minor minorStuff = new Minor();
+            }
+            minorSelect.getItems().addAll(Minor.minorSheet.keySet());
+            minorSelect.setOnAction(this::getDesc);
+//            minorSelect.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal)
+//                    -> {//reset table and textfield when new choice is selected
+//                if (newVal != null) {
+//                    System.out.println(minorStuff.getMinorDesc(minorSelect.getValue()));
+//                    String keyMinor = minorSelect.getValue();
+//                    String showMinor = minorStuff.getMinorDesc(keyMinor);
+//                    minorDesc.setText(showMinor);
+//                }
+//            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void getDesc(ActionEvent event){
+        System.out.println(minorSelect.getValue());
+        String option = minorSelect.getValue();
+        minorDesc.setText(Minor.minorSheet.get(option));
     }
 }
