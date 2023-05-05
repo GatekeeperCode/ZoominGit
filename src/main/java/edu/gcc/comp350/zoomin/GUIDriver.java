@@ -78,8 +78,7 @@ public class GUIDriver extends Application {
             FileReader fr = new FileReader(path + filename);
             Schedule sched = gson.fromJson(fr, Schedule.class);
 
-            //TODO: Assign the semester in the dropdown menu
-            String[] semesterDetails = sched.getSemester().split("");
+            String[] semesterDetails = sched.getSemester().split("\\s+");
             selectSemester = semesterDetails[0];
             selectYear = Integer.parseInt(semesterDetails[1]);
 

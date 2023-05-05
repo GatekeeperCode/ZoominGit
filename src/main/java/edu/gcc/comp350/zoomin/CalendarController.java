@@ -97,7 +97,7 @@ public class CalendarController  implements Initializable {
         }
 
 
-        Schedule schedule = new Schedule("test", "test");
+        Schedule schedule = new Schedule("test", GUIDriver.selectSemester + " " + GUIDriver.selectYear);
         for (Course c: GUIDriver.schedList){
             schedule.addClassToSchedule(c);
         }

@@ -34,10 +34,12 @@ public class Course {
     private int year;
     //Constructor
 
-
+    /**
+     * NOTE:
+     * THIS METHOD IS DEPRECATED. COURSE CONSTRUCTOR NEW VERSION BELOW.
+     */
     public Course(String parseData) {
         //Add parameters here
-        //TODO: CANNOT READ ENTRIES WITH "," WITHIN ITS NAME, ASK FOR A FIX TOMORROW
         String[] data = parseData.split(",");
         department = data[2];
         courseCode = data[3];
@@ -58,6 +60,12 @@ public class Course {
         }
         isOnSchedule = false;
     }
+
+    /**
+     * Course constructor based on MongoDB JSON format document.
+     * Will set up the course and prepare it for the schedule view.
+     * @param c - The JSON document corresponding to the class.
+     */
     public Course(Document c) {
         department = c.getString("coursePrefix");
         courseCode = "" + c.getInteger("courseNumber");
