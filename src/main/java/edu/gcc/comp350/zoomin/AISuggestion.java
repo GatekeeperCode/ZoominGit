@@ -17,6 +17,8 @@ public class AISuggestion {
 	private ArrayList<String> TimesAvoid = new ArrayList<String>();
 	//private ArrayList<Course> RecCourses = new ArrayList<Course>();
 	private ArrayList<String> timesCant = new ArrayList<String>();
+	private ArrayList<String> addedDept = new ArrayList<>();
+	private ArrayList<Integer> addedCode = new ArrayList<>();
 	private String schedName;
 	private int semestYear;
 	private String semestSession;
@@ -96,7 +98,7 @@ public class AISuggestion {
 			String code = "";
 			for(int j=4; j<courseCodes.get(i).length(); j++)
 			{
-				if(!(courseCodes.get(i).charAt(j)==' '))
+				if(Character.isDigit(courseCodes.get(i).charAt(j)))
 				{
 					code += courseCodes.get(i).charAt(j);
 				}
@@ -192,6 +194,8 @@ public class AISuggestion {
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
 
 				timesCant.add(scnr.next());
+				addedCode.add(ClassCodes.get(index));
+				addedDept.add(DeptCodes.get(index));
 				scnr.close();
 				return hold;
 			}
@@ -221,10 +225,10 @@ public class AISuggestion {
 			mainFilter = Filters.and(mainFilter, cantFilter);
 		}
 
-		for(int i=0; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
+		for(int i=0; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
 		{
-			Bson avoidFilter = Filters.ne("courseNumber", ClassCodes.get(i));
-			Bson classAvoid = Filters.ne("coursePrefix", DeptCodes.get(i));
+			Bson avoidFilter = Filters.ne("courseNumber", addedCode.get(i));
+			Bson classAvoid = Filters.ne("coursePrefix", addedDept.get(i));
 			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
 			mainFilter = Filters.and(mainFilter, bothFilter);
 		}
@@ -238,8 +242,8 @@ public class AISuggestion {
 			hold.addClassToSchedule(humaList.get(0));
 
 			Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
-			ClassCodes.add(intTranslator.nextInt());
-			DeptCodes.add(humaList.get(0).getDepartment());
+			addedCode.add(intTranslator.nextInt());
+			addedDept.add(humaList.get(0).getDepartment());
 
 			Scanner scnr = new Scanner(humaList.get(0).getTime());
 			timesCant.add(scnr.next());
@@ -247,11 +251,12 @@ public class AISuggestion {
 		}
 
 
-		Bson mainFilter2 = Filters.ne("courseNumber", ClassCodes.get(0));
-		for(int i=1; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
+		Bson mainFilter2 = Filters.ne("courseNumber", addedCode.get(0));
+		mainFilter2 = Filters.and(Filters.ne("coursePrefix", addedDept.get(0)), mainFilter2);
+		for(int i=1; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
 		{
-			Bson avoidFilter = Filters.ne("courseNumber", ClassCodes.get(i));
-			Bson classAvoid = Filters.ne("coursePrefix", DeptCodes.get(i));
+			Bson avoidFilter = Filters.ne("courseNumber", addedCode.get(i));
+			Bson classAvoid = Filters.ne("coursePrefix", addedDept.get(i));
 			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
 			mainFilter2 = Filters.and(mainFilter, bothFilter);
 		}
@@ -260,11 +265,11 @@ public class AISuggestion {
 		FindIterable<Document> results2 = collection.find(mainFilter2);
 		results2.forEach(doc -> newList.add(new Course(doc)));
 
-		hold.addClassToSchedule(newList.get(0));
+		hold.addClassToSchedule(newList.get(0)); //TODO FIx this
 
 		Scanner intTranslator = new Scanner(newList.get(0).getCourseCode());
-		ClassCodes.add(intTranslator.nextInt());
-		DeptCodes.add(newList.get(0).getDepartment());
+		addedCode.add(intTranslator.nextInt());
+		addedDept.add(newList.get(0).getDepartment());
 
 		Scanner scnr = new Scanner(newList.get(0).getTime());
 		timesCant.add(scnr.next());
