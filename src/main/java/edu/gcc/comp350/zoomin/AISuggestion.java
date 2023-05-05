@@ -194,8 +194,7 @@ public class AISuggestion {
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
 
 				timesCant.add(scnr.next());
-				addedCode.add(ClassCodes.get(index));
-				addedDept.add(DeptCodes.get(index));
+				addCheck(hold, index);
 				scnr.close();
 				return hold;
 			}
@@ -241,9 +240,7 @@ public class AISuggestion {
 		{
 			hold.addClassToSchedule(humaList.get(0));
 
-			Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
-			addedCode.add(intTranslator.nextInt());
-			addedDept.add(humaList.get(0).getDepartment());
+			addExtraCourse(hold);
 
 			Scanner scnr = new Scanner(humaList.get(0).getTime());
 			timesCant.add(scnr.next());
@@ -266,18 +263,69 @@ public class AISuggestion {
 		results2.forEach(doc -> newList.add(new Course(doc)));
 
 		hold.addClassToSchedule(newList.get(0)); //TODO FIx this
-
-		Scanner intTranslator = new Scanner(newList.get(0).getCourseCode());
-		addedCode.add(intTranslator.nextInt());
-		addedDept.add(newList.get(0).getDepartment());
+		extraAddCheck(hold);
 
 		Scanner scnr = new Scanner(newList.get(0).getTime());
 		timesCant.add(scnr.next());
 		return hold;
 	}
 
+	void addCheck(Schedule sched, int index)
+	{
+		if(sched.getCourseList().size()==0)
+		{
+			return;
+		}
+
+		ArrayList<Course> addedCourses = sched.getCourseList();
+		for(int i=0; i<addedCourses.size(); i++)
+		{
+			String dept = addedCourses.get(i).getDepartment();
+			String code = addedCourses.get(i).getCourseCode();
+			Scanner intTranslator = new Scanner(code);
+			int codeint = intTranslator.nextInt();
+
+			if(codeint==ClassCodes.get(index)&&DeptCodes.get(index).equalsIgnoreCase(dept))
+			{
+				addedCode.add(codeint);
+				addedDept.add(dept);
+				return;
+			}
+		}
+	}
+
+	void extraAddCheck(Schedule sched)
+	{
+		ArrayList<Course> addedC = sched.getCourseList();
+
+		for(int i=0; i<addedC.size(); i++)
+		{
+			String dept = addedC.get(i).getDepartment();
+			String code = addedC.get(i).getCourseCode();
+			Scanner intTranslator = new Scanner(code);
+			int codeint = intTranslator.nextInt();
+			boolean match = false;
+
+			for(int j=0; j<addedCode.size(); j++)
+			{
+				if(addedDept.get(j).equalsIgnoreCase(dept)&&addedCode.get(j)==codeint)
+				{
+					match=true;
+				}
+			}
+
+			if(!match)
+			{
+				addedCode.add(codeint);
+				addedDept.add(dept);
+				return;
+			}
+		}
+	}
+
 	/**
 	 * Gets the course codes that the user wants to take.
+	 * Console method
 	 */
 	private void gatherCourseCodes()
 	{
@@ -340,6 +388,7 @@ public class AISuggestion {
 
 	/**
 	 * Gets the times that the user would like to avoid
+	 * Console Method
 	 */
 	public void filterTime()
 	{
