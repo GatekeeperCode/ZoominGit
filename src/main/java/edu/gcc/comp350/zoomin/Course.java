@@ -69,8 +69,8 @@ public class Course {
         semester = c.getString("semester");
         year = c.getInteger("year");
         String preferred = c.getString("preferred_name");
-        if (preferred != "") {
-            professor += " (" +preferred+ ")";
+        if (preferred != null) {
+            professor += " (" + preferred + ")";
         }
 
         days = "";

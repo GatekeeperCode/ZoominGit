@@ -74,6 +74,17 @@ public class CalendarController  implements Initializable {
         for (Course c : GUIDriver.schedList) {
             numHours += c.getCredits();
         }
+
+        if (GUIDriver.schedList.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "NOTE: You need to have at least one class to save.", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+                return;
+            }
+            return;
+        }
+
         if (numHours > 17 || numHours < 12) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "NOTE: You do not have 12 - 17 credit hours. Continue?",
                     ButtonType.YES, ButtonType.CANCEL);

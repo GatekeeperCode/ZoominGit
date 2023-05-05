@@ -38,6 +38,8 @@ public class GUIDriver extends Application {
     protected Scene StartScene;
     public static ArrayList<Course> schedList = new ArrayList<Course>();
     public static String openedSchedule;
+    public static String selectSemester;
+    public static int selectYear;
 
 
     public static void main(String[] args) throws URISyntaxException {
@@ -75,6 +77,12 @@ public class GUIDriver extends Application {
             String path = Paths.get(uri).toString() + "/";
             FileReader fr = new FileReader(path + filename);
             Schedule sched = gson.fromJson(fr, Schedule.class);
+
+            //TODO: Assign the semester in the dropdown menu
+            String[] semesterDetails = sched.getSemester().split("");
+            selectSemester = semesterDetails[0];
+            selectYear = Integer.parseInt(semesterDetails[1]);
+
             fr.close();
             return sched;
         } catch (FileNotFoundException e) {

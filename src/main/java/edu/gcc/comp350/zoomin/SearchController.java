@@ -2,6 +2,7 @@ package edu.gcc.comp350.zoomin;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,6 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.bson.Document;
+import org.bson.BsonDocument;
+import org.bson.BsonInt64;
+import org.bson.conversions.Bson;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,10 +78,12 @@ public class SearchController implements Initializable {
                 filename += temp.charAt(i);
             }
 
-            //This part needs expanding; we need a dropdown for the semesters
+            int yearSelect = GUIDriver.selectYear;
+            String semesterSelect = GUIDriver.selectSemester;
+            Bson semesterFilter = Filters.regex("semester", semesterSelect);
+            Bson yearFilter = Filters.eq("year", yearSelect);
             MongoCollection collection = GUIDriver.getDatabase();
-            FindIterable<Document> allCourses = collection.find();
-            System.out.println("Got here just fine");
+            FindIterable<Document> allCourses = collection.find(Filters.and(semesterFilter, yearFilter));
             allCourses.forEach(doc -> courseList.add(new Course(doc)));
 
         } catch(Exception e) {
