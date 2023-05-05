@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args)
     {
         //Use the access pass here:
-        String atlasPass = "";
+        String atlasPass = "mongodb+srv://ZMMN:pTnsKDeiP5QPDiI5@zmmncluster.jod4gfc.mongodb.net/test";
 
         // Construct a ServerApi instance using the ServerApi.builder() method
         ServerApi serverApi = ServerApi.builder()

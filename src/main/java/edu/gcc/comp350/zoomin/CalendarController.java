@@ -1,6 +1,5 @@
 package edu.gcc.comp350.zoomin;
 
-import com.calendarfx.view.DetailedWeekView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,6 +53,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -62,13 +62,31 @@ public class CalendarController  implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            deleteAndLeave();
+            deleteAndLeave(true);
         }else{
             alert.close();
         }
     }
     @FXML
     private void handleSaveButton(ActionEvent event) throws IOException {
+        //Check to see if the person has between 12 and 17 credits.
+        //If not, send a warning & confirmation.
+        int numHours = 0;
+        for (Course c : GUIDriver.schedList) {
+            numHours += c.getCredits();
+        }
+        if (numHours > 17 || numHours < 12) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "NOTE: You do not have 12 - 17 credit hours. Continue?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() != ButtonType.YES) {
+                alert.close();
+                return;
+            }
+            alert.close();
+        }
+
+
         Schedule schedule = new Schedule("test", "test");
         for (Course c: GUIDriver.schedList){
             schedule.addClassToSchedule(c);
@@ -83,6 +101,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -91,6 +110,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -109,6 +129,11 @@ public class CalendarController  implements Initializable {
 
     private void placeClasses(){
         int fonsize = 16;
+        M.getChildren().clear();
+        T.getChildren().clear();
+        W.getChildren().clear();
+        R.getChildren().clear();
+        F.getChildren().clear();
         for (TimeSlot time : timeSlots) {
             Label l;
             if(time.days.contains("M")){
@@ -146,7 +171,7 @@ public class CalendarController  implements Initializable {
     }
     private ArrayList<LocalTime> convertToTime(Course c){
         ArrayList<LocalTime> out = new ArrayList<LocalTime>();
-        DateFormat format = new SimpleDateFormat("KK:mm a");
+        DateFormat format = new SimpleDateFormat("HH:mm:ss");
         int count = 0;
         String string = c.getTime();
         if(!string.equals(" - ")) {
@@ -155,6 +180,7 @@ public class CalendarController  implements Initializable {
             LocalTime endTime = null;
             for (String j : test) {
                 j = j.replace(":00 ", " ");
+                System.out.println(j);
                 Date date = null;
                 try {
                     date = format.parse(j);
@@ -185,9 +211,9 @@ public class CalendarController  implements Initializable {
                 timeSlots.add(slot);
         }
     }
-    private void deleteAndLeave() throws IOException {
-        if(GUIDriver.schedList.size() > 0 ){
-            for (Course c: GUIDriver.schedList) {
+    private void deleteAndLeave(Boolean leave) throws IOException {
+        if (!GUIDriver.schedList.isEmpty()) {
+            for (Course c : GUIDriver.schedList) {
                 c.setOnSchedule(false);
             }
             M.getChildren().clear();
@@ -197,11 +223,21 @@ public class CalendarController  implements Initializable {
             F.getChildren().clear();
             GUIDriver.schedList.clear();
         }
+        if (GUIDriver.openedSchedule != null) {
+            GUIDriver.deleteSchedule(GUIDriver.openedSchedule);
+        }
+        if (leave) {
+            leave();
+        }
 
+    }
+
+    private void leave() throws IOException {
         root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         stage = (Stage) schedule.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 

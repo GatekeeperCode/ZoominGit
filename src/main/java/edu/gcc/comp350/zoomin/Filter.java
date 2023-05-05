@@ -11,6 +11,8 @@ public class Filter {
     private String CourseCode;
     private String courseName;
     private String primaryTimeCheck;
+    private String year;
+    private  String semester;
 
     Filter()
     {
@@ -138,5 +140,21 @@ public class Filter {
     public String getPrimaryTimeCheck()
     {
         return primaryTimeCheck;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 }

@@ -4,6 +4,12 @@
        -fx-border-radius: 10px !important;
        -fx-background-radius: 10px !important;
 }
+#continue{
+       -fx-padding: 15px 15px 15px 15px !important;
+       -fx-font-size: 20px !important;
+       -fx-border-radius: 10px !important;
+       -fx-background-radius: 10px !important;
+}
 #search{
        -fx-padding: 20px 40px 20px 52px !important;
        -fx-font-size: 28px !important;
@@ -84,3 +90,10 @@
               #Cancel:pressed {
                       -fx-background-color: #cbc8c8 !important;
                       }
+#add:hover   {
+       -fx-background-color: #c50202 !important;
+              }
+#add:pressed{
+-fx-background-color: #a70000 !important;
+              }
+                     
