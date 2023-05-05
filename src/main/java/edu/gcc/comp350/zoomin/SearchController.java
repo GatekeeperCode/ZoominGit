@@ -74,11 +74,11 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            String temp = getClass().getResource("CSV/2020-2021.csv").toExternalForm();
-            String filename = "";
-            for (int i = 6; i<temp.length(); i++){
-                filename += temp.charAt(i);
-            }
+//            String temp = getClass().getResource("CSV/2020-2021.csv").toExternalForm();
+//            String filename = "";
+//            for (int i = 6; i<temp.length(); i++){
+//                filename += temp.charAt(i);
+//            }
 
             int yearSelect = GUIDriver.selectYear;
             String semesterSelect = GUIDriver.selectSemester;
@@ -150,7 +150,23 @@ public class SearchController implements Initializable {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Course course = (Course) getTableRow().getItem();
-                            if (!course.isOnSchedule()) {
+                            boolean isAlreadyOn = false;
+                            for (Course c : GUIDriver.schedList) {
+                                if (c.getCourseCode().equals(course.getCourseCode()) &&
+                                        c.getDepartment().equals(course.getDepartment()) &&
+                                        c.getProfessor().equals(course.getProfessor())) {
+                                    isAlreadyOn = true;
+                                    break;
+                                }
+                            }
+
+                            if (isAlreadyOn && !course.isOnSchedule()) {
+                                Alert alert = new Alert(Alert.AlertType.WARNING, "Another version of this course has already been added.", ButtonType.OK);
+                                alert.showAndWait();
+                                alert.close();
+                            }
+
+                            if (!course.isOnSchedule() && !isAlreadyOn) {
                                 GUIDriver.schedList.add(course);
                                 course.setOnSchedule(true);
                                 btn.setText("Remove");
