@@ -73,16 +73,51 @@
          <center>
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
-                  <ListView editable="true" focusTraversable="false" layoutX="162.0" layoutY="4.0" prefHeight="390.0" prefWidth="274.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.600000000000023" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="563.6" AnchorPane.topAnchor="4.0">
+                  <ChoiceBox fx:id="Season" focusTraversable="false" layoutX="69.0" layoutY="87.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="Year" focusTraversable="false" layoutX="69.0" layoutY="148.0" prefWidth="150.0" />
+                  <Label layoutX="69.0" layoutY="59.0" text="Select Semester">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="69.0" layoutY="120.0" text="Select Year">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listView" editable="true" layoutX="333.0" layoutY="35.0" maxHeight="330.0" maxWidth="317.0" AnchorPane.topAnchor="35.0" />
+                  <Button id="add" layoutX="405.0" layoutY="367.0" mnemonicParsing="false" onAction="#handleAddButton" style="-fx-background-color: #ff152a;" stylesheets="@CSS/modifications.css" text="Add Course" textFill="WHITE" AnchorPane.topAnchor="367.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ListView>
-                  <ListView editable="true" focusTraversable="false" layoutX="545.0" layoutY="4.0" prefHeight="390.0" prefWidth="274.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.600000000000023" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="180.60000000000002" AnchorPane.topAnchor="4.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <ListView fx:id="times" editable="true" layoutX="742.0" layoutY="34.0" maxHeight="200.0" maxWidth="115.0" AnchorPane.topAnchor="35.0" />
+                  <Button id="add" layoutX="752.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleAddTimesButton" style="-fx-background-color: #ff152a;" stylesheets="@CSS/modifications.css" text="Add Times" textFill="WHITE" AnchorPane.topAnchor="234.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ListView>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="404.0" layoutY="6.0" text="Add Courses">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="704.0" layoutY="6.0" text="Add Times Unavailable">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="644.0" layoutY="252.0" prefHeight="106.0" prefWidth="311.0" text="Hours should be typed as &quot;8:00&quot; or &quot;14:00&quot; in 24hr time" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </center>

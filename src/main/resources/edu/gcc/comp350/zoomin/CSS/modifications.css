@@ -90,3 +90,10 @@
               #Cancel:pressed {
                       -fx-background-color: #cbc8c8 !important;
                       }
+#add:hover   {
+       -fx-background-color: #c50202 !important;
+              }
+#add:pressed{
+-fx-background-color: #a70000 !important;
+              }
+                     
