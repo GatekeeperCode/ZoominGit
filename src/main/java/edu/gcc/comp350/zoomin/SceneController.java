@@ -62,24 +62,35 @@ public class SceneController implements Initializable{
     @FXML
     private void handleCreateButton(ActionEvent event) throws IOException {
         schedList.clear();
-        Semester.getItems().addAll("Fall", "Spring");
-        year.getItems().addAll(2018, 2019, 2020);
+        if (Semester.getItems().isEmpty() && year.getItems().isEmpty()) {
+            Semester.getItems().addAll("Fall", "Spring");
+            year.getItems().addAll(2018, 2019, 2020);
+        }
         choicePane.setVisible(true);
         choicePane.setDisable(false);
-        //add Choice pane stuff here
-
     }
 
     @FXML
     private void handleSubmitButton(ActionEvent event) throws IOException {
-        choicePane.setVisible(false);
-        choicePane.setDisable(true);
-        root = FXMLLoader.load(getClass().getResource("CourseSearch.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
+        if (!year.getSelectionModel().isEmpty() && !Semester.getSelectionModel().isEmpty()) {
+            GUIDriver.selectSemester = Semester.getValue().toString();
+            GUIDriver.selectYear = Integer.parseInt(year.getValue().toString());
+            choicePane.setVisible(false);
+            choicePane.setDisable(true);
+            root = FXMLLoader.load(getClass().getResource("CourseSearch.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else {
+            //popup
+            Alert alert = new Alert(Alert.AlertType.WARNING, "You must specify the semester and year to continue.", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 
     @FXML
@@ -118,10 +129,10 @@ public class SceneController implements Initializable{
     }
 
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        choicePane.setDisable(true);
+        choicePane.setVisible(false);
         Schedules.clear();
         list.getItems().removeAll();
         for (File f : getResourceFolderFiles("Schedules")) {
