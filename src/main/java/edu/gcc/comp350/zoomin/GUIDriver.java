@@ -38,11 +38,11 @@ public class GUIDriver extends Application {
     protected Scene StartScene;
     public static ArrayList<Course> schedList = new ArrayList<Course>();
     public static String openedSchedule;
-
+    public static MongoCollection collection = null;
 
     public static void main(String[] args) throws URISyntaxException {
+        getDatabase();
         launch(args);
-        System.out.println();
     }
 
     public static void saveSchedule(Schedule s, String name) {
@@ -110,6 +110,7 @@ public class GUIDriver extends Application {
         StartScene.getStylesheets().add(getClass().getResource( "CSS/BootstrapTest.css").toExternalForm());
         primaryStage.setScene(StartScene);
         primaryStage.setTitle("Zoomin");
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
@@ -133,7 +134,6 @@ public class GUIDriver extends Application {
         // Create a new client and connect to the server
         MongoClient mongoClient = null;
         MongoDatabase database = null;
-        MongoCollection collection = null;
         try {
             mongoClient = MongoClients.create(settings);
             database = mongoClient.getDatabase("ZMMN");

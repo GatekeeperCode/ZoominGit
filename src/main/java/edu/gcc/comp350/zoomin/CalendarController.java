@@ -53,6 +53,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -100,6 +101,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
     @FXML
@@ -108,6 +110,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -168,7 +171,7 @@ public class CalendarController  implements Initializable {
     }
     private ArrayList<LocalTime> convertToTime(Course c){
         ArrayList<LocalTime> out = new ArrayList<LocalTime>();
-        DateFormat format = new SimpleDateFormat("KK:mm a");
+        DateFormat format = new SimpleDateFormat("HH:mm:ss");
         int count = 0;
         String string = c.getTime();
         if(!string.equals(" - ")) {
@@ -177,6 +180,7 @@ public class CalendarController  implements Initializable {
             LocalTime endTime = null;
             for (String j : test) {
                 j = j.replace(":00 ", " ");
+                System.out.println(j);
                 Date date = null;
                 try {
                     date = format.parse(j);
@@ -233,6 +237,7 @@ public class CalendarController  implements Initializable {
         stage = (Stage) schedule.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
