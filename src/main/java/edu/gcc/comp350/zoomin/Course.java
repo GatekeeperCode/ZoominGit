@@ -71,7 +71,14 @@ public class Course {
         courseCode = "" + c.getInteger("courseNumber");
         courseLetter = c.getString("courseSection");
         credits = c.getInteger("creditHours");
-        time = c.getString("startTime") + " - " + c.getString("endTime");
+        String startTime = c.getString("startTime");
+        String endTime = c.getString("endTime");
+        if (startTime != null && endTime != null) {
+            time = c.getString("startTime") + " - " + c.getString("endTime");
+        }
+        else {
+            time = "Online";
+        }
         courseName = c.getString("courseTitle");
         professor = c.getString("firstName") + " " + c.getString("lastName");
         semester = c.getString("semester");

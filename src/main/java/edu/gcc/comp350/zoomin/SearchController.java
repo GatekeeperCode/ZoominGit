@@ -151,12 +151,41 @@ public class SearchController implements Initializable {
                         btn.setOnAction((ActionEvent event) -> {
                             Course course = (Course) getTableRow().getItem();
                             boolean isAlreadyOn = false;
+                            boolean isTimeConstraint = false;
                             for (Course c : GUIDriver.schedList) {
                                 if (c.getCourseCode().equals(course.getCourseCode()) &&
-                                        c.getDepartment().equals(course.getDepartment()) &&
-                                        c.getProfessor().equals(course.getProfessor())) {
+                                        c.getDepartment().equals(course.getDepartment())) {
                                     isAlreadyOn = true;
                                     break;
+                                }
+
+                                String courseTime = c.getTime();
+                                if (!courseTime.equals("Online")) {
+                                    String[] courseAddSplit = course.getTime().split("\\s+");
+                                    String[] splitTimes = courseTime.split("\\s+");
+                                    boolean timeConflict = false;
+                                    if (course.getDays().length() > 0) {
+                                        for (int i = 0; i<course.getDays().length(); i++) {
+                                            char h = course.getDays().charAt(i);
+                                            if (c.getDays().contains("" + h)) {
+                                                timeConflict = true;
+                                            }
+                                        }
+                                    }
+
+                                    if (splitTimes[0].substring(0,2).equals(courseAddSplit[0].substring(0,2))
+                                        && !course.isOnSchedule() && timeConflict) {
+                                        Alert alert = new Alert(Alert.AlertType.WARNING, "There is an ongoing time conflict with this class.\nContinue?", ButtonType.YES, ButtonType.NO);
+                                        alert.showAndWait();
+                                        if (alert.getResult() == ButtonType.NO) {
+                                            isTimeConstraint = true;
+                                            alert.close();
+                                            break;
+                                        }
+                                        else {
+                                            alert.close();
+                                        }
+                                    }
                                 }
                             }
 
@@ -166,7 +195,7 @@ public class SearchController implements Initializable {
                                 alert.close();
                             }
 
-                            if (!course.isOnSchedule() && !isAlreadyOn) {
+                            if (!course.isOnSchedule() && !isAlreadyOn && !isTimeConstraint) {
                                 GUIDriver.schedList.add(course);
                                 course.setOnSchedule(true);
                                 btn.setText("Remove");
