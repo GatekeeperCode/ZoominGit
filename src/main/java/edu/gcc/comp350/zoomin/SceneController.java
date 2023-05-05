@@ -58,6 +58,8 @@ public class SceneController implements Initializable{
     @FXML
     Pane choicePane;
 
+    @FXML Button minorRequirementsB;
+
 
     @FXML
     private void handleCreateButton(ActionEvent event) throws IOException {
@@ -128,6 +130,15 @@ public class SceneController implements Initializable{
         stage.show();
     }
 
+    @FXML
+    private void handleMinorButton(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("MinorWindow.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
