@@ -123,6 +123,7 @@ public class AISuggestion {
 			AISched = addExtraCourse(AISched);
 
 			coursesAdded = AISched.getCourseList();
+			schedCredits = 0;
 			for(int i=0; i<coursesAdded.size(); i++)
 			{
 				schedCredits += coursesAdded.get(i).getCredits();
@@ -223,7 +224,9 @@ public class AISuggestion {
 		for(int i=0; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
 		{
 			Bson avoidFilter = Filters.ne("courseNumber", ClassCodes.get(i));
-			mainFilter = Filters.and(mainFilter, avoidFilter);
+			Bson classAvoid = Filters.ne("coursePrefix", DeptCodes.get(i));
+			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
+			mainFilter = Filters.and(mainFilter, bothFilter);
 		}
 
 		ArrayList<Course> humaList = new ArrayList<>();
@@ -236,6 +239,7 @@ public class AISuggestion {
 
 			Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
 			ClassCodes.add(intTranslator.nextInt());
+			DeptCodes.add(humaList.get(0).getDepartment());
 
 			Scanner scnr = new Scanner(humaList.get(0).getTime());
 			timesCant.add(scnr.next());
@@ -247,18 +251,22 @@ public class AISuggestion {
 		for(int i=1; i<ClassCodes.size(); i++) //Making sure a duplicate class isn't given.
 		{
 			Bson avoidFilter = Filters.ne("courseNumber", ClassCodes.get(i));
-			mainFilter2 = Filters.and(mainFilter2, avoidFilter);
+			Bson classAvoid = Filters.ne("coursePrefix", DeptCodes.get(i));
+			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
+			mainFilter2 = Filters.and(mainFilter, bothFilter);
 		}
 
+		ArrayList<Course> newList = new ArrayList<>();
 		FindIterable<Document> results2 = collection.find(mainFilter2);
-		results2.forEach(doc -> humaList.add(new Course(doc)));
+		results2.forEach(doc -> newList.add(new Course(doc)));
 
-		hold.addClassToSchedule(humaList.get(0));
+		hold.addClassToSchedule(newList.get(0));
 
-		Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
+		Scanner intTranslator = new Scanner(newList.get(0).getCourseCode());
 		ClassCodes.add(intTranslator.nextInt());
+		DeptCodes.add(newList.get(0).getDepartment());
 
-		Scanner scnr = new Scanner(humaList.get(0).getTime());
+		Scanner scnr = new Scanner(newList.get(0).getTime());
 		timesCant.add(scnr.next());
 		return hold;
 	}
