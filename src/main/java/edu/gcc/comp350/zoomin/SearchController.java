@@ -74,11 +74,11 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            String temp = getClass().getResource("CSV/2020-2021.csv").toExternalForm();
-            String filename = "";
-            for (int i = 6; i<temp.length(); i++){
-                filename += temp.charAt(i);
-            }
+//            String temp = getClass().getResource("CSV/2020-2021.csv").toExternalForm();
+//            String filename = "";
+//            for (int i = 6; i<temp.length(); i++){
+//                filename += temp.charAt(i);
+//            }
 
             int yearSelect = GUIDriver.selectYear;
             String semesterSelect = GUIDriver.selectSemester;
@@ -150,7 +150,52 @@ public class SearchController implements Initializable {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Course course = (Course) getTableRow().getItem();
-                            if (!course.isOnSchedule()) {
+                            boolean isAlreadyOn = false;
+                            boolean isTimeConstraint = false;
+                            for (Course c : GUIDriver.schedList) {
+                                if (c.getCourseCode().equals(course.getCourseCode()) &&
+                                        c.getDepartment().equals(course.getDepartment())) {
+                                    isAlreadyOn = true;
+                                    break;
+                                }
+
+                                String courseTime = c.getTime();
+                                if (!courseTime.equals("Online")) {
+                                    String[] courseAddSplit = course.getTime().split("\\s+");
+                                    String[] splitTimes = courseTime.split("\\s+");
+                                    boolean timeConflict = false;
+                                    if (course.getDays().length() > 0) {
+                                        for (int i = 0; i<course.getDays().length(); i++) {
+                                            char h = course.getDays().charAt(i);
+                                            if (c.getDays().contains("" + h)) {
+                                                timeConflict = true;
+                                            }
+                                        }
+                                    }
+
+                                    if (splitTimes[0].substring(0,2).equals(courseAddSplit[0].substring(0,2))
+                                        && !course.isOnSchedule() && timeConflict) {
+                                        Alert alert = new Alert(Alert.AlertType.WARNING, "There is an ongoing time conflict with this class.\nContinue?", ButtonType.YES, ButtonType.NO);
+                                        alert.showAndWait();
+                                        if (alert.getResult() == ButtonType.NO) {
+                                            isTimeConstraint = true;
+                                            alert.close();
+                                            break;
+                                        }
+                                        else {
+                                            alert.close();
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (isAlreadyOn && !course.isOnSchedule()) {
+                                Alert alert = new Alert(Alert.AlertType.WARNING, "Another version of this course has already been added.", ButtonType.OK);
+                                alert.showAndWait();
+                                alert.close();
+                            }
+
+                            if (!course.isOnSchedule() && !isAlreadyOn && !isTimeConstraint) {
                                 GUIDriver.schedList.add(course);
                                 course.setOnSchedule(true);
                                 btn.setText("Remove");

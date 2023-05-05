@@ -41,6 +41,7 @@ public class CalendarController  implements Initializable {
     private Parent root;
 
     private ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+    private ArrayList<TimeSlot> onlineSlots = new ArrayList<TimeSlot>();
 
 
 
@@ -129,9 +130,17 @@ public class CalendarController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         int totalHours = 0;
         for (Course c: GUIDriver.schedList) {
-            String courseCode = c.getDepartment() + " " +  c.getCourseCode();
-            addTimeslots(convertToTime(c), c.getDays(), courseCode);
-            totalHours += c.getCredits();
+            if (c.getTime().equals("Online")) {
+                String courseCode = c.getDepartment() + " " + c.getCourseCode();
+                TimeSlot slot = new TimeSlot(null, null, c.getDays(), courseCode);
+                onlineSlots.add(slot);
+                totalHours += c.getCredits();
+            }
+            else {
+                String courseCode = c.getDepartment() + " " + c.getCourseCode();
+                addTimeslots(convertToTime(c), c.getDays(), courseCode);
+                totalHours += c.getCredits();
+            }
         }
         Credits.setText("Credit hours: " + totalHours);
         Collections.sort(timeSlots);
@@ -148,36 +157,44 @@ public class CalendarController  implements Initializable {
         for (TimeSlot time : timeSlots) {
             Label l;
             if(time.days.contains("M")){
-                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getStart());
+                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getEnd());
                 l.setPadding(new Insets(20));
                 l.setFont(Font.font("System", fonsize));
                 l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
                 M.getChildren().add(l);
             } if (time.days.contains("T")) {
-                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getStart());
+                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getEnd());
                 l.setPadding(new Insets(20));
                 l.setFont(Font.font("System", fonsize));
                 l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
                 T.getChildren().add(l);
             }   if (time.days.contains("W")) {
-                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getStart());
+                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getEnd());
                 l.setPadding(new Insets(20));
                 l.setFont(Font.font("System", fonsize));
                 l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
                 W.getChildren().add(l);
             } if (time.days.contains("R")) {
-                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getStart());
+                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getEnd());
                 l.setPadding(new Insets(20));
                 l.setFont(Font.font("System", fonsize));
                 l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
                 R.getChildren().add(l);
             } if (time.days.contains("F")) {
-                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getStart());
+                l = new Label(time.getCourseCode() + "\n" + time.getStart() + " - " + time.getEnd());
                 l.setPadding(new Insets(20));
                 l.setFont(Font.font("System", fonsize));
                 l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
                 F.getChildren().add(l);
             }
+        }
+
+        for (TimeSlot t : onlineSlots) {
+            Label l = new Label(t.getCourseCode() + "\n" + "ONLINE ONLY");
+            l.setPadding(new Insets(20));
+            l.setFont(Font.font("System", fonsize));
+            l.setStyle("-fx-background-color: #ff152a; -fx-text-fill: WHITE; -fx-border-radius: 10px; -fx-border-color: BLACK; -fx-background-radius: 10px;");
+            W.getChildren().add(l);
         }
     }
     private ArrayList<LocalTime> convertToTime(Course c){

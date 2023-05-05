@@ -78,6 +78,7 @@ public class GUIDriver extends Application {
             Schedule sched = gson.fromJson(fr, Schedule.class);
 
             String[] semesterDetails = sched.getSemester().split("\\s+");
+            System.out.println(sched.getSemester());
             selectSemester = semesterDetails[0];
             selectYear = Integer.parseInt(semesterDetails[1]);
 
