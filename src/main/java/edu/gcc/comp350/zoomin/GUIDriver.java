@@ -38,8 +38,9 @@ public class GUIDriver extends Application {
     protected Scene StartScene;
     public static ArrayList<Course> schedList = new ArrayList<Course>();
     public static String openedSchedule;
+    public static String selectSemester;
+    public static int selectYear;
     public static MongoCollection collection = null;
-
     public static void main(String[] args) throws URISyntaxException {
         getDatabase();
         launch(args);
@@ -75,6 +76,11 @@ public class GUIDriver extends Application {
             String path = Paths.get(uri).toString() + "/";
             FileReader fr = new FileReader(path + filename);
             Schedule sched = gson.fromJson(fr, Schedule.class);
+
+            String[] semesterDetails = sched.getSemester().split("\\s+");
+            selectSemester = semesterDetails[0];
+            selectYear = Integer.parseInt(semesterDetails[1]);
+
             fr.close();
             return sched;
         } catch (FileNotFoundException e) {
