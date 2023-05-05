@@ -110,9 +110,23 @@ public class AISuggestion {
 			AISched = addCourse(AISched, i);
 		}
 
+		schedCredits = 0;
+
+		ArrayList<Course> coursesAdded = AISched.getCourseList();
+		for(int i=0; i<coursesAdded.size(); i++)
+		{
+			schedCredits += coursesAdded.get(i).getCredits();
+		}
+
 		while(schedCredits<12)
 		{
 			AISched = addExtraCourse(AISched);
+
+			coursesAdded = AISched.getCourseList();
+			for(int i=0; i<coursesAdded.size(); i++)
+			{
+				schedCredits += coursesAdded.get(i).getCredits();
+			}
 		}
 
 		return AISched;
@@ -175,9 +189,6 @@ public class AISuggestion {
 			{
 				hold.addClassToSchedule(secondList.get(0));
 				Scanner scnr = new Scanner(secondList.get(0).getTime());
-				scnr.useDelimiter(":00-");
-				schedCredits += secondList.get(0).getCredits();
-				hold.setTotalCredits(schedCredits);
 
 				timesCant.add(scnr.next());
 				scnr.close();
@@ -222,11 +233,12 @@ public class AISuggestion {
 		if(humaList.size()>0)
 		{
 			hold.addClassToSchedule(humaList.get(0));
-			schedCredits += humaList.get(0).getCredits();
-			hold.setTotalCredits(schedCredits);
 
 			Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
 			ClassCodes.add(intTranslator.nextInt());
+
+			Scanner scnr = new Scanner(humaList.get(0).getTime());
+			timesCant.add(scnr.next());
 			return hold;
 		}
 
@@ -242,10 +254,12 @@ public class AISuggestion {
 		results2.forEach(doc -> humaList.add(new Course(doc)));
 
 		hold.addClassToSchedule(humaList.get(0));
-		schedCredits += humaList.get(0).getCredits();
 
 		Scanner intTranslator = new Scanner(humaList.get(0).getCourseCode());
 		ClassCodes.add(intTranslator.nextInt());
+
+		Scanner scnr = new Scanner(humaList.get(0).getTime());
+		timesCant.add(scnr.next());
 		return hold;
 	}
 
