@@ -250,12 +250,19 @@ public class AISuggestion {
 
 		Bson mainFilter2 = Filters.ne("courseNumber", addedCode.get(0));
 		mainFilter2 = Filters.and(Filters.ne("coursePrefix", addedDept.get(0)), mainFilter2);
+
 		for(int i=1; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
 		{
 			Bson avoidFilter = Filters.ne("courseNumber", addedCode.get(i));
 			Bson classAvoid = Filters.ne("coursePrefix", addedDept.get(i));
 			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
 			mainFilter2 = Filters.and(mainFilter, bothFilter);
+		}
+
+		for(int i=0; i<timesCant.size(); i++)//Removing Time Duplicates
+		{
+			Bson timeCant = Filters.regex("startTime", timesCant.get(i));
+			mainFilter2 = Filters.and(mainFilter2, Filters.not(timeCant));
 		}
 
 		ArrayList<Course> newList = new ArrayList<>();
