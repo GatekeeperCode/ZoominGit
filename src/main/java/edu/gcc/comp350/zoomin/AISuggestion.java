@@ -9,7 +9,9 @@ import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
+import java.util.Set;
 
 public class AISuggestion {
 	private ArrayList<Integer> ClassCodes = new ArrayList<Integer>();
@@ -103,8 +105,7 @@ public class AISuggestion {
 					code += courseCodes.get(i).charAt(j);
 				}
 			}
-			Scanner intTranslator = new Scanner(code);
-			ClassCodes.add(intTranslator.nextInt());
+			ClassCodes.add(Integer.parseInt(code));
 		}
 
 		for(int i=0; i<ClassCodes.size(); i++)
@@ -112,24 +113,18 @@ public class AISuggestion {
 			AISched = addCourse(AISched, i);
 		}
 
-		schedCredits = 0;
-
-		ArrayList<Course> coursesAdded = AISched.getCourseList();
-		for(int i=0; i<coursesAdded.size(); i++)
-		{
-			schedCredits += coursesAdded.get(i).getCredits();
-		}
 
 		while(schedCredits<12)
 		{
-			AISched = addExtraCourse(AISched);
+			System.out.println(schedCredits);
 
-			coursesAdded = AISched.getCourseList();
-			schedCredits = 0;
-			for(int i=0; i<coursesAdded.size(); i++)
+			for(int i=0; i<addedCode.size(); i++)
 			{
-				schedCredits += coursesAdded.get(i).getCredits();
+				System.out.println("Course Added: " + addedCode.get(i));
 			}
+
+
+			AISched = addExtraCourse(AISched);
 		}
 
 		return AISched;
@@ -152,8 +147,7 @@ public class AISuggestion {
 			for(int i=1; i<timesCant.size(); i++)
 			{
 				System.out.println(timesCant.get(i));
-				Bson timeFilter = Filters.regex("startTime", timesCant.get(i));
-				timeFilter = Filters.not(timeFilter);
+				Bson timeFilter = Filters.ne("startTime", timesCant.get(i));
 				mainFilter = Filters.and(mainFilter, timeFilter);
 			}
 		}
@@ -173,8 +167,7 @@ public class AISuggestion {
 		{
 			for(int i=TimesAvoid.size()-loopIteration; i>=0; i--)
 			{
-				Bson timeFilter = Filters.regex("startTime", TimesAvoid.get(i));
-				timeFilter = Filters.not(timeFilter);
+				Bson timeFilter = Filters.not(Filters.regex("startTime", TimesAvoid.get(i)));
 				mainFilter = Filters.and(mainFilter, timeFilter);
 			}
 
@@ -191,12 +184,17 @@ public class AISuggestion {
 			if(secondList.size()>0)
 			{
 				hold.addClassToSchedule(secondList.get(0));
-				Scanner scnr = new Scanner(secondList.get(0).getTime());
 
-				timesCant.add(scnr.next());
-				addCheck(hold, index);
-				scnr.close();
-				return hold;
+				boolean courseApplied = addCheck(hold, index);
+				if(courseApplied)
+				{
+					Scanner timeParse = new Scanner(secondList.get(0).getTime());
+					timeParse.useDelimiter(" - ");
+					String time = timeParse.next();
+					timesCant.add(time);
+					schedCredits += secondList.get(0).getCredits();
+					return hold;
+				}
 			}
 			else
 			{
@@ -215,13 +213,17 @@ public class AISuggestion {
 		Bson humaFilter = Filters.eq("coursePrefix", "HUMA");
 		Bson codeFilter = Filters.ne("courseNumber", 102);
 		Bson semestFilter = Filters.eq("semester", semestSession);
-		Bson mainFilter = Filters.and(humaFilter, codeFilter, semestFilter);
+		Bson yearFilter = Filters.eq("year", semestYear);
+		Bson mainFilter = Filters.and(humaFilter, codeFilter, semestFilter, yearFilter);
 
-		for(int i=0; i<timesCant.size(); i++)
+		if(timesCant.size()>1)
 		{
-			Bson cantFilter = Filters.regex("startTime", timesCant.get(i));
-			cantFilter = Filters.not(cantFilter);
-			mainFilter = Filters.and(mainFilter, cantFilter);
+			for(int i=1; i<timesCant.size(); i++)
+			{
+				Bson cantFilter = Filters.not(Filters.regex("startTime", timesCant.get(i)));
+				System.out.println("timesCant at " + i+" " + timesCant.get(i));
+				mainFilter = Filters.and(mainFilter, cantFilter);
+			}
 		}
 
 		for(int i=0; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
@@ -240,94 +242,116 @@ public class AISuggestion {
 		{
 			hold.addClassToSchedule(humaList.get(0));
 
-			addExtraCourse(hold);
+			boolean courseAdded = extraAddCheck(hold);
 
-			Scanner scnr = new Scanner(humaList.get(0).getTime());
-			timesCant.add(scnr.next());
-			return hold;
+			if(courseAdded)
+			{
+				Scanner timeParse = new Scanner(humaList.get(0).getTime());
+				timeParse.useDelimiter(" - ");
+				timesCant.add(timeParse.next());
+				schedCredits += humaList.get(0).getCredits();
+				return hold;
+			}
 		}
 
 
 		Bson mainFilter2 = Filters.ne("courseNumber", addedCode.get(0));
 		mainFilter2 = Filters.and(Filters.ne("coursePrefix", addedDept.get(0)), mainFilter2);
+		mainFilter2 = Filters.and(mainFilter2, Filters.eq("semester", semestSession));
+		mainFilter2 = Filters.and(mainFilter2, Filters.eq("year", semestYear));
 
 		for(int i=1; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
 		{
 			Bson avoidFilter = Filters.ne("courseNumber", addedCode.get(i));
 			Bson classAvoid = Filters.ne("coursePrefix", addedDept.get(i));
 			Bson bothFilter = Filters.and(avoidFilter, classAvoid);
-			mainFilter2 = Filters.and(mainFilter, bothFilter);
+			mainFilter2 = Filters.and(mainFilter2, bothFilter);
 		}
 
-		for(int i=0; i<timesCant.size(); i++)//Removing Time Duplicates
+		if(timesCant.size()>1)
 		{
-			Bson timeCant = Filters.regex("startTime", timesCant.get(i));
-			mainFilter2 = Filters.and(mainFilter2, Filters.not(timeCant));
+			for(int i=1; i<timesCant.size(); i++)//Removing Time Duplicates
+			{
+				Bson timeCant = Filters.not(Filters.regex("startTime", timesCant.get(i)));
+				mainFilter2 = Filters.and(mainFilter2, timeCant);
+			}
 		}
 
 		ArrayList<Course> newList = new ArrayList<>();
 		FindIterable<Document> results2 = collection.find(mainFilter2);
 		results2.forEach(doc -> newList.add(new Course(doc)));
 
-		hold.addClassToSchedule(newList.get(0)); //TODO FIx this
-		extraAddCheck(hold);
+		hold.addClassToSchedule(newList.get(0));
+		boolean courseAdded = extraAddCheck(hold);
 
-		Scanner scnr = new Scanner(newList.get(0).getTime());
-		timesCant.add(scnr.next());
+		if(courseAdded)
+		{
+			Scanner timeParse = new Scanner(newList.get(0).getTime());
+			timeParse.useDelimiter(" - ");
+			schedCredits += newList.get(0).getCredits();
+			timesCant.add(timeParse.next());
+		}
+
 		return hold;
 	}
 
-	void addCheck(Schedule sched, int index)
+	boolean addCheck(Schedule sched, int index)
 	{
-		if(sched.getCourseList().size()==0)
+		if(sched.getSchedule().size()==0)
 		{
-			return;
+			return false;
 		}
 
-		ArrayList<Course> addedCourses = sched.getCourseList();
-		for(int i=0; i<addedCourses.size(); i++)
+		if(sched.getSchedule().containsKey(ClassCodes.get(index) +""))
 		{
-			String dept = addedCourses.get(i).getDepartment();
-			String code = addedCourses.get(i).getCourseCode();
-			Scanner intTranslator = new Scanner(code);
-			int codeint = intTranslator.nextInt();
-
-			if(codeint==ClassCodes.get(index)&&DeptCodes.get(index).equalsIgnoreCase(dept))
-			{
-				addedCode.add(codeint);
-				addedDept.add(dept);
-				return;
-			}
+			addedCode.add(ClassCodes.get(index));
+			addedDept.add(DeptCodes.get(index));
+			return true;
 		}
+
+		return false;
 	}
 
-	void extraAddCheck(Schedule sched)
+	boolean extraAddCheck(Schedule sched)
 	{
-		ArrayList<Course> addedC = sched.getCourseList();
+		boolean match = true;
 
-		for(int i=0; i<addedC.size(); i++)
+		for(int i=0; i<addedCode.size(); i++)
 		{
-			String dept = addedC.get(i).getDepartment();
-			String code = addedC.get(i).getCourseCode();
-			Scanner intTranslator = new Scanner(code);
-			int codeint = intTranslator.nextInt();
-			boolean match = false;
-
-			for(int j=0; j<addedCode.size(); j++)
+			if(sched.getSchedule().containsKey(addedCode.get(i)))
 			{
-				if(addedDept.get(j).equalsIgnoreCase(dept)&&addedCode.get(j)==codeint)
-				{
-					match=true;
-				}
-			}
-
-			if(!match)
-			{
-				addedCode.add(codeint);
-				addedDept.add(dept);
-				return;
+				match = false;
+				break;
 			}
 		}
+
+		if(match)
+		{
+			Collection<Course> hold = sched.getSchedule().values();
+
+			for(Course c : hold)
+			{
+				boolean wasAdded = false;
+
+				for(int i=0; i<addedCode.size(); i++)
+				{
+					if(addedCode.get(i) == Integer.parseInt(c.getCourseCode()))
+					{
+						wasAdded = true;
+						break;
+					}
+				}
+
+				if(!wasAdded)
+				{
+					addedCode.add(Integer.parseInt(c.getCourseCode()));
+					addedDept.add(c.getDepartment());
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**
