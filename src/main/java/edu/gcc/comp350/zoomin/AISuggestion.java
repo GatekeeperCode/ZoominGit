@@ -95,7 +95,7 @@ public class AISuggestion {
 			{
 				dept += Character.toUpperCase(courseCodes.get(i).charAt(j));
 			}
-			DeptCodes.add(dept);
+
 
 			String code = "";
 			for(int j=4; j<courseCodes.get(i).length(); j++)
@@ -105,7 +105,12 @@ public class AISuggestion {
 					code += courseCodes.get(i).charAt(j);
 				}
 			}
-			ClassCodes.add(Integer.parseInt(code));
+
+			if(code.length()>0)
+			{
+				ClassCodes.add(Integer.parseInt(code));
+				DeptCodes.add(dept);
+			}
 		}
 
 		for(int i=0; i<ClassCodes.size(); i++)
