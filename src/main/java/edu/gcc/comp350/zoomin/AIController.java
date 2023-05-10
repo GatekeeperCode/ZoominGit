@@ -71,6 +71,8 @@ public class AIController implements Initializable {
             ArrayList<String> courses = new ArrayList<>(listView.getItems());
             ArrayList<String> hours = new ArrayList<>(times.getItems());
 //        GUIDriver.schedList.addAll(sugg.generateSchedule(courses, hours).getSchedule().values());
+            CalendarController.onlineSlots.clear();
+            CalendarController.timeSlots.clear();
             GUIDriver.schedList.clear();
             Schedule s = sugg.generateSchedule(courses, hours);
             GUIDriver.openedSchedule = s.getScheduleName();

@@ -77,12 +77,16 @@ public class SceneController implements Initializable{
         if (!year.getSelectionModel().isEmpty() && !Semester.getSelectionModel().isEmpty()) {
             GUIDriver.selectSemester = Semester.getValue().toString();
             GUIDriver.selectYear = Integer.parseInt(year.getValue().toString());
+            CalendarController.onlineSlots.clear();
+            CalendarController.timeSlots.clear();
+            GUIDriver.schedList.clear();
             choicePane.setVisible(false);
             choicePane.setDisable(true);
             root = FXMLLoader.load(getClass().getResource("CourseSearch.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
         }
         else {
