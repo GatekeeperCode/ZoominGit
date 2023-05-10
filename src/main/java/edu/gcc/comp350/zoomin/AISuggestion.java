@@ -216,6 +216,15 @@ public class AISuggestion {
 		Bson yearFilter = Filters.eq("year", semestYear);
 		Bson mainFilter = Filters.and(humaFilter, codeFilter, semestFilter, yearFilter);
 
+		if(TimesAvoid.size()>1)
+		{
+			for(int i=0; i<TimesAvoid.size(); i++)
+			{
+				Bson avoidFilter = Filters.not(Filters.regex("startTime", TimesAvoid.get(i)));
+				mainFilter = Filters.and(mainFilter, avoidFilter);
+			}
+		}
+
 		if(timesCant.size()>1)
 		{
 			for(int i=1; i<timesCant.size(); i++)
@@ -259,6 +268,15 @@ public class AISuggestion {
 		mainFilter2 = Filters.and(Filters.ne("coursePrefix", addedDept.get(0)), mainFilter2);
 		mainFilter2 = Filters.and(mainFilter2, Filters.eq("semester", semestSession));
 		mainFilter2 = Filters.and(mainFilter2, Filters.eq("year", semestYear));
+
+		if(TimesAvoid.size()>1)
+		{
+			for(int i=0; i<TimesAvoid.size(); i++)
+			{
+				Bson avoidFilter = Filters.not(Filters.regex("startTime", TimesAvoid.get(i)));
+				mainFilter2 = Filters.and(mainFilter2, avoidFilter);
+			}
+		}
 
 		for(int i=1; i<addedCode.size(); i++) //Making sure a duplicate class isn't given.
 		{
