@@ -66,12 +66,13 @@ public class Schedule {
         boolean addTo = true;
         for(String key : this.Schedule.keySet()) {
             Course ctest = this.Schedule.get(key);
-            if (ctest.getTime().equals(course.getTime())) {
-                addTo = false;
-                System.out.println("Cannot add that course as it conflicts with: " + ctest.getCourseCode() + ",\nwhich is also at " +
-                        ctest.getTime());
-                break;
-            } else if (ctest.getCourseName().equals(course.getCourseName())) {
+//            if (ctest.getTime().equals(course.getTime()) && !ctest.getTime().equals("Online") && !course.getTime().equals("Online")) {
+//                addTo = false;
+//                System.out.println("Cannot add that course as it conflicts with: " + ctest.getCourseCode() + ",\nwhich is also at " +
+//                        ctest.getTime());
+//                break;
+//            }
+            if (ctest.getCourseName().equals(course.getCourseName())) {
                 addTo = false;
                 System.out.println("Cannot add a duplicate course");
                 break;
