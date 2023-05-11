@@ -19,11 +19,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.CalendarController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.gcc.comp350.zoomin.CalendarController">
    <children>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="676.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane fx:id="schedule" gridLinesVisible="true" prefHeight="542.0" prefWidth="1000.0" HBox.hgrow="ALWAYS">
                     <columnConstraints>
@@ -37,58 +37,18 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <FlowPane fx:id="M" alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0">
-                           <children>
-                              <Label text="Monday">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                        <FlowPane fx:id="T" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="1">
-                           <children>
-                              <Label text="Tuesday">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                        <FlowPane fx:id="W" alignment="TOP_CENTER" layoutX="210.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="2">
-                           <children>
-                              <Label text="Wednesday">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                        <FlowPane fx:id="R" alignment="TOP_CENTER" layoutX="410.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="3">
-                           <children>
-                              <Label text="Thursday">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </FlowPane>
-                        <FlowPane fx:id="F" alignment="TOP_CENTER" layoutX="610.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="4">
-                           <children>
-                              <Label text="Friday">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </FlowPane>
+                        <FlowPane fx:id="M" alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" />
+                        <FlowPane fx:id="T" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="1" />
+                        <FlowPane fx:id="W" alignment="TOP_CENTER" layoutX="210.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="2" />
+                        <FlowPane fx:id="R" alignment="TOP_CENTER" layoutX="410.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="3" />
+                        <FlowPane fx:id="F" alignment="TOP_CENTER" layoutX="610.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="199.0" GridPane.columnIndex="4" />
                      </children>
                   </GridPane>
                </children>
             </HBox>
          </center>
          <top>
-            <AnchorPane id="top" prefHeight="108.0" prefWidth="999.0" BorderPane.alignment="CENTER">
+            <AnchorPane id="top" prefHeight="100.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="5.0" style="-fx-background-color: #ff152a;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <ImageView id="Logo" fitHeight="69.0" fitWidth="236.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
@@ -157,6 +117,31 @@
                         <String fx:value="btn-lg" />
                         <String fx:value="btn-danger" />
                      </styleClass></Button>
+                  <Label layoutX="55.0" layoutY="99.0" text="Monday" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="821.0" AnchorPane.topAnchor="99.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="243.0" layoutY="99.0" text="Tuesday" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="243.0" AnchorPane.rightAnchor="633.0" AnchorPane.topAnchor="99.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="438.0" layoutY="99.0" text="Wednesday" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="438.0" AnchorPane.rightAnchor="438.0" AnchorPane.topAnchor="99.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="654.0" layoutY="100.0" text="Thursday" AnchorPane.bottomAnchor="11.999999999999986" AnchorPane.leftAnchor="654.0" AnchorPane.rightAnchor="249.2" AnchorPane.topAnchor="100.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="858.0" layoutY="103.0" text="Friday" AnchorPane.bottomAnchor="8.999999999999986" AnchorPane.leftAnchor="858.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="103.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </top>
