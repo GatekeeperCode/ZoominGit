@@ -81,6 +81,8 @@ public class AIController implements Initializable {
                 GUIDriver.schedList.add(c);
                 c.setOnSchedule(true);
             }
+            GUIDriver.selectYear = (int) Year.getValue();
+            GUIDriver.selectSemester = (String) Season.getValue();
             root = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
