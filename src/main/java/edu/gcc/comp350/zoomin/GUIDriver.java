@@ -126,6 +126,10 @@ public class GUIDriver extends Application {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
 //    }
     public static MongoCollection getDatabase() {
+        //This portion of the code references the MongoDB Official Documentation Site.
+        //https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/connect/
+        //Portions were modified to preserve integrity of the program and testing.
+
         //Use the access pass here:
         String atlasPass = "mongodb+srv://ZMMN:pTnsKDeiP5QPDiI5@zmmncluster.jod4gfc.mongodb.net/test";
 
