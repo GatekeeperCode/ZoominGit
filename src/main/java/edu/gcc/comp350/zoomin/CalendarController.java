@@ -40,8 +40,8 @@ public class CalendarController  implements Initializable {
     private Scene scene;
     private Parent root;
 
-    private ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
-    private ArrayList<TimeSlot> onlineSlots = new ArrayList<TimeSlot>();
+    public static ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+    public static ArrayList<TimeSlot> onlineSlots = new ArrayList<TimeSlot>();
 
 
 
@@ -129,16 +129,18 @@ public class CalendarController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int totalHours = 0;
+        timeSlots.clear();
+        onlineSlots.clear();
         for (Course c: GUIDriver.schedList) {
             if (c.getTime().equals("Online")) {
                 String courseCode = c.getDepartment() + " " + c.getCourseCode();
-                TimeSlot slot = new TimeSlot(null, null, c.getDays(), courseCode);
+                TimeSlot slot = new TimeSlot(null, null, c.getDays(), courseCode, c.isOnSchedule());
                 onlineSlots.add(slot);
                 totalHours += c.getCredits();
             }
             else {
                 String courseCode = c.getDepartment() + " " + c.getCourseCode();
-                addTimeslots(convertToTime(c), c.getDays(), courseCode);
+                addTimeslots(convertToTime(c), c.getDays(), courseCode, c.isOnSchedule());
                 totalHours += c.getCredits();
             }
         }
@@ -233,9 +235,9 @@ public class CalendarController  implements Initializable {
         return out;
     }
 
-    private void addTimeslots(ArrayList<LocalTime> times, String days, String courseCode){
-            TimeSlot slot = new TimeSlot(times.get(0), times.get(1), days, courseCode);
-            if (!timeSlots.contains(slot)) {
+    private void addTimeslots(ArrayList<LocalTime> times, String days, String courseCode, boolean isOnSchedule){
+            TimeSlot slot = new TimeSlot(times.get(0), times.get(1), days, courseCode, isOnSchedule);
+            if (!timeSlots.contains(slot) && isOnSchedule == true) {
                 timeSlots.add(slot);
         }
     }
@@ -274,12 +276,15 @@ public class CalendarController  implements Initializable {
         private LocalTime end;
         private String days;
         private String courseCode;
-        TimeSlot(LocalTime start, LocalTime end, String days, String courseCode){
+        private Boolean isOnSchedule;
+        TimeSlot(LocalTime start, LocalTime end, String days, String courseCode, boolean isOnSchedule){
             this.start = start;
             this.end = end;
             this.days = days;
             this.courseCode = courseCode;
         }
+        private void setIsOnSchedule(boolean value){this.isOnSchedule = value;}
+        private boolean getIsOnSchedule(){return this.isOnSchedule;}
         public void setEnd(LocalTime end) {this.end = end;}
         public void setStart(LocalTime start) {this.start = start;}
         public LocalTime getEnd() {return end;}

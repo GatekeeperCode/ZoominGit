@@ -38,11 +38,12 @@ test {
 mainClassName = "edu.gcc.comp350.zoomin.GUIDriver"
 
 jar {
+    archiveBaseName = 'Zoomin'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
-        attributes "Main-Class": "edu.gcc.comp350.zoomin.Main"
+        attributes "Main-Class": "edu.gcc.comp350.zoomin.GUIDriver"
     }
     from {
         configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
     }
-
 }

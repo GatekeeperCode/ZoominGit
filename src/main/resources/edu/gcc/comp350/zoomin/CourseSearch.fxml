@@ -34,25 +34,6 @@
                               <Glow />
                            </effect>
                         </Button>
-                        <Button id="Recommended" alignment="BOTTOM_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="554.0" layoutY="56.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="104.0" text="Filters" textAlignment="CENTER" textFill="#e8293f">
-                           <font>
-                              <Font size="48.0" />
-                           </font>
-                           <padding>
-                              <Insets top="50.0" />
-                           </padding>
-                           <stylesheets>
-                              <URL value="@CSS/BootstrapTest.css" />
-                              <URL value="@CSS/modifications.css" />
-                           </stylesheets>
-                           <styleClass>
-                              <String fx:value="btn-lg" />
-                              <String fx:value="btn-danger" />
-                           </styleClass>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
                         <TextField fx:id="SearchBar" focusTraversable="false" layoutX="162.0" layoutY="56.0" maxWidth="600.0" prefHeight="64.0" prefWidth="331.0" promptText="Search">
                            <font>
                               <Font size="32.0" />

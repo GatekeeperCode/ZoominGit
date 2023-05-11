@@ -71,6 +71,8 @@ public class AIController implements Initializable {
             ArrayList<String> courses = new ArrayList<>(listView.getItems());
             ArrayList<String> hours = new ArrayList<>(times.getItems());
 //        GUIDriver.schedList.addAll(sugg.generateSchedule(courses, hours).getSchedule().values());
+            CalendarController.onlineSlots.clear();
+            CalendarController.timeSlots.clear();
             GUIDriver.schedList.clear();
             Schedule s = sugg.generateSchedule(courses, hours);
             GUIDriver.openedSchedule = s.getScheduleName();
@@ -79,6 +81,8 @@ public class AIController implements Initializable {
                 GUIDriver.schedList.add(c);
                 c.setOnSchedule(true);
             }
+            GUIDriver.selectYear = (int) Year.getValue();
+            GUIDriver.selectSemester = (String) Season.getValue();
             root = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);

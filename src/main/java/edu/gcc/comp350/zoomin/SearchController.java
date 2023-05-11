@@ -87,7 +87,6 @@ public class SearchController implements Initializable {
             MongoCollection collection = GUIDriver.getDatabase();
             FindIterable<Document> allCourses = collection.find(Filters.and(semesterFilter, yearFilter));
             allCourses.forEach(doc -> courseList.add(new Course(doc)));
-
         } catch(Exception e) {
             System.out.println(e);
             e.printStackTrace();
